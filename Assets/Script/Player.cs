@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
             isUsingWappen = false;
             wappen[wappenIndex].GetComponent<Collider2D>().enabled = true;
             wappen[wappenIndex].SetActive(false);
-            wappen[wappenIndex].GetComponent<Collider2D>().enabled = false;
+            //wappen[wappenIndex].GetComponent<Collider2D>().enabled = false;
         }
         if (Input.GetKeyDown(KeyCode.Alpha1) && !isUsingWappen)
         {
