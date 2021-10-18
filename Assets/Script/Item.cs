@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Item : MonoBehaviour
 {
     Vector2 pos;
@@ -9,6 +8,7 @@ public class Item : MonoBehaviour
     [SerializeField] private int material;
     [SerializeField] private float heal;
     [SerializeField] private float damage;
+    [SerializeField] private int point;
     private void Start()
     {
         if (Random.Range(0, 2) == 0)//x°¡ ¸Ö‹š
@@ -31,6 +31,10 @@ public class Item : MonoBehaviour
         }
         transform.position = pos;
         alpha = Random.Range(0, 3);
+    }
+    private void OnDestroy()
+    {
+        GameManager.Instance.GetExp(point);
     }
     public float GetHeal()
     {

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Gravity : MonoBehaviour
 {
+    [SerializeField]
+    private float speed;
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, new Vector2(0,0), 10 * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, new Vector2(0,0), speed * Time.deltaTime);
     }
 }
