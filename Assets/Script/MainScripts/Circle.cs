@@ -4,41 +4,53 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Circle : MonoBehaviour
 {
+    float curSpeed;
+    float preHp;
+    float nowHp;
     private int spriteIndex;
     private int index = 0;
     private float curHp;
+    private float sizeHp;
     private int matarial;
+    [SerializeField] private Transform holdTemp;
     [SerializeField] private SpriteRenderer[] sprites;
     [SerializeField] private Sprite[] sprite;
     [SerializeField] private Camera camera;
     [SerializeField] private Text matarialText;
+    [SerializeField] private float speed;
     [SerializeField] private float maxHp;
     [SerializeField] private float startHp;
     [SerializeField] private float[] hpLevel;
     [SerializeField] private float[] cameraSize;
     void Start()
     {
+        curSpeed = speed;
+        preHp = curHp;
         curHp = startHp;
+        sizeHp = curHp;
         StartCoroutine(CheckLevel());
     }
     void Update()
     {
-        if (Input.GetKey(KeyCode.A))
+        holdTemp.Rotate(Vector3.forward * Time.deltaTime * curSpeed);
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            transform.Rotate(Vector3.forward * Time.deltaTime * 50);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(Vector3.back * Time.deltaTime * 50);
+            curSpeed *= -1;
         }
         if (curHp > 0)
         {
-            curHp -= Time.deltaTime;
+            curHp -= Time.deltaTime * 0.5f;
         }
-        transform.localScale = new Vector3(curHp, curHp, 1);
+        sizeHp = Mathf.Lerp(preHp, curHp, 1f);
+        transform.localScale = new Vector3(sizeHp, sizeHp, 1);
     }
-    private void Heal(float temp)
+    public void ChangeSpeed(float value)
     {
+        curSpeed *= value;
+    }
+    public void Heal(float temp)
+    {
+        preHp = curHp;
         curHp += temp;
         if (curHp > maxHp)
         {
@@ -107,5 +119,9 @@ public class Circle : MonoBehaviour
         {
             return;
         }
+    }
+    public void ChangeSpeed()
+    {
+
     }
 }

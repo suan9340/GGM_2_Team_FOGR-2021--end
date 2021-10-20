@@ -100,6 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: 0
   heal: 3
+  damage: 0
+  point: 10
 --- !u!50 &3258738151478278376
 Rigidbody2D:
   serializedVersion: 4
@@ -149,3 +151,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8fcee22924c6034f90128e86c52253b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 3
