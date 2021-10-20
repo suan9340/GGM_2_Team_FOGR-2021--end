@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Circle circle;
     [SerializeField] private Camera camera;
     [SerializeField] private Text wappenText;
+    [SerializeField] private GameObject[] wappenUI;
     [SerializeField] private string[] wappenName;
     [SerializeField] private Camera mainCam;
     [SerializeField] private Transform wappenHold;
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             wappenTemp = Instantiate(wappen[wappenIndex], wappenHold);
+            wappenUI[wappenIndex].SetActive(true);
             wappenTemp.SetActive(true);
         }
         if (Input.GetKey(KeyCode.Mouse0))
@@ -74,15 +76,26 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1) && !isUsingWappen)
         {
             wappenIndex = 0;
+            ChangeUiWappen();
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && !isUsingWappen)
         {
             wappenIndex = 1;
+            ChangeUiWappen();
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && !isUsingWappen)
         {
             wappenIndex = 2;
+            ChangeUiWappen();
         }
+    }
+    void ChangeUiWappen()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            wappenUI[i].SetActive(false);
+        }
+        wappenUI[wappenIndex].SetActive(true);
     }
     IEnumerator Attack()
     {
