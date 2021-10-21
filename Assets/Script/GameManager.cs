@@ -5,15 +5,15 @@ using UnityEngine.UI;
 public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] private Slider slider;
-    [SerializeField] private Circle circle;
-    [SerializeField] private Player player;
+    public Circle circle;
+    public Player player;
     [SerializeField] private GameObject upgradePanel;
     [SerializeField] private int[] expLevel;
     [SerializeField] private int exp;
     private int curExpLevel;
     public void ShowUpgradePannel()
     {
-
+        
     }
     public void BreakTime(int time)
     {

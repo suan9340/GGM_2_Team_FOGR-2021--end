@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Wappen : MonoBehaviour
 {
-    private void OnTriggerStay2D(Collider2D collision)
+    private int damage = 5;
+    public void ChangeDamage(int get)
     {
-        if (!collision.CompareTag("Player") && collision.CompareTag("Enemy"))
-            Destroy(collision.gameObject);
+        damage = get;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("A");
+        if (collision.CompareTag("Enemy"))
+            collision.GetComponent<Item>().GetDamaged(damage);
     }
 }

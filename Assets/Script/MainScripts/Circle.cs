@@ -4,14 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Circle : MonoBehaviour
 {
-    float curSpeed;
+    [SerializeField] private float curSpeed;
     float preHp;
     float nowHp;
+    private int score;
     private int spriteIndex;
     private int index = 0;
     private float curHp;
     private float sizeHp;
     private int matarial;
+    [SerializeField] private Text scoreText;
+    [SerializeField] private int[] SPS;
     [SerializeField] private Transform holdTemp;
     [SerializeField] private SpriteRenderer[] sprites;
     [SerializeField] private Sprite[] sprite;
@@ -22,6 +25,7 @@ public class Circle : MonoBehaviour
     [SerializeField] private float startHp;
     [SerializeField] private float[] hpLevel;
     [SerializeField] private float[] cameraSize;
+    [SerializeField] private SoundManager sound;
     void Start()
     {
         curSpeed = speed;
@@ -29,12 +33,14 @@ public class Circle : MonoBehaviour
         curHp = startHp;
         sizeHp = curHp;
         StartCoroutine(CheckLevel());
+        StartCoroutine(AddScore());
     }
     void Update()
     {
         holdTemp.Rotate(Vector3.forward * Time.deltaTime * curSpeed);
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            sound.Turn();
             curSpeed *= -1;
         }
         if (curHp > 0)
@@ -46,7 +52,7 @@ public class Circle : MonoBehaviour
     }
     public void ChangeSpeed(float value)
     {
-        curSpeed *= value;
+        curSpeed = value;
     }
     public void Heal(float temp)
     {
@@ -60,6 +66,10 @@ public class Circle : MonoBehaviour
     public void UpdateUI()
     {
         matarialText.text = string.Format("Àç·á : {0}",matarial);
+    }
+    public void ChangeSpeed(int change)
+    {
+        curSpeed = change;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -102,6 +112,15 @@ public class Circle : MonoBehaviour
                 index--;
                 ChangeSize();
             }
+        }
+    }
+    private IEnumerator AddScore()
+    {
+        while (true)
+        {
+            score += SPS[index];
+            scoreText.text = string.Format("Score : {0}", score);
+            yield return new WaitForSeconds(1f);
         }
     }
     public void ChangeSize()

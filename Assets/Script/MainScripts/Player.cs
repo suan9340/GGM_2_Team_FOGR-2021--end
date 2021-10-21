@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     float angle;
     Vector2 mousePos;
     Vector2 target;
+    [SerializeField] private float wappenSpeed;
     [SerializeField] private Circle circle;
     [SerializeField] private Camera camera;
     [SerializeField] private Text wappenText;
@@ -45,13 +46,13 @@ public class Player : MonoBehaviour
             range += Time.deltaTime * 8;
             if(wappenIndex == 0)
             {
-                wappenTemp.transform.localScale = new Vector3(range, range * 0.1f, 0);
-                wappenReal[wappenIndex].transform.localScale = new Vector3(range, range * 0.1f, 0);
+                wappenTemp.transform.localScale = new Vector3(range, range * 0.1f, 0) * wappenSpeed;
+                wappenReal[wappenIndex].transform.localScale = new Vector3(range, range * 0.1f, 0) * wappenSpeed;
             }
             else
             {
-                wappenTemp.transform.localScale = new Vector3(range, range, 0);
-                wappenReal[wappenIndex].transform.localScale = new Vector3(range, range, 0);
+                wappenTemp.transform.localScale = new Vector3(range, range, 0) * wappenSpeed;
+                wappenReal[wappenIndex].transform.localScale = new Vector3(range, range, 0) * wappenSpeed;
             }
             isUsingWappen = true;
             Vector2 mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
@@ -96,6 +97,10 @@ public class Player : MonoBehaviour
             wappenUI[i].SetActive(false);
         }
         wappenUI[wappenIndex].SetActive(true);
+    }
+    public void ChangeWappenSpeed(float change)
+    {
+        wappenSpeed = change;
     }
     IEnumerator Attack()
     {

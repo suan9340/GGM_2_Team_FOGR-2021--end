@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f8b89aa1fba34f49a68e35fb0c727ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 10
   material: 0
   heal: 3
   damage: 3

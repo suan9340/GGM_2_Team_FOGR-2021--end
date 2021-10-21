@@ -5,6 +5,8 @@ public class Item : MonoBehaviour
 {
     Vector2 pos;
     private int alpha;
+    bool isAttacked;
+    [SerializeField] private int hp;
     [SerializeField] private int material;
     [SerializeField] private float heal;
     [SerializeField] private float damage;
@@ -36,6 +38,20 @@ public class Item : MonoBehaviour
     {
         GameManager.Instance.GetExp(point);
     }
+    public void GetDamaged(int damage)
+    {
+        if (!isAttacked)
+        {
+            StartCoroutine(Check());
+            hp -= damage;
+            if (hp <= 0)
+            {
+                GameManager.Instance.GetExp(point);
+                Destroy(gameObject);
+            }
+        }
+        else return;
+    }
     public float GetHeal()
     {
         return heal;
@@ -51,5 +67,12 @@ public class Item : MonoBehaviour
     public int GetSprite()
     {
         return alpha;
+    }
+    public IEnumerator Check()
+    {
+        isAttacked = true;
+        yield return new WaitForSeconds(1f);
+        isAttacked = false;
+        //transform.gameObject.transform.gameObject.transform.gameObject.transform.gameObject.GetComponent<Transform>().position = transform.gameObject.transform.position;
     }
 }
