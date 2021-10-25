@@ -4,34 +4,39 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Circle : MonoBehaviour
 {
-    [SerializeField] private float curSpeed;
-    float preHp;
-    float nowHp;
     private int score;
     private int spriteIndex;
     private int index = 0;
+    private int matarial;
     private float curHp;
     private float sizeHp;
-    private int matarial;
-    [SerializeField] private Text scoreText;
+    private float preHp;
+    private float nowHp;
+    private bool isOver;
+    private bool isEndWait;
     [SerializeField] private int[] SPS;
-    [SerializeField] private Transform holdTemp;
-    [SerializeField] private SpriteRenderer[] sprites;
-    [SerializeField] private Sprite[] sprite;
-    [SerializeField] private Camera camera;
-    [SerializeField] private Text matarialText;
+    [SerializeField] private float waitTime;
+    [SerializeField] private float curSpeed;
     [SerializeField] private float speed;
     [SerializeField] private float maxHp;
     [SerializeField] private float startHp;
     [SerializeField] private float[] hpLevel;
     [SerializeField] private float[] cameraSize;
+    [SerializeField] private Text matarialText;
+    [SerializeField] private Text scoreText;
     [SerializeField] private SoundManager sound;
+    [SerializeField] private GameObject overPannel;
+    [SerializeField] private Transform holdTemp;
+    [SerializeField] private SpriteRenderer[] sprites;
+    [SerializeField] private Sprite[] sprite;
+    [SerializeField] private Camera camera;
     void Start()
     {
         curSpeed = speed;
         preHp = curHp;
         curHp = startHp;
         sizeHp = curHp;
+        StartCoroutine(Wait());
         StartCoroutine(CheckLevel());
         StartCoroutine(AddScore());
     }
@@ -45,10 +50,31 @@ public class Circle : MonoBehaviour
         }
         if (curHp > 0)
         {
-            curHp -= Time.deltaTime * 0.5f;
+            if (isEndWait)
+            {
+                curHp -= Time.deltaTime * 0.5f;
+            }
+        }
+        else
+        {
+            GameOver();
         }
         sizeHp = Mathf.Lerp(preHp, curHp, 1f);
         transform.localScale = new Vector3(sizeHp, sizeHp, 1);
+    }
+    public IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(waitTime);
+        isEndWait = true;
+    }
+    public void GameOver()
+    {
+        if (!isOver)
+        {
+            isOver = true;
+            Time.timeScale = 0;
+            overPannel.SetActive(true);
+        }
     }
     public void ChangeSpeed(float value)
     {
@@ -67,6 +93,30 @@ public class Circle : MonoBehaviour
     {
         matarialText.text = string.Format("재료 : {0}",matarial);
     }
+    public void GetMaterial(int get)
+    {
+        matarial += get;
+        UpdateUI();
+    }
+    public void GetBuff()
+    {
+        int a = Random.Range(0, 3);
+        switch(a)
+        {
+            case 0:
+                Debug.Log("1번 버프 온");
+                break;
+            case 1:
+                Debug.Log("2번 버프 온");
+                break;
+            case 2:
+                Debug.Log("3번 버프 온");
+                break;
+            default:
+                Debug.Log("범위 초과");
+                break;
+        }
+    }
     public void ChangeSpeed(int change)
     {
         curSpeed = change;
@@ -75,26 +125,27 @@ public class Circle : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Item"))
         {
-            Heal(collision.gameObject.GetComponent<Item>().GetHeal());
-            Destroy(collision.gameObject);
+            Item item = collision.gameObject.GetComponent<Item>();
+            item.Dead();
         }
         if (collision.gameObject.CompareTag("Material"))
         {
+            Item item = collision.gameObject.GetComponent<Item>();
+            matarial += item.GetMaterial();
+            item.Dead();
             UpdateUI();
-            matarial += collision.gameObject.GetComponent<Item>().GetMaterial();
-            Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("Alpha"))
         {
-            UpdateUI();
-            ChangeSprite(collision.gameObject.GetComponent<Item>().GetSprite());
-            Destroy(collision.gameObject);
+            Item item = collision.gameObject.GetComponent<Item>();
+            item.Dead();
+            Heal(item.GetDamage());
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            UpdateUI();
-            Heal(-collision.gameObject.GetComponent<Item>().GetDamage());
-            Destroy(collision.gameObject);
+            Item item = collision.gameObject.GetComponent<Item>();
+            Heal(-item.GetDamage());
+            item.Dead();
         }
     }
     private IEnumerator CheckLevel()

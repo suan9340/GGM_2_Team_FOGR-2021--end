@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 1, g: 0.009791803, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 74b10b7f0ecf50a4288601caf0b8a498, type: 3}
+  m_Color: {r: 0.4, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,11 +99,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f8b89aa1fba34f49a68e35fb0c727ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10
   material: 0
   heal: 3
   damage: 3
   point: 10
+  isEnemy: 1
+  renderer: {fileID: 5194037293785533256}
+  Color:
+  - {x: 0.3921569, y: 1, z: 0, w: 1}
+  - {x: 1, y: 1, z: 0, w: 1}
+  - {x: 0.7843137, y: 0.4705882, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  maxHp: 10
+  particle: {fileID: 1139283897377808518, guid: 4662d1acd08be864d9d8bfdb262b2afa, type: 3}
 --- !u!50 &5194037293785533261
 Rigidbody2D:
   serializedVersion: 4

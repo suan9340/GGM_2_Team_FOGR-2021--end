@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Item : MonoBehaviour
 {
-    Vector2 pos;
-    private int alpha;
+    int alpha;
+    int hp;
     bool isAttacked;
-    [SerializeField] private int hp;
+    Vector2 pos;
+    [SerializeField] private int maxHp;
+    [SerializeField] private int point;
     [SerializeField] private int material;
     [SerializeField] private float heal;
     [SerializeField] private float damage;
-    [SerializeField] private int point;
+    [SerializeField] private bool isEnemy;
+    [SerializeField] private Vector4[] Color;
+    [SerializeField] private SpriteRenderer renderer;
+    [SerializeField] private GameObject particle;
     private void Start()
     {
+        hp = maxHp;
         if (Random.Range(0, 2) == 0)//x°¡ ¸Ö‹š
         {
             pos.x = Random.Range(45, 55);
@@ -34,9 +40,11 @@ public class Item : MonoBehaviour
         transform.position = pos;
         alpha = Random.Range(0, 3);
     }
-    private void OnDestroy()
+    public void Dead()
     {
         GameManager.Instance.GetExp(point);
+        Instantiate(particle, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
     public void GetDamaged(int damage)
     {
@@ -44,10 +52,29 @@ public class Item : MonoBehaviour
         {
             StartCoroutine(Check());
             hp -= damage;
+            if (isEnemy)
+            {
+                if(hp < maxHp * 0.25f)
+                {
+                    renderer.color = Color[3];
+                }
+                else if(hp < maxHp * 0.5f)
+                {
+                    renderer.color = Color[2];
+                }
+                else if(hp < maxHp * 0.75f)
+                {
+                    renderer.color = Color[1];
+                }
+                else
+                {
+                    renderer.color = Color[0];
+                }
+            }
             if (hp <= 0)
             {
                 GameManager.Instance.GetExp(point);
-                Destroy(gameObject);
+                Dead();
             }
         }
         else return;
@@ -73,6 +100,5 @@ public class Item : MonoBehaviour
         isAttacked = true;
         yield return new WaitForSeconds(1f);
         isAttacked = false;
-        //transform.gameObject.transform.gameObject.transform.gameObject.transform.gameObject.GetComponent<Transform>().position = transform.gameObject.transform.position;
     }
 }

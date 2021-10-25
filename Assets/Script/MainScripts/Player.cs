@@ -4,21 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
-    GameObject wappenTemp;
-    float range;
     bool isUsingWappen;
     int wappenIndex = 0;
     float angle;
+    float range;
     Vector2 mousePos;
     Vector2 target;
+    GameObject wappenTemp;
+    [SerializeField] private string[] wappenName;
     [SerializeField] private float wappenSpeed;
+    [SerializeField] private Transform wappenHold;
+    [SerializeField] private Text wappenText;
     [SerializeField] private Circle circle;
     [SerializeField] private Camera camera;
-    [SerializeField] private Text wappenText;
-    [SerializeField] private GameObject[] wappenUI;
-    [SerializeField] private string[] wappenName;
     [SerializeField] private Camera mainCam;
-    [SerializeField] private Transform wappenHold;
+    [SerializeField] private GameObject[] wappenUI;
     [SerializeField] private GameObject[] wappen;
     [SerializeField] private GameObject[] wappenReal;
     void Start()
