@@ -100,8 +100,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: 0
   heal: 3
-  damage: 0
+  damage: 3
   point: 10
+  isEnemy: 0
+  renderer: {fileID: 0}
+  Color: []
+  maxHp: 0
+  particle: {fileID: 1139283897377808518, guid: 4662d1acd08be864d9d8bfdb262b2afa, type: 3}
 --- !u!50 &3258738151478278376
 Rigidbody2D:
   serializedVersion: 4

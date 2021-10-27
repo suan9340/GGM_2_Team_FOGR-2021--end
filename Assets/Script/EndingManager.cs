@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 public class EndingManager : MonoBehaviour
 {
+    [SerializeField] private int[] levelWappenDamage;
+    [SerializeField] private int[] level;
     [SerializeField] private float[] levelWappenSpeed;
     [SerializeField] private float[] levelSize;
-    [SerializeField] private Text[] levelText;
-    [SerializeField] private int[] level;
     [SerializeField] private GameObject holdPannel;
     [SerializeField] private GameObject UpgradePannel;
     [SerializeField] private GameObject NextStagePannel;
+    [SerializeField] private Wappen[] wappen;
+    [SerializeField] private Text[] levelText;
     public void ShowNextStage()
     {
         Time.timeScale = 0;
@@ -53,6 +55,10 @@ public class EndingManager : MonoBehaviour
     {
         if(level[0] < 10)
         {
+            for(int i = 0; i < 3; i++)
+            {
+                wappen[i].ChangeDamage(levelWappenDamage[level[0]]);
+            }
             level[0]++;
             levelText[0].text = string.Format("{0} / {1}", level[0], 10);
             Debug.Log("무기의 데미지가 업그레이드 됨");
@@ -63,8 +69,8 @@ public class EndingManager : MonoBehaviour
     {
         if (level[1] < 10)
         {
-            level[1]++;
             GameManager.Instance.player.ChangeWappenSpeed(levelWappenSpeed[level[1]]);
+            level[1]++;
             levelText[1].text = string.Format("{0} / {1}", level[1], 10);
             Debug.Log("무기의 속도를 업그레이드 됨");
         }
@@ -74,8 +80,8 @@ public class EndingManager : MonoBehaviour
     {
         if (level[2] < 10)
         {
-            level[2]++;
             GameManager.Instance.circle.ChangeSpeed(levelSize[level[2]]);
+            level[2]++;
             levelText[2].text = string.Format("{0} / {1}", level[2], 10);
             Debug.Log("플레이어의 속도가 업그레이드 됨");
         }
