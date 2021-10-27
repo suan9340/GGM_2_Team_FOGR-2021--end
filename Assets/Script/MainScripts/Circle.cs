@@ -8,10 +8,9 @@ public class Circle : MonoBehaviour
     private int spriteIndex;
     private int index = 0;
     private int matarial;
-    private float curHp;
-    private float sizeHp;
-    private float preHp;
-    private float nowHp;
+    public float curHp;
+    public float sizeHp;
+    public float preHp;
     private bool isOver;
     private bool isEndWait;
     [SerializeField] private int[] SPS;
@@ -39,6 +38,7 @@ public class Circle : MonoBehaviour
         StartCoroutine(Wait());
         StartCoroutine(CheckLevel());
         StartCoroutine(AddScore());
+        StartCoroutine(LerfSize());
     }
     void Update()
     {
@@ -60,7 +60,7 @@ public class Circle : MonoBehaviour
             GameOver();
         }
         sizeHp = Mathf.Lerp(preHp, curHp, 1f);
-        transform.localScale = new Vector3(sizeHp, sizeHp, 1);
+        transform.localScale = new Vector3(sizeHp, sizeHp, 0);
     }
     public IEnumerator Wait()
     {
@@ -82,7 +82,6 @@ public class Circle : MonoBehaviour
     }
     public void Heal(float temp)
     {
-        preHp = curHp;
         curHp += temp;
         if (curHp > maxHp)
         {
@@ -113,7 +112,7 @@ public class Circle : MonoBehaviour
                 Debug.Log("3번 버프 온");
                 break;
             default:
-                Debug.Log("범위 초과");
+                Debug.Log("범위 이상");
                 break;
         }
     }
@@ -152,7 +151,7 @@ public class Circle : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
             if (hpLevel[index] < curHp)
             {
                 index++;
@@ -188,6 +187,14 @@ public class Circle : MonoBehaviour
         else
         {
             return;
+        }
+    }
+    public IEnumerator LerfSize()
+    {
+        while (true)
+        {
+            preHp = curHp;
+            yield return new WaitForSeconds(1f);
         }
     }
     public void ChangeSpeed()

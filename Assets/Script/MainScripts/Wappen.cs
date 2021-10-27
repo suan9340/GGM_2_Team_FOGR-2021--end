@@ -13,7 +13,7 @@ public class Wappen : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
-            collision.GetComponent<Item>().GetDamaged(damage);
+            collision.GetComponent<Enemy>().GetDamaged(damage);
         if (collision.CompareTag("Material"))
         {
             Item item = collision.GetComponent<Item>();

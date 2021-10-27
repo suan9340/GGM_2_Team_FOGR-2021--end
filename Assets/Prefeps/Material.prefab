@@ -98,15 +98,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f8b89aa1fba34f49a68e35fb0c727ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  point: 10
   material: 1
   heal: 3
   damage: 0
-  point: 10
-  isEnemy: 0
-  renderer: {fileID: 0}
-  Color: []
-  maxHp: 0
   particle: {fileID: 1139283897377808518, guid: 4662d1acd08be864d9d8bfdb262b2afa, type: 3}
+  poolIndex: 3
+  poolManager: {fileID: 0}
 --- !u!50 &5128929507365441577
 Rigidbody2D:
   serializedVersion: 4

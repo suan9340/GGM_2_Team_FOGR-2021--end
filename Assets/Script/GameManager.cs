@@ -7,6 +7,7 @@ public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] private int exp;
     [SerializeField] private int[] expLevel;
+    [SerializeField] private LevelEnemy[] LevelPerEnemy;
     public Circle circle;
     public Player player;
     [SerializeField] private Slider slider;
@@ -20,6 +21,10 @@ public class GameManager : MonoSingleton<GameManager>
     public void BreakTime(int time)
     {
 
+    }
+    private void Start()
+    {
+        Time.timeScale = 1;
     }
     private void Update()
     {
@@ -54,5 +59,34 @@ public class GameManager : MonoSingleton<GameManager>
             upgradePanel.SetActive(true);
         }
         slider.value = (float)exp / (float)expLevel[curExpLevel];
+    }
+    public float GetLevel(int type)
+    {
+        return LevelPerEnemy[curExpLevel].Get(type);
+    }
+}
+[System.Serializable]
+public class LevelEnemy
+{
+    [SerializeField] private float hp;
+    [SerializeField] private float damage;
+    [SerializeField] private float speed;
+    public float Get(int type)
+    {
+        switch (type)
+        {
+            case 0:
+                return hp;
+                break;
+            case 1:
+                return damage;
+                break;
+            case 2:
+                return speed;
+                break;
+            default:
+                return 0;
+                break;
+        }
     }
 }
