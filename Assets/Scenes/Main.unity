@@ -1139,73 +1139,265 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exp: 0
+  sps: 
   expLevel: 0a0000003200000064000000f4010000e8030000881300001027000050c30000a086010020a10700
   LevelPerEnemy:
-  - hp: 10
-    damage: 15
-    speed: 3.5
-  - hp: 30
-    damage: 30
-    speed: 3.5
-  - hp: 50
-    damage: 45
-    speed: 3.5
-  - hp: 70
-    damage: 60
-    speed: 3.5
-  - hp: 90
-    damage: 75
-    speed: 3.5
-  - hp: 110
-    damage: 90
-    speed: 3.5
-  - hp: 130
-    damage: 105
-    speed: 3.5
-  - hp: 150
-    damage: 120
-    speed: 3.5
-  - hp: 170
-    damage: 135
-    speed: 3.5
-  - hp: 190
-    damage: 150
-    speed: 3.5
-  - hp: 210
-    damage: 165
-    speed: 3.5
-  - hp: 230
-    damage: 180
-    speed: 3.5
-  - hp: 250
-    damage: 195
-    speed: 3.5
-  - hp: 270
-    damage: 210
-    speed: 3.5
-  - hp: 290
-    damage: 225
-    speed: 3.5
-  - hp: 310
-    damage: 240
-    speed: 3.5
-  - hp: 330
-    damage: 255
-    speed: 3.5
-  - hp: 350
-    damage: 270
-    speed: 3.5
-  - hp: 370
-    damage: 285
-    speed: 3.5
-  - hp: 390
-    damage: 300
-    speed: 3.5
+  - hp:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    damage:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    speed:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - hp:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    damage:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    speed:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - hp:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    damage:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    speed:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - hp:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    damage:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    speed:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
   circle: {fileID: 794932215}
   player: {fileID: 1753074534}
-  slider: {fileID: 1278044048}
-  upgradePanel: {fileID: 1431506815}
-  pausePannel: {fileID: 666148409}
+  uiManager: {fileID: 734553450}
+  matarial: 0
 --- !u!4 &332496061
 Transform:
   m_ObjectHideFlags: 0
@@ -1213,12 +1405,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332496059}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.901822, y: -3.9929352, z: 8.188278}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.033033, y: -4.876319, z: 10.427452}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_Father: {fileID: 963443395}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &337649212
 GameObject:
@@ -1545,7 +1737,7 @@ GameObject:
   - component: {fileID: 413100743}
   - component: {fileID: 413100742}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Wappen Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1774,7 +1966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74320dff3ffd2a64fb597c8da95f23b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelWappenDamage: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
+  levelWappenDamage: 0300000006000000090000000c0000000f0000001200000015000000180000001b0000001e000000
   level: 000000000000000000000000
   levelWappenSpeed:
   - 1
@@ -1816,12 +2008,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 452487489}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2301873, y: -6.718859, z: 88.720665}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.0989766, y: -7.602243, z: 90.95984}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_Father: {fileID: 963443395}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &458196901
 GameObject:
@@ -2577,6 +2769,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 666148409}
   m_CullTransparentMesh: 1
+--- !u!1 &734553448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 734553449}
+  - component: {fileID: 734553450}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &734553449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734553448}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 963443395}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &734553450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734553448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d91a4a8298d1766498292a3206e72f68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matarialText: {fileID: 942999895}
+  scoreText: {fileID: 1560384871}
+  overPannel: {fileID: 1830011538}
+  slider: {fileID: 1278044048}
+  upgradePanel: {fileID: 1781811334}
+  pausePannel: {fileID: 666148409}
 --- !u!1 &775880840
 GameObject:
   m_ObjectHideFlags: 0
@@ -2670,7 +2911,7 @@ GameObject:
   - component: {fileID: 794932216}
   - component: {fileID: 794932217}
   m_Layer: 0
-  m_Name: Home
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2755,12 +2996,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c50012888d5be4342a4c1979a6f37e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SPS: 010000000200000003000000040000000500000006000000
   waitTime: 10
-  curSpeed: 50
   speed: 50
   maxHp: 2000
-  startHp: 70
+  startHp: 30
   hpLevel:
   - 5
   - 10
@@ -2773,7 +3012,6 @@ MonoBehaviour:
   - 1280
   - 2560
   cameraSize:
-  - 5
   - 10
   - 20
   - 40
@@ -2783,20 +3021,9 @@ MonoBehaviour:
   - 640
   - 1280
   - 2560
-  matarialText: {fileID: 942999895}
-  scoreText: {fileID: 1560384871}
+  - 2560
   sound: {fileID: 1445582558}
-  overPannel: {fileID: 1830011538}
   holdTemp: {fileID: 1727075861}
-  sprites:
-  - {fileID: 1541143393}
-  - {fileID: 819509575}
-  - {fileID: 1800057719}
-  - {fileID: 58374207}
-  sprite:
-  - {fileID: 21300000, guid: 3d67f62b11e8cf542b16d9d4ea027911, type: 3}
-  - {fileID: 21300000, guid: 04bafc0d285f8fe409304279c5fa9ed7, type: 3}
-  - {fileID: 21300000, guid: 1e20dc69759a801439e7834e138cd3da, type: 3}
   camera: {fileID: 519420031}
 --- !u!58 &794932216
 CircleCollider2D:
@@ -3639,7 +3866,7 @@ GameObject:
   - component: {fileID: 942999896}
   - component: {fileID: 942999895}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Matarial Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3867,6 +4094,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953927814}
   m_CullTransparentMesh: 1
+--- !u!1 &963443394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 963443395}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &963443395
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963443394}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.8687892, y: 0.8833836, z: -2.2391737}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 332496061}
+  - {fileID: 452487491}
+  - {fileID: 1445582559}
+  - {fileID: 1517274544}
+  - {fileID: 734553449}
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &984042926
 GameObject:
   m_ObjectHideFlags: 0
@@ -4743,9 +5005,9 @@ MonoBehaviour:
   - 1
   - 1
   - 1
-  Enemy: {fileID: 5194037293785533257, guid: 1976c7f5e4f35fb42a301f17632698cc, type: 3}
-  item_Heal: {fileID: 4729157131205240429, guid: 2557a41c714bdc946a674f255623987d, type: 3}
-  item_Matarial: {fileID: 5128929507365441581, guid: 090996cb4b8ebc844a12e1ca1f6c8235, type: 3}
+  Enemy: {fileID: 8834889440498489407, guid: 730a46e2217ba3149866ba6b1d61b924, type: 3}
+  item_Heal: {fileID: 4291809472767000408, guid: 25eba025efe6ddd4d9173ce59db3a8e3, type: 3}
+  item_Matarial: {fileID: 81088619762899648, guid: 8479cc098256e0049acd0c91c3a201de, type: 3}
   item_Alpha: {fileID: 3258738151478278380, guid: 50a02b12499a36249a55b15572d68594, type: 3}
   itemHolder: {fileID: 797422631}
   poolManager: {fileID: 1517274543}
@@ -5353,12 +5615,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1445582557}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.910208, y: 1.2250973, z: 198.77734}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.041419, y: 0.34171373, z: 201.01651}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_Father: {fileID: 963443395}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1445582560
 AudioSource:
@@ -5690,8 +5952,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517274542}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -31.370241, y: -3.5018218, z: 504.12466}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -28.501451, y: -4.3852053, z: 506.36383}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 797422632}
@@ -5700,8 +5962,8 @@ Transform:
   - {fileID: 835047365}
   - {fileID: 237029911}
   - {fileID: 337649213}
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_Father: {fileID: 963443395}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1527183985
 GameObject:
@@ -6034,7 +6296,7 @@ GameObject:
   - component: {fileID: 1560384872}
   - component: {fileID: 1560384871}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Score Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6459,7 +6721,7 @@ GameObject:
   - component: {fileID: 1643298867}
   - component: {fileID: 1643298866}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Temp UpGrade Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

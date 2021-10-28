@@ -6,8 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    #region 인스펙터
     [SerializeField] private GameObject DonClickChang;  // 클릭 방지용 창
     [SerializeField] private GameObject OutGameChang;   // 겜 종료 창
+    #endregion
+
     private bool isOutGame = false;
     // 게임 시작하기 버튼 눌렀을 때 실행되는 함수
     public void OnClickStartGame()

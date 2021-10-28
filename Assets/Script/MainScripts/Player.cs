@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
+    #region 변수
     bool isUsingWappen;
     int wappenIndex = 0;
     float angle;
@@ -11,16 +12,17 @@ public class Player : MonoBehaviour
     Vector2 mousePos;
     Vector2 target;
     GameObject wappenTemp;
-    [SerializeField] private string[] wappenName;
-    [SerializeField] private float wappenSpeed;
-    [SerializeField] private Transform wappenHold;
-    [SerializeField] private Text wappenText;
-    [SerializeField] private Circle circle;
-    [SerializeField] private Camera camera;
-    [SerializeField] private Camera mainCam;
-    [SerializeField] private GameObject[] wappenUI;
-    [SerializeField] private GameObject[] wappen;
-    [SerializeField] private GameObject[] wappenReal;
+    #endregion
+    #region 인스펙터
+    [Header("무기이름")] [SerializeField] private string[] wappenName;
+    [Header("차징 속도")] [SerializeField] private float wappenSpeed;
+    [Header("무기위치 잡아주는것")] [SerializeField] private Transform wappenHold;
+    [Header("무기이름 반영하는 텍스트")] [SerializeField] private Text wappenText;
+    [Header("Circle 스크립트")] [SerializeField] private Circle circle;
+    [Header("메인 카메라")] [SerializeField] private Camera mainCam;
+    [Header("무기 범위 지시용")] [SerializeField] private GameObject[] wappen;
+    [Header("무기 실질 공격용")] [SerializeField] private GameObject[] wappenReal;
+    #endregion
     void Start()
     {
         
@@ -38,7 +40,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             wappenTemp = Instantiate(wappen[wappenIndex], wappenHold);
-            wappenUI[wappenIndex].SetActive(true);
             wappenTemp.SetActive(true);
         }
         if (Input.GetKey(KeyCode.Mouse0))
@@ -55,7 +56,7 @@ public class Player : MonoBehaviour
                 wappenReal[wappenIndex].transform.localScale = new Vector3(range, range, 0) * wappenSpeed;
             }
             isUsingWappen = true;
-            Vector2 mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, transform.forward, 100);
             if (hit)
             {
@@ -77,26 +78,18 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1) && !isUsingWappen)
         {
             wappenIndex = 0;
-            ChangeUiWappen();
+            GameManager.Instance.UIManager.ChangeUiWappen(wappenIndex);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && !isUsingWappen)
         {
             wappenIndex = 1;
-            ChangeUiWappen();
+            GameManager.Instance.UIManager.ChangeUiWappen(wappenIndex);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && !isUsingWappen)
         {
             wappenIndex = 2;
-            ChangeUiWappen();
+            GameManager.Instance.UIManager.ChangeUiWappen(wappenIndex);
         }
-    }
-    void ChangeUiWappen()
-    {
-        for(int i = 0; i < 3; i++)
-        {
-            wappenUI[i].SetActive(false);
-        }
-        wappenUI[wappenIndex].SetActive(true);
     }
     public void ChangeWappenSpeed(float change)
     {

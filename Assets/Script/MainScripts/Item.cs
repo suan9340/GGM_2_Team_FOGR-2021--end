@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Item : MonoBehaviour
 {
+    #region 변수
     protected Vector2 pos;
-    [SerializeField] protected int point;
-    [SerializeField] protected int material;
-    [SerializeField] protected float heal;
-    [SerializeField] protected float damage;
-    [SerializeField] protected GameObject particle;
-    [SerializeField] protected int poolIndex;
-    [SerializeField] protected PoolManager poolManager;
-    [SerializeField] protected float speed = 3.5f;
+    #endregion
+    #region 인스펙터
+    [Header("획득가능 점수")] [SerializeField] protected int point;
+    [Header("획득가능 재료")] [SerializeField] protected int material;
+    [Header("획득가능 HP")] [SerializeField] protected float heal;
+    [Header("받을수 있는 데미지")] [SerializeField] protected float damage;
+    [Header("죽을시 나오는 파티클")] [SerializeField] protected GameObject particle;
+    [Header("풀링받을 오브젝트 주소")] [SerializeField] protected int poolIndex;
+    [Header("PoolManager")] [SerializeField] protected PoolManager poolManager;
+    [Header("중력 속도")] [SerializeField] protected float speed = 3.5f;
+    #endregion
     private void Start()
     {
         poolManager = FindObjectOfType<PoolManager>();

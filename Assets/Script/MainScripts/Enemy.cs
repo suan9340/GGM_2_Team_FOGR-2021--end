@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Enemy : Item
 {
+    #region 변수
     bool isAttacked;
-    [SerializeField] private float maxHp;
-    [SerializeField] private float hp;
-    [SerializeField] private Vector4[] Color;
-    [SerializeField] private SpriteRenderer renderer;
-    private void OnEnable()
+    #endregion
+    #region 인스펙터
+    [Header("최대 Hp")] [SerializeField] private float maxHp;
+    [Header("진짜 Hp")] [SerializeField] private float hp;
+    [Header("색깔 배열(4차원 RGBA)")] [SerializeField] private Vector4[] Color;
+    [Header("자신의 SpriteRenderer")] [SerializeField] private SpriteRenderer renderer;
+    #endregion
+
+    // 켜질때 세팅 해주는 것
+    private void OnEnable() 
     {
         if (Random.Range(0, 2) == 0)//x가 멀떄
         {
@@ -35,6 +40,8 @@ public class Enemy : Item
         hp = GameManager.Instance.GetLevel(0);
         maxHp = GameManager.Instance.GetLevel(0);
     }
+
+    // 데미지 입었을 때 색 바꿔주는 함수
     public void GetDamaged(int damage)
     {
         if (!isAttacked)
