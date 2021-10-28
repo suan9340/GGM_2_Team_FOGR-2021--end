@@ -16,6 +16,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
                 Debug.Log("[Instance] Instance" + typeof(T) + "is already destroyed. Returning null");
                 return null;
             }
+
             lock (locker)
             {
                 if (instance == null)

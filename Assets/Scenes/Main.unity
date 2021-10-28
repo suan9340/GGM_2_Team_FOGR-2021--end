@@ -788,8 +788,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97374f2282841840aa3f475acaacf18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circle: {fileID: 794932215}
   damage: 2
+  circle: {fileID: 794932215}
 --- !u!61 &189731602
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1107,12 +1107,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6f8aa3414c34146b88169174b78442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 1278044048}
+  exp: 0
+  expLevel: 0a0000003200000064000000f4010000e8030000881300001027000050c30000a086010020a10700
   circle: {fileID: 794932215}
   player: {fileID: 1753074534}
+  slider: {fileID: 1278044048}
   upgradePanel: {fileID: 1431506815}
-  expLevel: 0a0000003200000064000000f4010000e8030000881300001027000050c30000a086010020a10700
-  exp: 0
   pausePannel: {fileID: 666148409}
 --- !u!4 &332496061
 Transform:
@@ -1652,10 +1652,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74320dff3ffd2a64fb597c8da95f23b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wappen:
-  - {fileID: 189731601}
-  - {fileID: 2058188750}
-  - {fileID: 1557762630}
+  levelWappenDamage: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
+  level: 000000000000000000000000
   levelWappenSpeed:
   - 1
   - 2
@@ -1678,15 +1676,17 @@ MonoBehaviour:
   - 400
   - 450
   - 500
-  levelWappenDamage: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
+  holdPannel: {fileID: 1781811334}
+  UpgradePannel: {fileID: 1431506815}
+  NextStagePannel: {fileID: 524672140}
+  wappen:
+  - {fileID: 189731601}
+  - {fileID: 2058188750}
+  - {fileID: 1557762630}
   levelText:
   - {fileID: 130740781}
   - {fileID: 859054246}
   - {fileID: 1144303429}
-  level: 000000000000000000000000
-  holdPannel: {fileID: 1781811334}
-  UpgradePannel: {fileID: 1431506815}
-  NextStagePannel: {fileID: 524672140}
 --- !u!4 &452487491
 Transform:
   m_ObjectHideFlags: 0
@@ -1818,20 +1818,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe5cd53398382c429ac82f1f6854026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wappenSpeed: 0
-  circle: {fileID: 794932215}
-  camera: {fileID: 519420031}
-  wappenText: {fileID: 413100742}
-  wappenUI:
-  - {fileID: 875905442}
-  - {fileID: 175073155}
-  - {fileID: 1427189349}
   wappenName:
   - "\uC9C1\uC120"
   - "\uC6D0\uD615"
   - "\uD638\uD615"
-  mainCam: {fileID: 519420031}
+  wappenSpeed: 0
   wappenHold: {fileID: 2107411753}
+  wappenText: {fileID: 413100742}
+  circle: {fileID: 794932215}
+  camera: {fileID: 519420031}
+  mainCam: {fileID: 519420031}
+  wappenUI:
+  - {fileID: 875905442}
+  - {fileID: 175073155}
+  - {fileID: 1427189349}
   wappen:
   - {fileID: 1226201009}
   - {fileID: 1585967794}
@@ -2535,7 +2535,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.5896226, g: 0.5882353, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2573,22 +2573,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c50012888d5be4342a4c1979a6f37e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curSpeed: 50
-  waitTime: 10
-  scoreText: {fileID: 1560384871}
   SPS: 010000000200000003000000040000000500000006000000
-  holdTemp: {fileID: 1727075861}
-  sprites:
-  - {fileID: 1541143393}
-  - {fileID: 819509575}
-  - {fileID: 1800057719}
-  - {fileID: 58374207}
-  sprite:
-  - {fileID: 21300000, guid: 3d67f62b11e8cf542b16d9d4ea027911, type: 3}
-  - {fileID: 21300000, guid: 04bafc0d285f8fe409304279c5fa9ed7, type: 3}
-  - {fileID: 21300000, guid: 1e20dc69759a801439e7834e138cd3da, type: 3}
-  camera: {fileID: 519420031}
-  matarialText: {fileID: 942999895}
+  waitTime: 10
+  curSpeed: 50
   speed: 50
   maxHp: 30
   startHp: 5
@@ -2606,8 +2593,21 @@ MonoBehaviour:
   - 30
   - 35
   - 1000
+  matarialText: {fileID: 942999895}
+  scoreText: {fileID: 1560384871}
   sound: {fileID: 1445582558}
   overPannel: {fileID: 1830011538}
+  holdTemp: {fileID: 1727075861}
+  sprites:
+  - {fileID: 1541143393}
+  - {fileID: 819509575}
+  - {fileID: 1800057719}
+  - {fileID: 58374207}
+  sprite:
+  - {fileID: 21300000, guid: 3d67f62b11e8cf542b16d9d4ea027911, type: 3}
+  - {fileID: 21300000, guid: 04bafc0d285f8fe409304279c5fa9ed7, type: 3}
+  - {fileID: 21300000, guid: 1e20dc69759a801439e7834e138cd3da, type: 3}
+  camera: {fileID: 519420031}
 --- !u!58 &794932216
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5615,8 +5615,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97374f2282841840aa3f475acaacf18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circle: {fileID: 794932215}
   damage: 2
+  circle: {fileID: 794932215}
 --- !u!60 &1557762631
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -6618,20 +6618,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe5cd53398382c429ac82f1f6854026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wappenSpeed: 1
-  circle: {fileID: 794932215}
-  camera: {fileID: 519420031}
-  wappenText: {fileID: 413100742}
-  wappenUI:
-  - {fileID: 875905442}
-  - {fileID: 175073155}
-  - {fileID: 1427189349}
   wappenName:
   - "\uC9C1\uC120"
   - "\uC6D0\uD615"
   - "\uD638\uD615"
-  mainCam: {fileID: 519420031}
+  wappenSpeed: 1
   wappenHold: {fileID: 2107411753}
+  wappenText: {fileID: 413100742}
+  circle: {fileID: 794932215}
+  camera: {fileID: 519420031}
+  mainCam: {fileID: 519420031}
+  wappenUI:
+  - {fileID: 875905442}
+  - {fileID: 175073155}
+  - {fileID: 1427189349}
   wappen:
   - {fileID: 1226201009}
   - {fileID: 1585967794}
@@ -7874,8 +7874,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97374f2282841840aa3f475acaacf18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circle: {fileID: 794932215}
   damage: 2
+  circle: {fileID: 794932215}
 --- !u!58 &2058188751
 CircleCollider2D:
   m_ObjectHideFlags: 0
