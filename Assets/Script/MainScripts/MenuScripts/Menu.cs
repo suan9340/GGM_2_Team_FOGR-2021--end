@@ -26,8 +26,6 @@ public class Menu : MonoBehaviour
         Debug.Log("튜토리얼 및 설명서 시작");
         SceneManager.LoadScene("Tutorial");
     }
-
-
     // 게임 종료 버튼 눌렀을 때 실행되는 함수
     public void OnClickOutGame()
     {

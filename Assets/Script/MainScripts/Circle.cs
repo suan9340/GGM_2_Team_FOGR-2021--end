@@ -23,6 +23,8 @@ public class Circle : MonoBehaviour
     [Header("사운드매니저")] [SerializeField] private SoundManager sound;
     [Header("플레이어를 잡아주는 것")] [SerializeField] private Transform holdTemp;
     [Header("Main 카메라")] [SerializeField] private Camera camera;
+    [Header("쓰레기 흔들림 (X : 힘 , Y : 시간)")] [SerializeField] Vector2 alphaForce;
+    [Header("적 흔들림 (X : 힘 , Y : 시간)")] [SerializeField] Vector2 enemyForce;
     #endregion
     void Start()
     {
@@ -147,22 +149,24 @@ public class Circle : MonoBehaviour
             Item item = collision.gameObject.GetComponent<Item>();
             item.Dead();
         }
-        if (collision.gameObject.CompareTag("Material"))    //재료
+        else if (collision.gameObject.CompareTag("Material"))    //재료
         {
             Item item = collision.gameObject.GetComponent<Item>();  
             GameManager.Instance.Matarial += item.GetMaterial();
             UpdateUI();
             item.Dead();
         }
-        if (collision.gameObject.CompareTag("Alpha"))   //  쓰레기
+        else if (collision.gameObject.CompareTag("Alpha"))   //  쓰레기
         {
             Item item = collision.gameObject.GetComponent<Item>();
+            GameManager.Instance.CameraManager.ShakeCamera(alphaForce.x,alphaForce.y);
             item.Dead();
             Heal(item.GetDamage());
         }
-        if (collision.gameObject.CompareTag("Enemy"))   // 적
+        else if (collision.gameObject.CompareTag("Enemy"))   // 적
         {
             Item item = collision.gameObject.GetComponent<Item>();
+            GameManager.Instance.CameraManager.ShakeCamera(enemyForce.x,enemyForce.y);
             Heal(-item.GetDamage());
             item.Dead();
         }

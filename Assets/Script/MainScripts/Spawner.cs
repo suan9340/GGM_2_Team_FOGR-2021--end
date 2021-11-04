@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 {
     #region 인스펙터
     [Header("스폰하는 쿨타임")] [SerializeField] private float[] coolTime;
+    [Header("적 스폰하는 확률")] [SerializeField] private EnemySpawnPerCent[] spawnPerCent;
     [Header("적 프리팹")] [SerializeField] private GameObject Enemy;
     [Header("아이템 프리팹")] [SerializeField] private GameObject item_Heal;
     [Header("재료 프리팹")] [SerializeField] private GameObject item_Matarial;
@@ -79,17 +80,30 @@ public class Spawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(coolTime[3]);
-            GameObject obj = poolManager.Get(3);
-            if (obj != null)
+            if(Random.Range(0,100) < spawnPerCent[0].PerCent)
             {
-                obj.transform.SetParent(itemHolder.transform);
-                obj.SetActive(true);
+                GameObject obj = poolManager.Get(3);
+                if (obj != null)
+                {
+                    obj.transform.SetParent(itemHolder.transform);
+                    obj.SetActive(true);
+                }
+                else
+                {
+                    obj = Instantiate(Enemy);
+                    obj.transform.SetParent(itemHolder.transform);
+                }
             }
             else
             {
-                obj = Instantiate(Enemy);
-                obj.transform.SetParent(itemHolder.transform);
+                Debug.Log("꽝!");
             }
         }
     }
+}
+[System.Serializable]
+class EnemySpawnPerCent
+{
+    [Header("100분위 확률")] [SerializeField] private int[] perCent;
+    public int PerCent { get { return perCent[GameManager.Instance.CurExpLevel]; } set { perCent[GameManager.Instance.CurExpLevel] = value; } }
 }
