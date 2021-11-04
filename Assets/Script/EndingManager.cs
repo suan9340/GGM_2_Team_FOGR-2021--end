@@ -4,15 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 public class EndingManager : MonoBehaviour
 {
-    [SerializeField] private int[] levelWappenDamage;
-    [SerializeField] private int[] level;
-    [SerializeField] private float[] levelWappenSpeed;
-    [SerializeField] private float[] levelSize;
-    [SerializeField] private GameObject holdPannel;
-    [SerializeField] private GameObject UpgradePannel;
-    [SerializeField] private GameObject NextStagePannel;
-    [SerializeField] private Wappen[] wappen;
-    [SerializeField] private Text[] levelText;
+    #region 인스펙터
+    [Header("레벨에 대응하는 무기 데미지")] [SerializeField] private int[] levelWappenDamage;
+    [Header("레벨")] [SerializeField] private int[] level;
+    [Header("레벨에 대응하는 차징 속도")] [SerializeField] private float[] levelWappenSpeed;
+    [Header("레벨의 크기")] [SerializeField] private float[] levelSize;
+    [Header("이상한거")] [SerializeField] private GameObject holdPannel;
+    [Header("업그레이드 판넬")] [SerializeField] private GameObject UpgradePannel;
+    [Header("다음 스테이지 판넬")] [SerializeField] private GameObject NextStagePannel;
+    [Header("무기 배열 ?")] [SerializeField] private Wappen[] wappen;
+    [Header("현제 레벨 표시하는 텍스트")] [SerializeField] private Text[] levelText;
+    #endregion
     public void ShowNextStage()
     {
         Time.timeScale = 0;
@@ -29,7 +31,7 @@ public class EndingManager : MonoBehaviour
         UpgradePannel.SetActive(false);
         holdPannel.SetActive(false);
         Time.timeScale = 1;
-        GameManager.Instance.BreakTime(10);
+        GameManager.Instance.UIManager.BreakTime(10);
     }
     public void Upgrade(int get)
     {
@@ -69,7 +71,7 @@ public class EndingManager : MonoBehaviour
     {
         if (level[1] < 10)
         {
-            GameManager.Instance.player.ChangeWappenSpeed(levelWappenSpeed[level[1]]);
+            GameManager.Instance.Player.ChangeWappenSpeed(levelWappenSpeed[level[1]]);
             level[1]++;
             levelText[1].text = string.Format("{0} / {1}", level[1], 10);
             Debug.Log("무기의 속도를 업그레이드 됨");
@@ -80,7 +82,7 @@ public class EndingManager : MonoBehaviour
     {
         if (level[2] < 10)
         {
-            GameManager.Instance.circle.ChangeSpeed(levelSize[level[2]]);
+            GameManager.Instance.Circle.ChangeSpeed(levelSize[level[2]]);
             level[2]++;
             levelText[2].text = string.Format("{0} / {1}", level[2], 10);
             Debug.Log("플레이어의 속도가 업그레이드 됨");

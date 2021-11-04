@@ -4,33 +4,36 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Circle : MonoBehaviour
 {
-    private int score;
-    private int spriteIndex;
+    #region 변수
     private int index = 0;
-    private int matarial;
+    private float curSpeed;
     private float curHp;
     private float sizeHp;
     private float preHp;
-    private float nowHp;
     private bool isOver;
-    private bool isEndWait;
-    [SerializeField] private int[] SPS;
-    [SerializeField] private float waitTime;
-    [SerializeField] private float curSpeed;
-    [SerializeField] private float speed;
-    [SerializeField] private float maxHp;
-    [SerializeField] private float startHp;
-    [SerializeField] private float[] hpLevel;
-    [SerializeField] private float[] cameraSize;
-    [SerializeField] private Text matarialText;
-    [SerializeField] private Text scoreText;
-    [SerializeField] private SoundManager sound;
-    [SerializeField] private GameObject overPannel;
-    [SerializeField] private Transform holdTemp;
-    [SerializeField] private SpriteRenderer[] sprites;
-    [SerializeField] private Sprite[] sprite;
-    [SerializeField] private Camera camera;
+    private bool isEndWait; 
+    #endregion
+    #region 인스펙터
+    [Header("원 줄어들기 시작하는 시간")] [SerializeField] private float waitTime;
+    [Header("원이 돌아가는 속도")] [SerializeField] private float speed;
+    [Header("원의 최대 hp")] [SerializeField] private float maxHp;
+    [Header("기본 hp(시작할 때)")] [SerializeField] private float startHp;
+    [Header("hp 단계(카메라 크기 조정 위한것)")] [SerializeField] private float[] hpLevel;
+    [Header("hp 단계에 따라서 대응하는 카메라 사이즈")] [SerializeField] private float[] cameraSize;
+    [Header("사운드매니저")] [SerializeField] private SoundManager sound;
+    [Header("플레이어를 잡아주는 것")] [SerializeField] private Transform holdTemp;
+    [Header("Main 카메라")] [SerializeField] private Camera camera;
+    #endregion
     void Start()
+    {
+        GameSetUP();
+    }
+    void Update()
+    {
+        KeyInPut();
+    }
+
+    private void GameSetUP()
     {
         curSpeed = speed;
         preHp = curHp;
@@ -38,9 +41,10 @@ public class Circle : MonoBehaviour
         sizeHp = curHp;
         StartCoroutine(Wait());
         StartCoroutine(CheckLevel());
-        StartCoroutine(AddScore());
+        StartCoroutine(LerfSize());
     }
-    void Update()
+
+    private void KeyInPut()
     {
         holdTemp.Rotate(Vector3.forward * Time.deltaTime * curSpeed);
         if (Input.GetKeyDown(KeyCode.Space))
@@ -60,44 +64,55 @@ public class Circle : MonoBehaviour
             GameOver();
         }
         sizeHp = Mathf.Lerp(preHp, curHp, 1f);
-        transform.localScale = new Vector3(sizeHp, sizeHp, 1);
+        transform.localScale = new Vector3(sizeHp, sizeHp, 0);
     }
+    // 게임 시작 전에 원 줄어드는 시간 기다리는 코루틴 함수
     public IEnumerator Wait()
     {
         yield return new WaitForSeconds(waitTime);
         isEndWait = true;
     }
+
+    // 게임 오버됬을 때 불리는 함수
     public void GameOver()
     {
         if (!isOver)
         {
             isOver = true;
             Time.timeScale = 0;
-            overPannel.SetActive(true);
+            GameManager.Instance.UIManager.Over();
         }
     }
+
+    // 원 속도를 업그레이드 해줬을 때 호출되는 함수
     public void ChangeSpeed(float value)
     {
         curSpeed = value;
     }
+
+    // 원이 커질 때 호출되는 함수
     public void Heal(float temp)
     {
-        preHp = curHp;
         curHp += temp;
         if (curHp > maxHp)
         {
             curHp = maxHp;
         }
     }
+
+    // UI업데이트
     public void UpdateUI()
     {
-        matarialText.text = string.Format("재료 : {0}",matarial);
     }
+
+    // 재료 얻었을 때 호출되는 함수 
     public void GetMaterial(int get)
     {
-        matarial += get;
-        UpdateUI();
+        GameManager.Instance.Matarial += get;
+        GameManager.Instance.UIManager.UpdateUI();
     }
+
+    // 아이템을 공격 시 얻는 버프를 실행하는 함수
     public void GetBuff()
     {
         int a = Random.Range(0, 3);
@@ -113,46 +128,52 @@ public class Circle : MonoBehaviour
                 Debug.Log("3번 버프 온");
                 break;
             default:
-                Debug.Log("범위 초과");
+                Debug.Log("범위 이상");
                 break;
         }
     }
+
+    // Dummy 
     public void ChangeSpeed(int change)
     {
         curSpeed = change;
     }
+
+    // 충돌할시 실행되는것
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Item"))
+        if (collision.gameObject.CompareTag("Item"))    //아이템일시
         {
             Item item = collision.gameObject.GetComponent<Item>();
             item.Dead();
         }
-        if (collision.gameObject.CompareTag("Material"))
+        if (collision.gameObject.CompareTag("Material"))    //재료
         {
-            Item item = collision.gameObject.GetComponent<Item>();
-            matarial += item.GetMaterial();
-            item.Dead();
+            Item item = collision.gameObject.GetComponent<Item>();  
+            GameManager.Instance.Matarial += item.GetMaterial();
             UpdateUI();
+            item.Dead();
         }
-        if (collision.gameObject.CompareTag("Alpha"))
+        if (collision.gameObject.CompareTag("Alpha"))   //  쓰레기
         {
             Item item = collision.gameObject.GetComponent<Item>();
             item.Dead();
             Heal(item.GetDamage());
         }
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))   // 적
         {
             Item item = collision.gameObject.GetComponent<Item>();
             Heal(-item.GetDamage());
             item.Dead();
         }
     }
+
+    // 원의 증감소에 따라 카메라 크기 비율 맞춰주는 코루틴 함수
     private IEnumerator CheckLevel()
     {
         while (true)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
             if (hpLevel[index] < curHp)
             {
                 index++;
@@ -165,33 +186,19 @@ public class Circle : MonoBehaviour
             }
         }
     }
-    private IEnumerator AddScore()
-    {
-        while (true)
-        {
-            score += SPS[index];
-            scoreText.text = string.Format("Score : {0}", score);
-            yield return new WaitForSeconds(1f);
-        }
-    }
+
     public void ChangeSize()
     {
         camera.orthographicSize = cameraSize[index];
     }
-    public void ChangeSprite(int beta)
-    {
-        if(spriteIndex < 4)
-        {
-            sprites[spriteIndex].sprite = sprite[beta];
-            spriteIndex++;
-        }
-        else
-        {
-            return;
-        }
-    }
-    public void ChangeSpeed()
-    {
 
+    // 러프 사이즈를 위해 1초전 hp를 기억하는 함수
+    public IEnumerator LerfSize()
+    {
+        while (true)
+        {
+            preHp = curHp;
+            yield return new WaitForSeconds(1f);
+        }
     }
 }

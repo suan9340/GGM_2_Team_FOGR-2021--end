@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private AudioSource turn, click;
+    #region 인스펙터
+    #endregion
+    [Header("출력할 오디오 소스")] [SerializeField] private AudioSource turn, click;
     public void Click()
     {
         click.Play();

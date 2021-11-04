@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Item : MonoBehaviour
 {
-    int alpha;
-    int hp;
-    bool isAttacked;
-    Vector2 pos;
-    [SerializeField] private int maxHp;
-    [SerializeField] private int point;
-    [SerializeField] private int material;
-    [SerializeField] private float heal;
-    [SerializeField] private float damage;
-    [SerializeField] private bool isEnemy;
-    [SerializeField] private Vector4[] Color;
-    [SerializeField] private SpriteRenderer renderer;
-    [SerializeField] private GameObject particle;
+    #region 변수
+    protected Vector2 pos;
+    #endregion
+    #region 인스펙터
+    [Header("획득가능 점수")] [SerializeField] protected int point;
+    [Header("획득가능 재료")] [SerializeField] protected int material;
+    [Header("획득가능 HP")] [SerializeField] protected float heal;
+    [Header("받을수 있는 데미지")] [SerializeField] protected float damage;
+    [Header("죽을시 나오는 파티클")] [SerializeField] protected GameObject particle;
+    [Header("풀링받을 오브젝트 주소")] [SerializeField] protected int poolIndex;
+    [Header("PoolManager")] [SerializeField] protected PoolManager poolManager;
+    [Header("중력 속도")] [SerializeField] protected float speed = 3.5f;
+    #endregion
     private void Start()
     {
-        hp = maxHp;
+        poolManager = FindObjectOfType<PoolManager>();
+    }
+    private void OnEnable()
+    {
         if (Random.Range(0, 2) == 0)//x가 멀떄
         {
             pos.x = Random.Range(45, 55);
@@ -30,7 +33,7 @@ public class Item : MonoBehaviour
         }
         else//y가 멀때
         {
-            pos.y = Random.Range(45, 55);;
+            pos.y = Random.Range(45, 55); ;
             pos.x = Random.Range(-55, 55);
             if (Random.Range(0, 2) == 0)
             {
@@ -38,46 +41,17 @@ public class Item : MonoBehaviour
             }
         }
         transform.position = pos;
-        alpha = Random.Range(0, 3);
+    }
+    void Update()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, 0), speed * Time.deltaTime);
     }
     public void Dead()
     {
         GameManager.Instance.GetExp(point);
         Instantiate(particle, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-    }
-    public void GetDamaged(int damage)
-    {
-        if (!isAttacked)
-        {
-            StartCoroutine(Check());
-            hp -= damage;
-            if (isEnemy)
-            {
-                if(hp < maxHp * 0.25f)
-                {
-                    renderer.color = Color[3];
-                }
-                else if(hp < maxHp * 0.5f)
-                {
-                    renderer.color = Color[2];
-                }
-                else if(hp < maxHp * 0.75f)
-                {
-                    renderer.color = Color[1];
-                }
-                else
-                {
-                    renderer.color = Color[0];
-                }
-            }
-            if (hp <= 0)
-            {
-                GameManager.Instance.GetExp(point);
-                Dead();
-            }
-        }
-        else return;
+        gameObject.SetActive(false);
+        transform.SetParent(poolManager.Instance(poolIndex));
     }
     public float GetHeal()
     {
@@ -90,15 +64,5 @@ public class Item : MonoBehaviour
     public int GetMaterial()
     {
         return material;
-    }
-    public int GetSprite()
-    {
-        return alpha;
-    }
-    public IEnumerator Check()
-    {
-        isAttacked = true;
-        yield return new WaitForSeconds(1f);
-        isAttacked = false;
     }
 }

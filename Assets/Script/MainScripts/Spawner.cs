@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private float[] coolTime;
-    [SerializeField] private GameObject Enemy;
-    [SerializeField] private GameObject item_Heal;
-    [SerializeField] private GameObject item_Matarial;
-    [SerializeField] private GameObject item_Alpha;
+    #region 인스펙터
+    [Header("스폰하는 쿨타임")] [SerializeField] private float[] coolTime;
+    [Header("적 프리팹")] [SerializeField] private GameObject Enemy;
+    [Header("아이템 프리팹")] [SerializeField] private GameObject item_Heal;
+    [Header("재료 프리팹")] [SerializeField] private GameObject item_Matarial;
+    [Header("쓰레기 프리팹")] [SerializeField] private GameObject item_Alpha;
+    [Header("스폰한 아이템 모아두는곳")] [SerializeField] private GameObject itemHolder;
+    [Header("PoolManager 스크립트")] [SerializeField] private PoolManager poolManager;
+    #endregion
     void Start()
     {
         StartCoroutine(spawn_Enemy());
@@ -21,7 +25,17 @@ public class Spawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(coolTime[0]);
-            Instantiate(item_Heal);
+            GameObject obj = poolManager.Get(0);
+            if(obj != null)
+            {
+                obj.transform.SetParent(itemHolder.transform);
+                obj.SetActive(true);
+            }
+            else
+            {
+                obj = Instantiate(item_Heal);
+                obj.transform.SetParent(itemHolder.transform);
+            }
         }
     }
     IEnumerator spawn_Matarial()
@@ -29,7 +43,17 @@ public class Spawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(coolTime[1]);
-            Instantiate(item_Matarial);
+            GameObject obj = poolManager.Get(1);
+            if (obj != null)
+            {
+                obj.transform.SetParent(itemHolder.transform);
+                obj.SetActive(true);
+            }
+            else
+            {
+                obj = Instantiate(item_Matarial);
+                obj.transform.SetParent(itemHolder.transform);
+            }
         }
     }
     IEnumerator spawn_Alpha()
@@ -37,7 +61,17 @@ public class Spawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(coolTime[2]);
-            Instantiate(item_Alpha);
+            GameObject obj = poolManager.Get(2);
+            if (obj != null)
+            {
+                obj.transform.SetParent(itemHolder.transform);
+                obj.SetActive(true);
+            }
+            else
+            {
+                obj = Instantiate(item_Alpha);
+                obj.transform.SetParent(itemHolder.transform);
+            }
         }
     }
     IEnumerator spawn_Enemy()
@@ -45,7 +79,17 @@ public class Spawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(coolTime[3]);
-            Instantiate(Enemy);
+            GameObject obj = poolManager.Get(3);
+            if (obj != null)
+            {
+                obj.transform.SetParent(itemHolder.transform);
+                obj.SetActive(true);
+            }
+            else
+            {
+                obj = Instantiate(Enemy);
+                obj.transform.SetParent(itemHolder.transform);
+            }
         }
     }
 }
