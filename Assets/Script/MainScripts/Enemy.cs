@@ -66,7 +66,6 @@ public class Enemy : Item
             }
             if (hp <= 0)
             {
-                GameManager.Instance.GetExp(point);
                 Dead();
             }
         }

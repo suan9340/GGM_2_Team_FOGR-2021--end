@@ -62,7 +62,7 @@ public class EndingManager : MonoBehaviour
             }
             level[0]++;
             levelText[0].text = string.Format("{0} / {1}", level[0], 10);
-            Debug.Log("무기의 데미지가 업그레이드 됨");
+            //Debug.Log("무기의 데미지가 업그레이드 됨");
         }
     }
     void UpgradAttackSpeed()
@@ -72,7 +72,7 @@ public class EndingManager : MonoBehaviour
             GameManager.Instance.Player.ChangeWappenSpeed(levelWappenSpeed[level[1]]);
             level[1]++;
             levelText[1].text = string.Format("{0} / {1}", level[1], 10);
-            Debug.Log("무기의 속도가 업그레이드 됨");
+            //Debug.Log("무기의 속도가 업그레이드 됨");
         }
     }
     void UpgradSpeed()
@@ -82,7 +82,7 @@ public class EndingManager : MonoBehaviour
             GameManager.Instance.Circle.ChangeSpeed(levelSize[level[2]]);
             level[2]++;
             levelText[2].text = string.Format("{0} / {1}", level[2], 10);
-            Debug.Log("플레이어의 속도가 업그레이드 됨");
+            //Debug.Log("플레이어의 속도가 업그레이드 됨");
         }
     }
     #endregion

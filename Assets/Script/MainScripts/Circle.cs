@@ -25,6 +25,9 @@ public class Circle : MonoBehaviour
     [Header("Main 카메라")] [SerializeField] private Camera camera;
     [Header("쓰레기 흔들림 (X : 힘 , Y : 시간)")] [SerializeField] Vector2 alphaForce;
     [Header("적 흔들림 (X : 힘 , Y : 시간)")] [SerializeField] Vector2 enemyForce;
+    [Header("버프 표현할 스프라이트 배열")] [SerializeField] private Sprite[] buffSprites;
+    [Header("버프 활성화 시간")] [SerializeField] private float[] buffTimes;
+    [Header("크기당 얻는 초당점수 배열")] [SerializeField] private int[] expPerSecond;
     #endregion
     void Start()
     {
@@ -44,6 +47,16 @@ public class Circle : MonoBehaviour
         StartCoroutine(Wait());
         StartCoroutine(CheckLevel());
         StartCoroutine(LerfSize());
+        StartCoroutine(GetScroe());
+    }
+
+    public IEnumerator GetScroe()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            GameManager.Instance.GetExp(expPerSecond[index]);
+        }
     }
 
     private void KeyInPut()
@@ -58,7 +71,7 @@ public class Circle : MonoBehaviour
         {
             if (isEndWait)
             {
-                curHp -= Time.deltaTime * 0.5f;
+                curHp -= Time.deltaTime * 1.5f;
             }
         }
         else
@@ -121,13 +134,13 @@ public class Circle : MonoBehaviour
         switch(a)
         {
             case 0:
-                Debug.Log("1번 버프 온");
+                GameManager.Instance.UIManager.BuffOn(buffTimes[a], buffSprites[a]);
                 break;
             case 1:
-                Debug.Log("2번 버프 온");
+                GameManager.Instance.UIManager.BuffOn(buffTimes[a], buffSprites[a]);
                 break;
             case 2:
-                Debug.Log("3번 버프 온");
+                GameManager.Instance.UIManager.BuffOn(buffTimes[a], buffSprites[a]);
                 break;
             default:
                 Debug.Log("범위 이상");
@@ -153,6 +166,7 @@ public class Circle : MonoBehaviour
         {
             Item item = collision.gameObject.GetComponent<Item>();  
             GameManager.Instance.Matarial += item.GetMaterial();
+            GameManager.Instance.GetMatarial();
             UpdateUI();
             item.Dead();
         }

@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [Header("경험치 슬라이더")] [SerializeField] private Slider slider;
     [Header("중지 판넬")] [SerializeField] private GameObject pausePannel;
     [Header("현제 무기 표시할 오브젝트")] [SerializeField] private GameObject[] wappenUI;
+    [Header("현제 버프를 표시할 이미지")] [SerializeField] private GameObject buffImage;
     #endregion
     private void Start()
     {
@@ -23,7 +24,7 @@ public class UIManager : MonoBehaviour
     {
         slider.value = GameManager.Instance.GetSliderValue();
         levelText.text = string.Format("Stage : {0}", GameManager.Instance.CurExpLevel);
-        matarialText.text = string.Format("재료 : {0}",GameManager.Instance.Matarial);
+        matarialText.text = string.Format("재료 : {0} / {1}",GameManager.Instance.Matarial,GameManager.Instance.MatarialAmount);
     }
     public void ChangeUiWappen(int index)
     {
@@ -41,6 +42,11 @@ public class UIManager : MonoBehaviour
     public void BreakTime(int time)
     {
 
+    }
+    public void BuffOn(float dur, Sprite sprite)
+    {
+        buffImage.SetActive(true);
+        buffImage.GetComponent<Skill>().SetUp(dur,sprite);
     }
     public void Pause(bool isOn)
     {

@@ -4,8 +4,8 @@ using UnityEngine.UI;
 using UnityEngine;
 public class Skill : MonoBehaviour
 {
-    bool isStart = true;
-    public float duration, time;
+    bool isStart = false;
+    float duration, time;
     [Header("배경 이미지")] [SerializeField] private Image backImage;
     [Header("현제 이미지")] [SerializeField] private Image image;
     Sprite sprite;

@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3258738151478278380}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -14.060953, y: 3.4211173, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -98,10 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f8b89aa1fba34f49a68e35fb0c727ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  point: 10
   material: 0
   heal: 3
-  damage: 1
+  damage: -1
   particle: {fileID: 1139283897377808518, guid: 4662d1acd08be864d9d8bfdb262b2afa, type: 3}
   poolIndex: 2
   poolManager: {fileID: 0}

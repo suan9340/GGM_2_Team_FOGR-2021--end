@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
     #region 인스펙터
     [Header("스폰하는 쿨타임")] [SerializeField] private float[] coolTime;
     [Header("적 스폰하는 확률")] [SerializeField] private EnemySpawnPerCent[] spawnPerCent;
-    [Header("적 프리팹")] [SerializeField] private GameObject Enemy;
+    [Header("적 프리팹")] [SerializeField] private GameObject[] Enemy;
     [Header("아이템 프리팹")] [SerializeField] private GameObject item_Heal;
     [Header("재료 프리팹")] [SerializeField] private GameObject item_Matarial;
     [Header("쓰레기 프리팹")] [SerializeField] private GameObject item_Alpha;
@@ -27,15 +27,18 @@ public class Spawner : MonoBehaviour
         {
             yield return new WaitForSeconds(coolTime[0]);
             GameObject obj = poolManager.Get(0);
-            if(obj != null)
+            if(Random.Range(0,100) < 25)
             {
-                obj.transform.SetParent(itemHolder.transform);
-                obj.SetActive(true);
-            }
-            else
-            {
-                obj = Instantiate(item_Heal);
-                obj.transform.SetParent(itemHolder.transform);
+                if (obj != null)
+                {
+                    obj.transform.SetParent(itemHolder.transform);
+                    obj.SetActive(true);
+                }
+                else
+                {
+                    obj = Instantiate(item_Heal);
+                    obj.transform.SetParent(itemHolder.transform);
+                }
             }
         }
     }
@@ -80,9 +83,23 @@ public class Spawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(coolTime[3]);
-            if(Random.Range(0,100) < spawnPerCent[0].PerCent)
+            bool isSpawn = false;
+            int temp = Random.Range(0,100);
+            int cur = 0;
+            int i;
+            for (i = 0; i < spawnPerCent.Length; i++)
             {
-                GameObject obj = poolManager.Get(3);
+                cur += spawnPerCent[i].PerCent;
+                if (temp < cur)
+                {
+                    isSpawn = true;
+                    break;
+                }
+            }
+            if (isSpawn)
+            {
+                print("적 스폰 함");
+                GameObject obj = poolManager.Get(i + 3);
                 if (obj != null)
                 {
                     obj.transform.SetParent(itemHolder.transform);
@@ -90,13 +107,13 @@ public class Spawner : MonoBehaviour
                 }
                 else
                 {
-                    obj = Instantiate(Enemy);
+                    obj = Instantiate(Enemy[i]);
                     obj.transform.SetParent(itemHolder.transform);
                 }
             }
             else
             {
-                Debug.Log("꽝!");
+                print("적 스폰 안함");
             }
         }
     }

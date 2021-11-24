@@ -7,7 +7,6 @@ public class Item : MonoBehaviour
     protected Vector2 pos;
     #endregion
     #region ÀÎ½ºÆåÅÍ
-    [Header("È¹µæ°¡´É Á¡¼ö")] [SerializeField] protected int point;
     [Header("È¹µæ°¡´É Àç·á")] [SerializeField] protected int material;
     [Header("È¹µæ°¡´É HP")] [SerializeField] protected float heal;
     [Header("¹ÞÀ»¼ö ÀÖ´Â µ¥¹ÌÁö")] [SerializeField] protected float damage;
@@ -48,7 +47,6 @@ public class Item : MonoBehaviour
     }
     public void Dead()
     {
-        GameManager.Instance.GetExp(point);
         Instantiate(particle, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
         transform.SetParent(poolManager.Instance(poolIndex));

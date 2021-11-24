@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     bool isUsingWappen;
     int wappenIndex = 0;
     float angle;
+    float angle2;
     float range;
     Vector2 mousePos;
     Vector2 target;
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
     [Header("메인 카메라")] [SerializeField] private Camera mainCam;
     [Header("무기 범위 지시용")] [SerializeField] private GameObject[] wappen;
     [Header("무기 실질 공격용")] [SerializeField] private GameObject[] wappenReal;
+    [Header("무기공격 각도 배열")] [SerializeField] private float[] attackAngle;
     #endregion
     void Start()
     {
@@ -31,7 +33,11 @@ public class Player : MonoBehaviour
     {
         wappenText.text = string.Format("무기 : {0}", wappenName[wappenIndex]);
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        angle2 = Mathf.Atan2(transform.position.y, transform.position.x) * Mathf.Rad2Deg;
         angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
+        
+        angle = Mathf.Clamp(angle, -attackAngle[wappenIndex] + angle2,attackAngle[wappenIndex] + angle2);
+        //Debug.Log("무기의 공격각도 : " + angle + " 플레이어와 지구와의 각도 : " + angle2 + " 무가 범위제한값 : " + attackAngle[wappenIndex]);
         wappenHold.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         CheckInput();
     }
@@ -47,8 +53,12 @@ public class Player : MonoBehaviour
             range += Time.deltaTime * 100;
             if(wappenIndex == 0)
             {
-                wappenTemp.transform.localScale = new Vector3(range * 0.1f, range, 0) * wappenSpeed;
-                wappenReal[wappenIndex].transform.localScale = new Vector3(range * 0.1f, range, 0) * wappenSpeed;
+                if(range > 1000) { }
+                else
+                {
+                    wappenTemp.transform.localScale = new Vector3(range * 0.1f, range, 0) * wappenSpeed;
+                    wappenReal[wappenIndex].transform.localScale = new Vector3(range * 0.1f, range, 0) * wappenSpeed;
+                }
             }
             else
             {

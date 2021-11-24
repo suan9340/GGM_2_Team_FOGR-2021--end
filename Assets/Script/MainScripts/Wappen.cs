@@ -20,12 +20,14 @@ public class Wappen : MonoBehaviour
         {
             Item item = collision.GetComponent<Item>();
             circle.GetMaterial(item.GetMaterial());
+            GameManager.Instance.GetMatarial();
             item.Dead();
         }
         if (collision.CompareTag("Alpha"))
         {
             Item item = collision.GetComponent<Item>();
             circle.GetMaterial(item.GetMaterial());
+            GameManager.Instance.GetMatarial();
             item.Dead();
         }
         if (collision.CompareTag("Item"))

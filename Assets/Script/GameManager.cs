@@ -8,6 +8,7 @@ public class GameManager : MonoSingleton<GameManager>
     #region Set Get 함수
     public int Exp { get { return exp; } set { exp = value; } }
     public int Matarial { get { return matarial; } set { matarial = value; } }
+    public int MatarialAmount { get { return matarialAmount[curWappenLevel]; } set { matarialAmount[curWappenLevel] = value; } }
     public int Sps { get { return sps[curExpLevel]; } set { sps[curExpLevel] = value; } }
     public int CurExpLevel { get { return curExpLevel; } set { curExpLevel = value; } }
     public UIManager UIManager { get { return uiManager; } set { uiManager = value; } }
@@ -17,10 +18,12 @@ public class GameManager : MonoSingleton<GameManager>
     #endregion
     #region 변수
     private int curExpLevel;
+    private int curWappenLevel;
     #endregion
     #region 인스펙터
     [Header("재료")] [SerializeField] private int matarial;
     [Header("현제 경험치")] [SerializeField] private int exp;
+    [Header("무기 레벨업 필요한 재료량")] [SerializeField] private int[] matarialAmount;
     [Header("단계별 초당 경험치 배열")] [SerializeField] private int[] sps;
     [Header("현제 스테이지 단계")] [SerializeField] private int[] expLevel;
     [Header("스테이지당 대응하는 적 정보(2차원 배열)")] [SerializeField] private LevelEnemy[] LevelPerEnemy;
@@ -33,6 +36,12 @@ public class GameManager : MonoSingleton<GameManager>
     {
         uiManager.UpdateUI();
         Time.timeScale = 1;
+        int temp = 15;
+        for(int i = 1; i < 120; i++)
+        {
+            matarialAmount[i] = temp;
+            temp += 10;
+        }
     }
     private void Update()
     {
@@ -55,10 +64,17 @@ public class GameManager : MonoSingleton<GameManager>
         if(exp >= expLevel[curExpLevel])
         {
             curExpLevel++;
-            Debug.Log("A");
             uiManager.ShowUpgradePannel();
         }
         uiManager.UpdateUI();
+    }
+    public void GetMatarial()
+    {
+        if(matarial >= matarialAmount[curWappenLevel])
+        {
+            matarial = 0;
+            curWappenLevel++;
+        }
     }
     public float GetLevel(int type,int mod)
     {
@@ -86,16 +102,12 @@ public class LevelEnemy
         {
             case 0:
                 return hp;
-                break;
             case 1:
                 return damage;
-                break;
             case 2:
                 return speed;
-                break;
             default:
                 return 0;
-                break;
         }
     }
 }
