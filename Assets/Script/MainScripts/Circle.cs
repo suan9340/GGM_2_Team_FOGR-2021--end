@@ -20,11 +20,9 @@ public class Circle : MonoBehaviour
     [Header("기본 hp(시작할 때)")] [SerializeField] private float startHp;
     [Header("hp 단계(카메라 크기 조정 위한것)")] [SerializeField] private float[] hpLevel;
     [Header("hp 단계에 따라서 대응하는 카메라 사이즈")] [SerializeField] private float[] cameraSize;
-    [Header("사운드매니저")] [SerializeField] private SoundManager sound;
+    [Header("사운드매니저")] [SerializeField] private SoundManager soundManager;
     [Header("플레이어를 잡아주는 것")] [SerializeField] private Transform holdTemp;
-    [Header("Main 카메라")] [SerializeField] private Camera camera;
-    [Header("쓰레기 흔들림 (X : 힘 , Y : 시간)")] [SerializeField] Vector2 alphaForce;
-    [Header("적 흔들림 (X : 힘 , Y : 시간)")] [SerializeField] Vector2 enemyForce;
+    [Header("Main 카메라")] [SerializeField] private Camera mainCamera;
     [Header("버프 표현할 스프라이트 배열")] [SerializeField] private Sprite[] buffSprites;
     [Header("버프 활성화 시간")] [SerializeField] private float[] buffTimes;
     [Header("크기당 얻는 초당점수 배열")] [SerializeField] private int[] expPerSecond;
@@ -35,9 +33,77 @@ public class Circle : MonoBehaviour
     }
     void Update()
     {
-        KeyInPut();
+        CheckInput();
     }
-
+    private void OnCollisionEnter2D(Collision2D collision) // 충돌할시 실행되는것
+    {
+        if (collision.gameObject.CompareTag("Item"))    //아이템일시
+        {
+            Item item = collision.gameObject.GetComponent<Item>();
+            item.Dead();
+        }
+        else if (collision.gameObject.CompareTag("Ingredient"))    //재료
+        {
+            Item item = collision.gameObject.GetComponent<Item>();
+            GameManager.Instance.Ingredient += item.GetIngredient();
+            GameManager.Instance.GetIngredient();
+            item.Dead();
+        }
+        else if (collision.gameObject.CompareTag("Garbage"))   //  쓰레기
+        {
+            Item item = collision.gameObject.GetComponent<Item>();
+            GetDamage(item.GetDamage());
+            item.Dead();
+        }
+        else if (collision.gameObject.CompareTag("Enemy"))   // 적
+        {
+            Item item = collision.gameObject.GetComponent<Item>();
+            item.Dead();
+        }
+    }
+    void GetDamage(float _damage)
+    {
+        curHp -= _damage;
+        GameManager.Instance.CameraManager.ShakeCamera();
+    }
+    public IEnumerator LerfSize() // 러프 사이즈를 위해 1초전 hp를 기억하는 함수
+    {
+        while (true)
+        {
+            preHp = curHp;
+            yield return new WaitForSeconds(1f);
+        }
+    }
+    private IEnumerator CheckLevel() // 원의 증감소에 따라 카메라 크기 비율 맞춰주는 코루틴 함수
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+            if (hpLevel[index] < curHp)
+            {
+                index++;
+                ChangeSize();
+            }
+            if (hpLevel[index] > curHp && index > 1)
+            {
+                index--;
+                ChangeSize();
+            }
+        }
+    }
+    public IEnumerator Wait() // 게임 시작 전에 원 줄어드는 시간 기다리는 코루틴 함수
+    {
+        yield return new WaitForSeconds(waitTime);
+        isEndWait = true;
+    }
+    public IEnumerator GetScroe()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            GameManager.Instance.GetExp(expPerSecond[index]);
+        }
+    }
     private void GameSetUP()
     {
         curSpeed = speed;
@@ -49,22 +115,12 @@ public class Circle : MonoBehaviour
         StartCoroutine(LerfSize());
         StartCoroutine(GetScroe());
     }
-
-    public IEnumerator GetScroe()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1);
-            GameManager.Instance.GetExp(expPerSecond[index]);
-        }
-    }
-
-    private void KeyInPut()
+    private void CheckInput()
     {
         holdTemp.Rotate(Vector3.forward * Time.deltaTime * curSpeed);
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            sound.Turn();
+            soundManager.Turn();
             curSpeed *= -1;
         }
         if (curHp > 0)
@@ -81,15 +137,7 @@ public class Circle : MonoBehaviour
         sizeHp = Mathf.Lerp(preHp, curHp, 1f);
         transform.localScale = new Vector3(sizeHp, sizeHp, 0);
     }
-    // 게임 시작 전에 원 줄어드는 시간 기다리는 코루틴 함수
-    public IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(waitTime);
-        isEndWait = true;
-    }
-
-    // 게임 오버됬을 때 불리는 함수
-    public void GameOver()
+    public void GameOver() // 게임 오버됬을 때 불리는 함수
     {
         if (!isOver)
         {
@@ -98,15 +146,11 @@ public class Circle : MonoBehaviour
             GameManager.Instance.UIManager.Over();
         }
     }
-
-    // 원 속도를 업그레이드 해줬을 때 호출되는 함수
-    public void ChangeSpeed(float value)
+    public void ChangeSpeed(float value) // 원 속도를 업그레이드 해줬을 때 호출되는 함수
     {
         curSpeed = value;
     }
-
-    // 원이 커질 때 호출되는 함수
-    public void Heal(float temp)
+    public void Heal(float temp) // 원이 커질 때 호출되는 함수
     {
         curHp += temp;
         if (curHp > maxHp)
@@ -114,21 +158,12 @@ public class Circle : MonoBehaviour
             curHp = maxHp;
         }
     }
-
-    // UI업데이트
-    public void UpdateUI()
+    public void GetIngredient(int get) // 재료 얻었을 때 호출되는 함수 
     {
-    }
-
-    // 재료 얻었을 때 호출되는 함수 
-    public void GetMaterial(int get)
-    {
-        GameManager.Instance.Matarial += get;
+        GameManager.Instance.Ingredient += get;
         GameManager.Instance.UIManager.UpdateUI();
     }
-
-    // 아이템을 공격 시 얻는 버프를 실행하는 함수
-    public void GetBuff()
+    public void GetBuff() // 아이템을 공격 시 얻는 버프를 실행하는 함수
     {
         int a = Random.Range(0, 3);
         switch(a)
@@ -147,76 +182,8 @@ public class Circle : MonoBehaviour
                 break;
         }
     }
-
-    // Dummy 
-    public void ChangeSpeed(int change)
-    {
-        curSpeed = change;
-    }
-
-    // 충돌할시 실행되는것
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Item"))    //아이템일시
-        {
-            Item item = collision.gameObject.GetComponent<Item>();
-            item.Dead();
-        }
-        else if (collision.gameObject.CompareTag("Material"))    //재료
-        {
-            Item item = collision.gameObject.GetComponent<Item>();  
-            GameManager.Instance.Matarial += item.GetMaterial();
-            GameManager.Instance.GetMatarial();
-            UpdateUI();
-            item.Dead();
-        }
-        else if (collision.gameObject.CompareTag("Alpha"))   //  쓰레기
-        {
-            Item item = collision.gameObject.GetComponent<Item>();
-            GameManager.Instance.CameraManager.ShakeCamera(alphaForce.x,alphaForce.y);
-            item.Dead();
-            Heal(item.GetDamage());
-        }
-        else if (collision.gameObject.CompareTag("Enemy"))   // 적
-        {
-            Item item = collision.gameObject.GetComponent<Item>();
-            GameManager.Instance.CameraManager.ShakeCamera(enemyForce.x,enemyForce.y);
-            Heal(-item.GetDamage());
-            item.Dead();
-        }
-    }
-
-    // 원의 증감소에 따라 카메라 크기 비율 맞춰주는 코루틴 함수
-    private IEnumerator CheckLevel()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(0.1f);
-            if (hpLevel[index] < curHp)
-            {
-                index++;
-                ChangeSize();
-            }
-            if (hpLevel[index] > curHp && index > 1)
-            {
-                index--;
-                ChangeSize();
-            }
-        }
-    }
-
     public void ChangeSize()
     {
-        camera.orthographicSize = cameraSize[index];
-    }
-
-    // 러프 사이즈를 위해 1초전 hp를 기억하는 함수
-    public IEnumerator LerfSize()
-    {
-        while (true)
-        {
-            preHp = curHp;
-            yield return new WaitForSeconds(1f);
-        }
+        mainCamera.orthographicSize = cameraSize[index];
     }
 }

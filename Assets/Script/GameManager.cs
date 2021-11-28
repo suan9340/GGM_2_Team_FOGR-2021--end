@@ -7,23 +7,25 @@ public class GameManager : MonoSingleton<GameManager>
 {
     #region Set Get 함수
     public int Exp { get { return exp; } set { exp = value; } }
-    public int Matarial { get { return matarial; } set { matarial = value; } }
-    public int MatarialAmount { get { return matarialAmount[curWappenLevel]; } set { matarialAmount[curWappenLevel] = value; } }
+    public int Ingredient { get { return ingredient; } set { ingredient = value; } }
+    public int IngredientAmount { get { return ingredientAmount[curWeaponLevel]; } set { ingredientAmount[curWeaponLevel] = value; } }
     public int Sps { get { return sps[curExpLevel]; } set { sps[curExpLevel] = value; } }
     public int CurExpLevel { get { return curExpLevel; } set { curExpLevel = value; } }
     public UIManager UIManager { get { return uiManager; } set { uiManager = value; } }
     public Circle Circle { get { return circle; } set { circle = value; } }
     public Player Player { get { return player; } set { player = value; } }
     public CameraManager CameraManager { get { return cameraManager; } set { cameraManager = value; } }
+    public PoolManager PoolManager { get { return poolManager; } set { poolManager = value; } }
+    public EndingManager EndingManager { get { return endingManager; } set { endingManager = value; } }
     #endregion
     #region 변수
     private int curExpLevel;
-    private int curWappenLevel;
+    private int curWeaponLevel;
     #endregion
     #region 인스펙터
-    [Header("재료")] [SerializeField] private int matarial;
+    [Header("재료")] [SerializeField] private int ingredient;
     [Header("현제 경험치")] [SerializeField] private int exp;
-    [Header("무기 레벨업 필요한 재료량")] [SerializeField] private int[] matarialAmount;
+    [Header("무기 레벨업 필요한 재료량")] [SerializeField] private int[] ingredientAmount;
     [Header("단계별 초당 경험치 배열")] [SerializeField] private int[] sps;
     [Header("현제 스테이지 단계")] [SerializeField] private int[] expLevel;
     [Header("스테이지당 대응하는 적 정보(2차원 배열)")] [SerializeField] private LevelEnemy[] LevelPerEnemy;
@@ -31,23 +33,33 @@ public class GameManager : MonoSingleton<GameManager>
     [Header("Circle 스크립트")] [SerializeField] private Circle circle;
     [Header("Player 스크립트")] [SerializeField] private Player player;
     [Header("CameraManager 스크립트")] [SerializeField] private CameraManager cameraManager;
+    [Header("PoolManager 스크립트")] [SerializeField] private PoolManager poolManager;
+    [Header("EndingManager")] [SerializeField] private EndingManager endingManager;
     #endregion
     private void Start()
     {
-        uiManager.UpdateUI();
-        Time.timeScale = 1;
-        int temp = 15;
-        for(int i = 1; i < 120; i++)
-        {
-            matarialAmount[i] = temp;
-            temp += 10;
-        }
+        GameSetUp();
     }
     private void Update()
+    {
+        CheckInput();
+    }
+    void CheckInput()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             uiManager.Pause(true);
+        }
+    }
+    void GameSetUp()
+    {
+        Time.timeScale = 1;
+        uiManager.UpdateUI();
+        int temp = 15;
+        for (int i = 1; i < 120; i++) //무기 업글당 재료량 공식
+        {
+            ingredientAmount[i] = temp;
+            temp += 10;
         }
     }
     public void ExitGame()
@@ -68,12 +80,12 @@ public class GameManager : MonoSingleton<GameManager>
         }
         uiManager.UpdateUI();
     }
-    public void GetMatarial()
+    public void GetIngredient()
     {
-        if(matarial >= matarialAmount[curWappenLevel])
+        if(ingredient >= ingredientAmount[curWeaponLevel])
         {
-            matarial = 0;
-            curWappenLevel++;
+            ingredient = 0;
+            curWeaponLevel++;
         }
     }
     public float GetLevel(int type,int mod)

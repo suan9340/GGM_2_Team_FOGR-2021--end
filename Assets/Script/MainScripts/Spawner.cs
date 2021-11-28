@@ -8,20 +8,20 @@ public class Spawner : MonoBehaviour
     [Header("스폰하는 쿨타임")] [SerializeField] private float[] coolTime;
     [Header("적 스폰하는 확률")] [SerializeField] private EnemySpawnPerCent[] spawnPerCent;
     [Header("적 프리팹")] [SerializeField] private GameObject[] Enemy;
-    [Header("아이템 프리팹")] [SerializeField] private GameObject item_Heal;
-    [Header("재료 프리팹")] [SerializeField] private GameObject item_Matarial;
-    [Header("쓰레기 프리팹")] [SerializeField] private GameObject item_Alpha;
+    [Header("아이템 프리팹")] [SerializeField] private GameObject item;
+    [Header("재료 프리팹")] [SerializeField] private GameObject ingredient;
+    [Header("쓰레기 프리팹")] [SerializeField] private GameObject garbage;
     [Header("스폰한 아이템 모아두는곳")] [SerializeField] private GameObject itemHolder;
     [Header("PoolManager 스크립트")] [SerializeField] private PoolManager poolManager;
     #endregion
     void Start()
     {
         StartCoroutine(spawn_Enemy());
-        StartCoroutine(spawn_Heal());
-        StartCoroutine(spawn_Matarial());
-        StartCoroutine(spawn_Alpha());
+        StartCoroutine(spawn_Item());
+        StartCoroutine(spawn_Ingredient());
+        StartCoroutine(spawn_Garbage());
     }
-    IEnumerator spawn_Heal()
+    IEnumerator spawn_Item()
     {
         while (true)
         {
@@ -36,13 +36,13 @@ public class Spawner : MonoBehaviour
                 }
                 else
                 {
-                    obj = Instantiate(item_Heal);
+                    obj = Instantiate(item);
                     obj.transform.SetParent(itemHolder.transform);
                 }
             }
         }
     }
-    IEnumerator spawn_Matarial()
+    IEnumerator spawn_Ingredient()
     {
         while (true)
         {
@@ -55,12 +55,12 @@ public class Spawner : MonoBehaviour
             }
             else
             {
-                obj = Instantiate(item_Matarial);
+                obj = Instantiate(ingredient);
                 obj.transform.SetParent(itemHolder.transform);
             }
         }
     }
-    IEnumerator spawn_Alpha()
+    IEnumerator spawn_Garbage()
     {
         while (true)
         {
@@ -73,7 +73,7 @@ public class Spawner : MonoBehaviour
             }
             else
             {
-                obj = Instantiate(item_Alpha);
+                obj = Instantiate(garbage);
                 obj.transform.SetParent(itemHolder.transform);
             }
         }

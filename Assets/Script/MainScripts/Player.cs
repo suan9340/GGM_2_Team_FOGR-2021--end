@@ -21,9 +21,9 @@ public class Player : MonoBehaviour
     [Header("무기이름 반영하는 텍스트")] [SerializeField] private Text wappenText;
     [Header("Circle 스크립트")] [SerializeField] private Circle circle;
     [Header("메인 카메라")] [SerializeField] private Camera mainCam;
-    [Header("무기 범위 지시용")] [SerializeField] private GameObject[] wappen;
-    [Header("무기 실질 공격용")] [SerializeField] private GameObject[] wappenReal;
-    [Header("무기공격 각도 배열")] [SerializeField] private float[] attackAngle;
+    [Header("무기 범위 장판")] [SerializeField] private GameObject[] wappen;
+    [Header("무기 공격 장판")] [SerializeField] private GameObject[] wappenReal;
+    [Header("무기공격 각도 제한 배열")] [SerializeField] private float[] attackAngle;
     #endregion
     void Start()
     {
@@ -31,15 +31,24 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        wappenText.text = string.Format("무기 : {0}", wappenName[wappenIndex]);
+        ChangeWeaponAngle();
+        CheckInput();
+    }
+    IEnumerator Attack()
+    {
+        GameObject temp = Instantiate(wappenReal[wappenIndex], wappenHold);
+        temp.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        Destroy(temp);
+    }
+    void ChangeWeaponAngle()
+    {
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         angle2 = Mathf.Atan2(transform.position.y, transform.position.x) * Mathf.Rad2Deg;
         angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
-        
-        angle = Mathf.Clamp(angle, -attackAngle[wappenIndex] + angle2,attackAngle[wappenIndex] + angle2);
-        //Debug.Log("무기의 공격각도 : " + angle + " 플레이어와 지구와의 각도 : " + angle2 + " 무가 범위제한값 : " + attackAngle[wappenIndex]);
+
+        angle = Mathf.Clamp(angle, -attackAngle[wappenIndex] + angle2, attackAngle[wappenIndex] + angle2);
         wappenHold.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-        CheckInput();
     }
     void CheckInput()
     {
@@ -70,7 +79,7 @@ public class Player : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, transform.forward, 100);
             if (hit)
             {
-                if (hit.transform.CompareTag("Material") || hit.transform.CompareTag("Alpha"))
+                if (hit.transform.CompareTag("Ingredient") || hit.transform.CompareTag("Garbage"))
                 {
                     circle.Heal(hit.transform.GetComponent<Item>().GetHeal());
                     Destroy(hit.transform.gameObject);
@@ -89,27 +98,23 @@ public class Player : MonoBehaviour
         {
             wappenIndex = 0;
             GameManager.Instance.UIManager.ChangeUiWappen(wappenIndex);
+            wappenText.text = string.Format("무기 : {0}", wappenName[wappenIndex]);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && !isUsingWappen)
         {
             wappenIndex = 1;
             GameManager.Instance.UIManager.ChangeUiWappen(wappenIndex);
+            wappenText.text = string.Format("무기 : {0}", wappenName[wappenIndex]);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && !isUsingWappen)
         {
             wappenIndex = 2;
             GameManager.Instance.UIManager.ChangeUiWappen(wappenIndex);
+            wappenText.text = string.Format("무기 : {0}", wappenName[wappenIndex]);
         }
     }
     public void ChangeWappenSpeed(float change)
     {
         wappenSpeed = change;
-    }
-    IEnumerator Attack()
-    {
-        GameObject temp = Instantiate(wappenReal[wappenIndex],wappenHold);
-        temp.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        Destroy(temp);
     }
 }

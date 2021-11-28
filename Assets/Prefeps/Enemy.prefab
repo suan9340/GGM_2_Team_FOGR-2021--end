@@ -80,7 +80,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.29, y: 2.94}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -148,8 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55028f6f5fa5928489e08b356fa88eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  point: 10
-  material: 0
+  ingredient: 0
   heal: 0
   damage: 3
   particle: {fileID: 1139283897377808518, guid: 4662d1acd08be864d9d8bfdb262b2afa, type: 3}
@@ -157,7 +156,7 @@ MonoBehaviour:
   poolManager: {fileID: 0}
   speed: 3.5
   maxHp: 10
-  hp: 10
+  curHp: 0
   Color:
   - {x: 0, y: 1, z: 0, w: 1}
   - {x: 1, y: 1, z: 0, w: 1}

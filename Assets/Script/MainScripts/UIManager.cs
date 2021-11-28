@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     #region 인스펙터
-    [Header("재료 표시용 텍스트")] [SerializeField] private Text matarialText;
+    [Header("재료 표시용 텍스트")] [SerializeField] private Text ingredientText;
     [Header("점수 표시용 텍스트")] [SerializeField] private Text scoreText;
-    [Header("Level 애 대응할 텍스트")] [SerializeField] private Text levelText;
+    [Header("Level 애 대응할 텍스트")] [SerializeField] private Text stageText;
     [Header("게임오버 판넬")] [SerializeField] private GameObject overPannel;
     [Header("업그레이드 판넬")] [SerializeField] private GameObject upgradePanel;
     [Header("경험치 슬라이더")] [SerializeField] private Slider slider;
@@ -18,13 +18,21 @@ public class UIManager : MonoBehaviour
     #endregion
     private void Start()
     {
-        StartCoroutine(AddScore());
+        StartCoroutine(GetScore());
+    }
+    private IEnumerator GetScore()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            scoreText.text = string.Format("Score : {0}", GameManager.Instance.Exp);
+        }
     }
     public void UpdateUI()
     {
         slider.value = GameManager.Instance.GetSliderValue();
-        levelText.text = string.Format("Stage : {0}", GameManager.Instance.CurExpLevel);
-        matarialText.text = string.Format("재료 : {0} / {1}",GameManager.Instance.Matarial,GameManager.Instance.MatarialAmount);
+        stageText.text = string.Format("Stage : {0}", GameManager.Instance.CurExpLevel);
+        ingredientText.text = string.Format("재료 : {0} / {1}",GameManager.Instance.Ingredient,GameManager.Instance.IngredientAmount);
     }
     public void ChangeUiWappen(int index)
     {
@@ -38,6 +46,7 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 0;
         upgradePanel.SetActive(true);
+        GameManager.Instance.EndingManager.ShowNextEnemy();
     }
     public void BreakTime(int time)
     {
@@ -56,13 +65,5 @@ public class UIManager : MonoBehaviour
     public void Over()
     {
         overPannel.SetActive(true);
-    }
-    private IEnumerator AddScore()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1f);
-            scoreText.text = string.Format("Score : {0}",GameManager.Instance.Exp);
-        }
     }
 }

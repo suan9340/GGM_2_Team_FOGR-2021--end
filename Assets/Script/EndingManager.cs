@@ -5,21 +5,25 @@ using UnityEngine.UI;
 public class EndingManager : MonoBehaviour
 {
     #region 인스펙터
-    [Header("레벨에 대응하는 무기 데미지")] [SerializeField] private int[] levelWappenDamage;
-    [Header("레벨")] [SerializeField] private int[] level;
-    [Header("레벨에 대응하는 차징 속도")] [SerializeField] private float[] levelWappenSpeed;
+    [Header("레벨에 대응하는 무기 데미지")] [SerializeField] private int[] levelWeaponDamage;
+    [Header("레벨")] [SerializeField] private float[] level;
+    [Header("레벨에 대응하는 차징 속도")] [SerializeField] private float[] levelWeaponSpeed;
     [Header("레벨의 크기")] [SerializeField] private float[] levelSize;
     [Header("이상한거")] [SerializeField] private GameObject holdPannel;
     [Header("업그레이드 판넬")] [SerializeField] private GameObject upgradePannel;
     [Header("다음 스테이지 판넬")] [SerializeField] private GameObject NextStagePannel;
-    [Header("무기 배열 ?")] [SerializeField] private Wappen[] wappen;
-    [Header("현제 레벨 표시하는 텍스트")] [SerializeField] private Text[] levelText;
+    [Header("무기 배열 ?")] [SerializeField] private Weapon[] weapon;
+    [Header("현제 레벨 표시하는 슬라이더")] [SerializeField] private Slider[] levelSlider;
+    [Header("적 정보 배열")] [SerializeField] private EnemyInfo[] enemyInfo;
+    [Header("적 이름")] [SerializeField] private Text enemy_Name_Text;
+    [Header("적 설명")] [SerializeField] private Text enemy_Desc_Text;
+    [Header("적 사진")] [SerializeField] private Image enemy_Image_Image;
     #endregion
-    public void ShowNextStage()
+    /*public void ShowNextStage()
     {
         holdPannel.SetActive(true);
         NextStagePannel.SetActive(true);
-    }
+    }*/
     public void ShowUpgrade()
     {
         NextStagePannel.SetActive(false);
@@ -31,6 +35,12 @@ public class EndingManager : MonoBehaviour
         upgradePannel.SetActive(false);
         Time.timeScale = 1;
         GameManager.Instance.UIManager.BreakTime(10);
+    }
+    public void ShowNextEnemy()
+    {
+        enemy_Name_Text.text = enemyInfo[1].name;
+        enemy_Desc_Text.text = enemyInfo[1].desc;
+        enemy_Image_Image.sprite = enemyInfo[1].sprite;
     }
     public void Upgrade(int get)
     {
@@ -49,6 +59,7 @@ public class EndingManager : MonoBehaviour
                 Debug.LogError("Null!");
                 break;
         }
+        GameManager.Instance.PoolManager.ClearTable();
         GoGame();
     }
     #region 실질 업그레이드 실행문
@@ -58,31 +69,28 @@ public class EndingManager : MonoBehaviour
         {
             for (int i = 0; i < 3; i++)
             {
-                wappen[i].ChangeDamage(levelWappenDamage[level[0]]);
+                weapon[i].ChangeDamage(levelWeaponDamage[(int)level[0]]);
             }
             level[0]++;
-            levelText[0].text = string.Format("{0} / {1}", level[0], 10);
-            //Debug.Log("무기의 데미지가 업그레이드 됨");
-        }
-    }
-    void UpgradAttackSpeed()
-    {
-        if (level[1] < 10)
-        {
-            GameManager.Instance.Player.ChangeWappenSpeed(levelWappenSpeed[level[1]]);
-            level[1]++;
-            levelText[1].text = string.Format("{0} / {1}", level[1], 10);
-            //Debug.Log("무기의 속도가 업그레이드 됨");
+            levelSlider[0].value = (float)level[0] * 0.1f;
         }
     }
     void UpgradSpeed()
     {
+        if (level[1] < 10)
+        {
+            GameManager.Instance.Circle.ChangeSpeed(levelSize[(int)level[1]]);
+            level[1]++;
+            levelSlider[1].value = (float)level[2] * 0.1f;
+        }
+    }
+    void UpgradAttackSpeed()
+    {
         if (level[2] < 10)
         {
-            GameManager.Instance.Circle.ChangeSpeed(levelSize[level[2]]);
+            GameManager.Instance.Player.ChangeWappenSpeed(levelWeaponSpeed[(int)level[2]]);
             level[2]++;
-            levelText[2].text = string.Format("{0} / {1}", level[2], 10);
-            //Debug.Log("플레이어의 속도가 업그레이드 됨");
+            levelSlider[2].value = level[2] * 0.1f;
         }
     }
     #endregion

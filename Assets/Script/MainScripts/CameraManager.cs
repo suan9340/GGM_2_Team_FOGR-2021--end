@@ -4,36 +4,30 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    bool isRunning;
-    bool isEnd;
     Vector3 originalPos;
-    [Header("Èçµé¸®´Â Èû")] [SerializeField] private float ShakeForce;
-    [Header("Èçµé¸®´Â ½Ã°£")] [SerializeField] private float ShakeTime;
+    float _shakeForce;
+    [Header("Èçµé¸®´Â Èû")] [SerializeField] private float shakeForce;
+    [Header("Èçµé¸®´Â ½Ã°£")] [SerializeField] private float shakeTime;
     public void Start()
     {
         originalPos = transform.position;
     }
-    public void ShakeCamera(float force , float time)
+    public void ShakeCamera()
     {
-        StartCoroutine(Shake(force , time));
+        StartCoroutine(Shake());
     }
-    IEnumerator Shake(float force, float time)
+    IEnumerator Shake()
     {
-        isEnd = false;
-        isRunning = true;
-        yield return new WaitForSeconds(time);
-        isRunning = false;
+        _shakeForce = shakeForce;
+        yield return new WaitForSeconds(shakeTime);
+        _shakeForce = 0;
+        transform.position = originalPos;
     }
     public void Update()
     {
-        if (isRunning)
+        if(_shakeForce != 0)
         {
-            transform.position = Random.insideUnitSphere * ShakeForce + originalPos;
-        }
-        else if(!isEnd)
-        {
-            transform.position = originalPos;
-            isEnd = true;
+            transform.position = Random.insideUnitSphere * shakeForce + originalPos;
         }
     }
 }

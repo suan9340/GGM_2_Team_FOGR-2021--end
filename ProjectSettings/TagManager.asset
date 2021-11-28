@@ -5,9 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Item
-  - Material
-  - Alpha
   - Enemy
+  - Ingredient
+  - Garbage
   layers:
   - Default
   - TransparentFX
