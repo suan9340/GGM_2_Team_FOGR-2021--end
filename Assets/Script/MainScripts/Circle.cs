@@ -117,7 +117,7 @@ public class Circle : MonoBehaviour
     }
     private void CheckInput()
     {
-        holdTemp.Rotate(Vector3.forward * Time.deltaTime * curSpeed);
+        holdTemp.Rotate(Vector3.forward * Time.deltaTime * curSpeed * GameManager.Instance.SpeedUpgradeAmount * GameManager.Instance.SpeedBuffAmount);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             soundManager.Turn();
@@ -146,10 +146,10 @@ public class Circle : MonoBehaviour
             GameManager.Instance.UIManager.Over();
         }
     }
-    public void ChangeSpeed(float value) // 원 속도를 업그레이드 해줬을 때 호출되는 함수
+    /*public void ChangeSpeed(float value) // 원 속도를 업그레이드 해줬을 때 호출되는 함수
     {
         curSpeed = value;
-    }
+    }*/
     public void Heal(float temp) // 원이 커질 때 호출되는 함수
     {
         curHp += temp;

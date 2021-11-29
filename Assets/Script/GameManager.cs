@@ -17,6 +17,12 @@ public class GameManager : MonoSingleton<GameManager>
     public CameraManager CameraManager { get { return cameraManager; } set { cameraManager = value; } }
     public PoolManager PoolManager { get { return poolManager; } set { poolManager = value; } }
     public EndingManager EndingManager { get { return endingManager; } set { endingManager = value; } }
+    public float DamageUpgradeAmount { get { return damageUpgradeAmount; } set { damageUpgradeAmount = value; } }
+    public float DamageBuffAmount { get { return damageBuffAmount; } set { damageBuffAmount = value; } }
+    public float SpeedUpgradeAmount { get { return speedUpgradeAmount; } set { speedUpgradeAmount = value; } }
+    public float SpeedBuffAmount { get { return speedBuffAmount; } set { speedBuffAmount = value; } }
+    public float WaeponSpeedUpgradeAmount { get { return weaponSpeedUpgradeAmount; } set { weaponSpeedUpgradeAmount = value; } }
+    public float WaeponSpeedBuffAmount { get { return weaponSpeedBuffAmount; } set { weaponSpeedBuffAmount = value; } }
     #endregion
     #region 변수
     private int curExpLevel;
@@ -35,6 +41,12 @@ public class GameManager : MonoSingleton<GameManager>
     [Header("CameraManager 스크립트")] [SerializeField] private CameraManager cameraManager;
     [Header("PoolManager 스크립트")] [SerializeField] private PoolManager poolManager;
     [Header("EndingManager")] [SerializeField] private EndingManager endingManager;
+    [Header("공격력 배율")] [SerializeField] private float damageUpgradeAmount;
+    [Header("공격력 버프")] [SerializeField] private float damageBuffAmount;
+    [Header("속도 배율")] [SerializeField] private float speedUpgradeAmount;
+    [Header("속도 버프")] [SerializeField] private float speedBuffAmount;
+    [Header("차징속도 배율")] [SerializeField] private float weaponSpeedUpgradeAmount;
+    [Header("차징속도 버프")] [SerializeField] private float weaponSpeedBuffAmount;
     #endregion
     private void Start()
     {
@@ -62,6 +74,18 @@ public class GameManager : MonoSingleton<GameManager>
             temp += 10;
         }
     }
+    public void UpGradeSpeed(float value)
+    {
+        speedUpgradeAmount = value;
+    }
+    public void UpGradeDamage(float value)
+    {
+        damageUpgradeAmount = value;
+    }
+    public void UpGradeWeaponSpeed(float value)
+    {
+        weaponSpeedUpgradeAmount = value;
+    }
     public void ExitGame()
     {
         SceneManager.LoadScene("Menu");
@@ -73,7 +97,7 @@ public class GameManager : MonoSingleton<GameManager>
     public void GetExp(int get)
     {
         exp += get;
-        if(exp >= expLevel[curExpLevel])
+        if (exp >= expLevel[curExpLevel])
         {
             curExpLevel++;
             uiManager.ShowUpgradePannel();
@@ -82,15 +106,45 @@ public class GameManager : MonoSingleton<GameManager>
     }
     public void GetIngredient()
     {
-        if(ingredient >= ingredientAmount[curWeaponLevel])
+        if (ingredient >= ingredientAmount[curWeaponLevel])
         {
             ingredient = 0;
             curWeaponLevel++;
         }
     }
-    public float GetLevel(int type,int mod)
+    public float GetLevel(int type, int mod)
     {
         return LevelPerEnemy[type].Get(mod);
+    }
+    public void AddBuff(int type)
+    {
+        switch (type)
+        {
+            case 0:
+                damageBuffAmount = 3;
+                break;
+            case 1:
+                speedBuffAmount = 2;
+                break;
+            case 2:
+                weaponSpeedBuffAmount = 2;
+                break;
+        }
+    }
+    public void MinusBuff(int type)
+    {
+        switch (type)
+        {
+            case 0:
+                damageBuffAmount = 1;
+                break;
+            case 1:
+                speedBuffAmount = 1;
+                break;
+            case 2:
+                weaponSpeedBuffAmount = 1;
+                break;
+        }
     }
 }
 [System.Serializable]
