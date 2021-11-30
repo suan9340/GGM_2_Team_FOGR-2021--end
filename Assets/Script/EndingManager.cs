@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 public class EndingManager : MonoBehaviour
 {
-    #region 인스펙터
+    #region 인스펙터    
+    //[Header("무기 배열 ?")] [SerializeField] private Weapon[] weapon;
+    //[Header("이상한거")] [SerializeField] private GameObject holdPannel;
     [Header("레벨")] [SerializeField] private float[] level;
     [Header("레벨에 대응하는 차징 속도")] [SerializeField] private float[] levelWeaponSpeed;
     [Header("레벨에 대응하는 무기 데미지")] [SerializeField] private int[] levelWeaponDamage;
     [Header("레벨에 대응하는 속도")] [SerializeField] private float[] levelSpeed;
-    [Header("이상한거")] [SerializeField] private GameObject holdPannel;
     [Header("업그레이드 판넬")] [SerializeField] private GameObject upgradePannel;
     [Header("다음 스테이지 판넬")] [SerializeField] private GameObject NextStagePannel;
-    [Header("무기 배열 ?")] [SerializeField] private Weapon[] weapon;
     [Header("현제 레벨 표시하는 슬라이더")] [SerializeField] private Slider[] levelSlider;
     [Header("적 정보 배열")] [SerializeField] private EnemyInfo[] enemyInfo;
     [Header("업그레이드될 수치 표시용 텍스트")] [SerializeField] private Text[] levelValueText;
@@ -108,6 +108,9 @@ public class EndingManager : MonoBehaviour
         {
             levelValueText[2].text = string.Format("MAX : {0}", levelWeaponSpeed[(int)level[2]]);
         }
+        levelSlider[1].value = level[2] * 0.1f;
+        levelSlider[1].value = level[1] * 0.1f;
+        levelSlider[0].value = level[0] * 0.1f;
     }
     #region 실질 업그레이드 실행문
     void UpgradDamage()
@@ -116,10 +119,10 @@ public class EndingManager : MonoBehaviour
         {
             for (int i = 0; i < 3; i++)
             {
-                weapon[i].ChangeDamage(levelWeaponDamage[(int)level[0]]);
+                GameManager.Instance.UpGradeDamage(levelWeaponDamage[(int)level[0]]);
             }
             level[0]++;
-            levelSlider[0].value = (float)level[0] * 0.1f;
+            levelSlider[0].value = level[0] * 0.1f;
         }
     }
     void UpgradSpeed()
@@ -128,7 +131,7 @@ public class EndingManager : MonoBehaviour
         {
             GameManager.Instance.UpGradeSpeed(levelSpeed[(int)level[1]]);
             level[1]++;
-            levelSlider[1].value = (float)level[2] * 0.1f;
+            levelSlider[1].value = level[1] * 0.1f;
         }
     }
     void UpgradAttackSpeed()

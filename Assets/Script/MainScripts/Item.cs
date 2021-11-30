@@ -27,11 +27,11 @@ public class Item : MonoBehaviour
     {
         MoveToZero();
     }
-    void MoveToZero()
+    protected void MoveToZero()
     {
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, 0), speed * Time.deltaTime);
     }
-    void SetStartPosition()
+    protected void SetStartPosition()
     {
         Vector2 pos;
         if (Random.Range(0, 2) == 0)//x°¡ ¸Ö‹š

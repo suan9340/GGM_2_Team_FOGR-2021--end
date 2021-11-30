@@ -19,19 +19,19 @@ public class PoolManager : MonoBehaviour
     }
     public void ClearTable()
     {
-        print(holder.childCount);
+        //print(holder.childCount);
         for (int i = 0; i < holder.childCount; i++)
         {
             Item item = holder.GetChild(0).GetComponent<Item>();
             if (item == null)
             {
                 Enemy enemy = holder.GetChild(0).GetComponent<Enemy>();
-                print("A");
+                //print("A");
                 enemy.Dead();
             }
             else
             {
-                print(item.gameObject.name);
+                //print(item.gameObject.name);
                 item.Dead();
             }
         }

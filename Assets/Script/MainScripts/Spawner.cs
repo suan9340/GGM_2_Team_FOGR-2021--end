@@ -98,8 +98,8 @@ public class Spawner : MonoBehaviour
             }
             if (isSpawn)
             {
-                print("적 스폰 함");
                 GameObject obj = poolManager.Get(i + 3);
+                Debug.Log(i + 3);
                 if (obj != null)
                 {
                     obj.transform.SetParent(itemHolder.transform);
@@ -110,10 +110,6 @@ public class Spawner : MonoBehaviour
                     obj = Instantiate(Enemy[i]);
                     obj.transform.SetParent(itemHolder.transform);
                 }
-            }
-            else
-            {
-                print("적 스폰 안함");
             }
         }
     }
