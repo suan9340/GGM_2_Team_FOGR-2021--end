@@ -9,6 +9,8 @@ public class Enemy : Item
     protected float curHp;
     #endregion
     #region 인스펙터
+    [Header("몇번째 적인지 표시용")] [SerializeField] private int enemyIndex;
+    [Header("각도 보정치")] [SerializeField] protected Vector3 angle_fix;
     [Header("최대 Hp")] [SerializeField] protected float maxHp;
     [Header("색깔")] [SerializeField] private Color[] Color;
     #endregion
@@ -19,17 +21,17 @@ public class Enemy : Item
     }
     private void OnEnable() // 켜질때 세팅 해주는 것
     {
-        base.damage = GameManager.Instance.GetLevel(1,1);
-        base.speed = GameManager.Instance.GetLevel(2,2);
-        curHp = GameManager.Instance.GetLevel(0,0);
-        maxHp = GameManager.Instance.GetLevel(0,0);
+        base.damage = GameManager.Instance.GetLevel(enemyIndex,1);
+        //base.speed = GameManager.Instance.GetLevel(enemyIndex,2);
+        curHp = GameManager.Instance.GetLevel(enemyIndex,0);
+        maxHp = GameManager.Instance.GetLevel(enemyIndex,0);
         SetStartPosition();
     }
     void Update()
     {
-        MoveToZero();
+        //MoveToZero();
         float angle = Mathf.Atan2(transform.position.y, transform.position.x) * Mathf.Rad2Deg;
-        transform.eulerAngles = new Vector3(0,0,angle - 90);
+        transform.eulerAngles = new Vector3(0,0,angle) + angle_fix;
     }
     public void GetDamaged(int damage) // 데미지 입었을 때 색 바꿔주는 함수
     {

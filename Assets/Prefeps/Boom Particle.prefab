@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1139283897377808516}
   - component: {fileID: 1139283897377808517}
   - component: {fileID: -2701429848677444633}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Boom Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

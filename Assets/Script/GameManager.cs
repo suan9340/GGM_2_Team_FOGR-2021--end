@@ -67,11 +67,11 @@ public class GameManager : MonoSingleton<GameManager>
     {
         Time.timeScale = 1;
         uiManager.UpdateUI();
-        int temp = 15;
-        for (int i = 1; i < 120; i++) //무기 업글당 재료량 공식
+        int temp = 5;
+        for (int i = 0; i < 100; i++) //무기 업글당 재료량 공식
         {
             ingredientAmount[i] = temp;
-            temp += 10;
+            temp += 3;
         }
     }
     public void UpGradeSpeed(float value)
@@ -150,28 +150,17 @@ public class GameManager : MonoSingleton<GameManager>
 [System.Serializable]
 public class LevelEnemy
 {
-    [Header("스테이지당 체력 증가량")] [SerializeField] private float hpUpValue;
-    [Header("스테이지당 공격력 증가량")] [SerializeField] private float damageUpValue;
-    [Header("스테이지당 속도 증가량")] [SerializeField] private float speedUpValue;
-    [Header("체력")] [SerializeField] private float hp;
-    [Header("공격력")] [SerializeField] private float damage;
-    [Header("속도")] [SerializeField] private float speed;
-    public void ChangeStage()
-    {
-        hp += hpUpValue;
-        damage += damageUpValue;
-        speed += speedUpValue;
-    }
+    [Header("체력")] [SerializeField] private float[] hp;
+    [Header("공격력")] [SerializeField] private float[] damage;
     public float Get(int type)
-    {
+    { 
+        int index = GameManager.Instance.CurExpLevel;
         switch (type)
         {
             case 0:
-                return hp;
+                return hp[index];
             case 1:
-                return damage;
-            case 2:
-                return speed;
+                return damage[index];
             default:
                 return 0;
         }

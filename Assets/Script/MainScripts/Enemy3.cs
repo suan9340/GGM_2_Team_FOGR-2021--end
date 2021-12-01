@@ -11,12 +11,11 @@ public class Enemy3 : Enemy
     private void OnEnable() // 켜질때 세팅 해주는 것
     {
         base.damage = GameManager.Instance.GetLevel(1, 1);
-        base.speed = GameManager.Instance.GetLevel(2, 2);
+        //base.speed = GameManager.Instance.GetLevel(2, 2);
         base.curHp = GameManager.Instance.GetLevel(0, 0);
         base.maxHp = GameManager.Instance.GetLevel(0, 0);
         SetStartPosition();
         if (lineRenderer == null) { lineRenderer = GetComponent<LineRenderer>(); }
-
         runningCoroutine = StartCoroutine(Attack());
     }
     private void OnDisable()
@@ -35,7 +34,6 @@ public class Enemy3 : Enemy
             hit = Physics2D.Raycast(firePos.position, Vector2.zero, 10000);
             lineRenderer.enabled = true;
             lineRenderer.SetPosition(0, firePos.position);
-            //lineRenderer.SetPosition(1, Vector2.zero);
             if (hit)
             {
                 lineRenderer.SetPosition(1, hit.point);
@@ -43,7 +41,6 @@ public class Enemy3 : Enemy
             }
             else
             {
-                //lineRenderer.SetPosition(1, Vector2.zero);
                 Debug.Log("Null!");
             }
             yield return new WaitForSeconds(0.2f);

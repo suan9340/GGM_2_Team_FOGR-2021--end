@@ -9,7 +9,7 @@ public class Enemy2 : Enemy
     private void OnEnable() // 켜질때 세팅 해주는 것
     {
         base.damage = GameManager.Instance.GetLevel(1, 1);
-        base.speed = GameManager.Instance.GetLevel(2, 2);
+        //base.speed = GameManager.Instance.GetLevel(2, 2);
         base.curHp = GameManager.Instance.GetLevel(0, 0);
         base.maxHp = GameManager.Instance.GetLevel(0, 0);
         SetStartPosition();
@@ -21,6 +21,10 @@ public class Enemy2 : Enemy
         {
             StopCoroutine(runningCoroutine);
         }
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(0));
+        }
     }
     IEnumerator SpawnChild()
     {
@@ -28,7 +32,6 @@ public class Enemy2 : Enemy
         {
             yield return new WaitForSeconds(2);
             GameObject obj = Instantiate(child, transform.position,Quaternion.identity);
-            obj.transform.SetParent(null);
         }
     }
 }

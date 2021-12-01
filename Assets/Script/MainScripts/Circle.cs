@@ -58,6 +58,7 @@ public class Circle : MonoBehaviour
         else if (collision.gameObject.CompareTag("Enemy"))   // Àû
         {
             Item item = collision.gameObject.GetComponent<Item>();
+            GetDamage(item.GetDamage());
             item.Dead();
         }
     }

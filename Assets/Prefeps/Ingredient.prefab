@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 81088619762899652}
   - component: {fileID: 81088619762899655}
   - component: {fileID: 81088619762899707}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ingredient
   m_TagString: Ingredient
   m_Icon: {fileID: 0}
@@ -104,7 +104,6 @@ MonoBehaviour:
   particle: {fileID: 1139283897377808518, guid: 4662d1acd08be864d9d8bfdb262b2afa, type: 3}
   poolIndex: 1
   poolManager: {fileID: 0}
-  speed: 3.5
 --- !u!50 &81088619762899652
 Rigidbody2D:
   serializedVersion: 4

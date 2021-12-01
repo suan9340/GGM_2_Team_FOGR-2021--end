@@ -10,7 +10,7 @@ public class Item : MonoBehaviour
     [Header("죽을시 나오는 파티클")] [SerializeField] protected GameObject particle;
     [Header("풀링받을 오브젝트 주소")] [SerializeField] protected int poolIndex;
     [Header("PoolManager")] [SerializeField] protected PoolManager poolManager;
-    [Header("중력 속도")] [SerializeField] protected float speed = 3.5f;
+    //[Header("중력 속도")] [SerializeField] protected float speed = 3.5f;
     #endregion
     #region GetSet 함수
     
@@ -25,34 +25,40 @@ public class Item : MonoBehaviour
     }
     void Update()
     {
-        MoveToZero();
+        //MoveToZero();
     }
     protected void MoveToZero()
     {
-        transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, 0), speed * Time.deltaTime);
+        //transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, 0), speed * Time.deltaTime);
     }
     protected void SetStartPosition()
     {
-        Vector2 pos;
+        Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
         if (Random.Range(0, 2) == 0)//x가 멀떄
         {
-            pos.x = Random.Range(45, 55);
-            pos.y = Random.Range(-55, 55);
-            if (Random.Range(0, 2) == 0)
+            int temp = Random.Range(0, 2);
+            if(temp == 0)
             {
-                pos.x *= -1;
+                pos.x = 0;
+            }
+            else
+            {
+                pos.x = 1;
             }
         }
         else//y가 멀때
         {
-            pos.y = Random.Range(45, 55); ;
-            pos.x = Random.Range(-55, 55);
-            if (Random.Range(0, 2) == 0)
+            int temp = Random.Range(0, 2);
+            if (temp == 0)
             {
-                pos.y *= -1;
+                pos.y = 0;
+            }
+            else
+            {
+                pos.y = 1;
             }
         }
-        transform.position = pos;
+        transform.position = Camera.main.ViewportToWorldPoint(pos);
     }
     public void Dead()
     {

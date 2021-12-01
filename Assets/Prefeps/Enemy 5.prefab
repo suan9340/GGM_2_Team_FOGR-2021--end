@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3807573016900453928}
   - component: {fileID: 3807573016900453908}
   - component: {fileID: 2863065617582541163}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy 5
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3807573016900453935}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 136.3, y: -97.8, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_Children:
   - {fileID: 1650765065908641850}
@@ -127,7 +127,8 @@ MonoBehaviour:
   particle: {fileID: 1139283897377808518, guid: 4662d1acd08be864d9d8bfdb262b2afa, type: 3}
   poolIndex: 7
   poolManager: {fileID: 0}
-  speed: 3.5
+  enemyIndex: 4
+  angle_fix: {x: 0, y: 180, z: -90}
   maxHp: 50
   Color:
   - {r: 0, g: 1, b: 0, a: 1}
@@ -164,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8fcee22924c6034f90128e86c52253b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 0.8
 --- !u!120 &2863065617582541163
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -207,7 +208,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -272,7 +273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1650765065908641850}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FirePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

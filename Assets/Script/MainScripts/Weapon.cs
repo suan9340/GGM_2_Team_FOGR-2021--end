@@ -19,7 +19,8 @@ public class Weapon : MonoBehaviour
         if (collision.CompareTag("Ingredient"))
         {
             Item item = collision.GetComponent<Item>();
-            circle.GetIngredient(item.GetIngredient());
+            circle.Heal(item.GetHeal());
+            //circle.GetIngredient(item.GetIngredient());
             GameManager.Instance.GetIngredient();
             item.Dead();
         }
