@@ -8,6 +8,9 @@ TagManager:
   - Material
   - Alpha
   - Enemy
+  - materail
+  - trash
+  - item
   layers:
   - Default
   - TransparentFX
