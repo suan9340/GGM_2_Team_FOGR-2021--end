@@ -10,26 +10,25 @@ public class EndingManager : MonoBehaviour
     [Header("레벨에 대응하는 차징 속도")] [SerializeField] private float[] levelWappenSpeed;
     [Header("레벨의 크기")] [SerializeField] private float[] levelSize;
     [Header("이상한거")] [SerializeField] private GameObject holdPannel;
-    [Header("업그레이드 판넬")] [SerializeField] private GameObject UpgradePannel;
+    [Header("업그레이드 판넬")] [SerializeField] private GameObject upgradePannel;
     [Header("다음 스테이지 판넬")] [SerializeField] private GameObject NextStagePannel;
     [Header("무기 배열 ?")] [SerializeField] private Wappen[] wappen;
     [Header("현제 레벨 표시하는 텍스트")] [SerializeField] private Text[] levelText;
     #endregion
     public void ShowNextStage()
     {
-        Time.timeScale = 0;
         holdPannel.SetActive(true);
         NextStagePannel.SetActive(true);
     }
     public void ShowUpgrade()
     {
         NextStagePannel.SetActive(false);
-        UpgradePannel.SetActive(true);
+        upgradePannel.SetActive(true);
     }
     public void GoGame()
     {
-        UpgradePannel.SetActive(false);
-        holdPannel.SetActive(false);
+        NextStagePannel.SetActive(false);
+        upgradePannel.SetActive(false);
         Time.timeScale = 1;
         GameManager.Instance.UIManager.BreakTime(10);
     }
@@ -55,9 +54,9 @@ public class EndingManager : MonoBehaviour
     #region 실질 업그레이드 실행문
     void UpgradDamage()
     {
-        if(level[0] < 10)
+        if (level[0] < 10)
         {
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 wappen[i].ChangeDamage(levelWappenDamage[level[0]]);
             }
@@ -65,7 +64,6 @@ public class EndingManager : MonoBehaviour
             levelText[0].text = string.Format("{0} / {1}", level[0], 10);
             Debug.Log("무기의 데미지가 업그레이드 됨");
         }
-        gameObject.SetActive(false);
     }
     void UpgradAttackSpeed()
     {
@@ -74,9 +72,8 @@ public class EndingManager : MonoBehaviour
             GameManager.Instance.Player.ChangeWappenSpeed(levelWappenSpeed[level[1]]);
             level[1]++;
             levelText[1].text = string.Format("{0} / {1}", level[1], 10);
-            Debug.Log("무기의 속도를 업그레이드 됨");
+            Debug.Log("무기의 속도가 업그레이드 됨");
         }
-        gameObject.SetActive(false);
     }
     void UpgradSpeed()
     {
@@ -87,7 +84,6 @@ public class EndingManager : MonoBehaviour
             levelText[2].text = string.Format("{0} / {1}", level[2], 10);
             Debug.Log("플레이어의 속도가 업그레이드 됨");
         }
-        gameObject.SetActive(false);
     }
     #endregion
 }

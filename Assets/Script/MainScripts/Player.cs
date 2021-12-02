@@ -44,11 +44,11 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            range += Time.deltaTime * 8;
+            range += Time.deltaTime * 100;
             if(wappenIndex == 0)
             {
-                wappenTemp.transform.localScale = new Vector3(range, range * 0.1f, 0) * wappenSpeed;
-                wappenReal[wappenIndex].transform.localScale = new Vector3(range, range * 0.1f, 0) * wappenSpeed;
+                wappenTemp.transform.localScale = new Vector3(range * 0.1f, range, 0) * wappenSpeed;
+                wappenReal[wappenIndex].transform.localScale = new Vector3(range * 0.1f, range, 0) * wappenSpeed;
             }
             else
             {

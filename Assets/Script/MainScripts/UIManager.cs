@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     #region 인스펙터
     [Header("재료 표시용 텍스트")] [SerializeField] private Text matarialText;
     [Header("점수 표시용 텍스트")] [SerializeField] private Text scoreText;
+    [Header("Level 애 대응할 텍스트")] [SerializeField] private Text levelText;
     [Header("게임오버 판넬")] [SerializeField] private GameObject overPannel;
     [Header("업그레이드 판넬")] [SerializeField] private GameObject upgradePanel;
     [Header("경험치 슬라이더")] [SerializeField] private Slider slider;
@@ -20,6 +21,8 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateUI()
     {
+        slider.value = GameManager.Instance.GetSliderValue();
+        levelText.text = string.Format("Stage : {0}", GameManager.Instance.CurExpLevel);
         matarialText.text = string.Format("재료 : {0}",GameManager.Instance.Matarial);
     }
     public void ChangeUiWappen(int index)
@@ -32,7 +35,8 @@ public class UIManager : MonoBehaviour
     }
     public void ShowUpgradePannel()
     {
-
+        Time.timeScale = 0;
+        upgradePanel.SetActive(true);
     }
     public void BreakTime(int time)
     {

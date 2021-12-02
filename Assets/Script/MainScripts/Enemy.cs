@@ -16,6 +16,7 @@ public class Enemy : Item
     // 켜질때 세팅 해주는 것
     private void OnEnable() 
     {
+        renderer.color = Color[0];
         if (Random.Range(0, 2) == 0)//x가 멀떄
         {
             pos.x = Random.Range(45, 55);
@@ -35,10 +36,10 @@ public class Enemy : Item
             }
         }
         transform.position = pos;
-        base.damage = GameManager.Instance.GetLevel(1);
-        base.speed = GameManager.Instance.GetLevel(2);
-        hp = GameManager.Instance.GetLevel(0);
-        maxHp = GameManager.Instance.GetLevel(0);
+        base.damage = GameManager.Instance.GetLevel(1,1);
+        base.speed = GameManager.Instance.GetLevel(2,2);
+        hp = GameManager.Instance.GetLevel(0,0);
+        maxHp = GameManager.Instance.GetLevel(0,0);
     }
 
     // 데미지 입었을 때 색 바꿔주는 함수
