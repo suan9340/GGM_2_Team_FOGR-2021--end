@@ -29,7 +29,7 @@ public class Spawner : MonoBehaviour
         {
             yield return new WaitForSeconds(coolTime[0]);
             GameObject obj = poolManager.Get(1);
-            if(Random.Range(0,100) < 25)
+            if(Random.Range(0,100) < 50)
             {
                 if (obj != null)
                 {
