@@ -12,10 +12,11 @@ public class Tuto : MonoBehaviour
     [SerializeField] private Transform storyTextTransform = null;
     [SerializeField] private string[] story;
     private Transform textTrans;
-  
+    [SerializeField] bool isa = false;
+
     private Vector3 enemyPosition;
 
-    private int index = 1;
+    [SerializeField] private int index = 1;
 
     [Header("변수")]
     #region 변수들
@@ -141,19 +142,19 @@ public class Tuto : MonoBehaviour
         }
 
     }
-    
+
     public void outttTuto()
     {
         SceneManager.LoadScene("Menu");
     }
     public void nextBtn()
     {
-        if(isMove)
+        if (isMove)
         {
             return;
         }
 
-        if(index==8)
+        if (index == 8)
         {
             if (TutorialManager.Instance.isStory9)
             {
@@ -162,7 +163,16 @@ public class Tuto : MonoBehaviour
             else return;
         }
 
-        else if(index==15)
+        else if (index == 6)
+        {
+            if (isa)
+            {
+                index++;
+            }
+            else return;
+        }
+
+        else if (index == 15)
         {
             if (TutorialManager.Instance.isStory16)
             {
@@ -171,9 +181,9 @@ public class Tuto : MonoBehaviour
             else return;
         }
 
-        else if(index==19)
+        else if (index == 19)
         {
-            if(TutorialManager.Instance.isStory20)
+            if (TutorialManager.Instance.isStory20)
             {
                 index++;
             }
@@ -212,16 +222,17 @@ public class Tuto : MonoBehaviour
 
     private void Five()
     {
-        enemyPosition = new Vector3(enemy.transform.position.x, enemy.transform.position.y,0f);
+        enemyPosition = new Vector3(enemy.transform.position.x, enemy.transform.position.y, 0f);
         enemy.SetActive(true);
         enemy.transform.DOMove(new Vector3(0f, 0f, 0f), 2f);
+        Invoke("IsMove", 2f);
         storyText.text = story[4];
     }
 
     private void Six()
     {
         TutorialManager.Instance.isStory6 = true;
-        enemy.transform.position = new Vector3(enemyPosition.x,enemyPosition.y,enemyPosition.z);
+        enemy.transform.position = new Vector3(enemyPosition.x, enemyPosition.y, enemyPosition.z);
         enemy.transform.DOMove(new Vector3(0f, 0f, 0f), 2f);
         storyText.text = story[5];
     }
@@ -295,7 +306,7 @@ public class Tuto : MonoBehaviour
     {
         storyText.text = story[17];
     }
-    
+
     private void Nineteen()
     {//아이템
         item.SetActive(true);
@@ -316,5 +327,10 @@ public class Tuto : MonoBehaviour
     private void TwentyTwo()
     {
         storyText.text = story[21];
+    }
+
+    private void IsMove()
+    {
+        isa = true;
     }
 }
