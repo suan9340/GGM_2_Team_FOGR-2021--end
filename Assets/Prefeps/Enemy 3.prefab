@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1789311926244532411}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 46.6047, y: -26.243649, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -157,9 +157,9 @@ MonoBehaviour:
   enemyIndex: 2
   angle_fix: {x: 0, y: 0, z: -90}
   maxHp: 50
-  Color:
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 0, a: 2.6560967e+20}
+  ColorArr:
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.5, b: 0, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0.2, g: 0, b: 0, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
   child: {fileID: 8834889440498489407, guid: 730a46e2217ba3149866ba6b1d61b924, type: 3}

@@ -102,7 +102,7 @@ MonoBehaviour:
   heal: 3
   damage: 3
   particle: {fileID: 1139283897377808518, guid: 4662d1acd08be864d9d8bfdb262b2afa, type: 3}
-  poolIndex: 0
+  poolIndex: 1
   poolManager: {fileID: 0}
 --- !u!50 &7076082830861377729
 Rigidbody2D:

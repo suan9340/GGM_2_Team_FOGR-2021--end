@@ -12,12 +12,13 @@ public class Enemy : Item
     [Header("몇번째 적인지 표시용")] [SerializeField] private int enemyIndex;
     [Header("각도 보정치")] [SerializeField] protected Vector3 angle_fix;
     [Header("최대 Hp")] [SerializeField] protected float maxHp;
-    [Header("색깔")] [SerializeField] private Color[] Color;
+    [Header("색깔")] [SerializeField] private Color[] ColorArr;
     #endregion
     private void Start()
     {
         poolManager = FindObjectOfType<PoolManager>();
         renderer = GetComponent<SpriteRenderer>();
+        renderer.color = Color.green;
     }
     private void OnEnable() // 켜질때 세팅 해주는 것
     {
@@ -25,6 +26,10 @@ public class Enemy : Item
         //base.speed = GameManager.Instance.GetLevel(enemyIndex,2);
         curHp = GameManager.Instance.GetLevel(enemyIndex,0);
         maxHp = GameManager.Instance.GetLevel(enemyIndex,0);
+        if(renderer != null)
+        {
+            renderer.color = Color.green;
+        }
         SetStartPosition();
     }
     void Update()
@@ -40,19 +45,19 @@ public class Enemy : Item
             curHp -= damage;
             if (curHp < maxHp * 0.25f)
             {
-                renderer.color = Color[3];
+                renderer.color = ColorArr[3];
             }
             else if (curHp < maxHp * 0.5f)
             {
-                renderer.color = Color[2];
+                renderer.color = ColorArr[2];
             }
             else if (curHp < maxHp * 0.75f)
             {
-                renderer.color = Color[1];
+                renderer.color = ColorArr[1];
             }
             else
             {
-                renderer.color = Color[0];
+                renderer.color = ColorArr[0];
             }
             if (curHp <= 0)
             {

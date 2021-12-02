@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3807573016900453935}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_Children:
   - {fileID: 1650765065908641850}
   m_Father: {fileID: 0}
@@ -128,13 +128,13 @@ MonoBehaviour:
   poolIndex: 7
   poolManager: {fileID: 0}
   enemyIndex: 4
-  angle_fix: {x: 0, y: 180, z: -90}
+  angle_fix: {x: 0, y: 0, z: -90}
   maxHp: 50
-  Color:
-  - {r: 0, g: 1, b: 0, a: 1}
+  ColorArr:
   - {r: 1, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.5, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
   firePos: {fileID: 1650765065908641850}
   delay: 4
 --- !u!58 &3807573016900453928
