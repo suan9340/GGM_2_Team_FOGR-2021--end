@@ -11,6 +11,8 @@ TagManager:
   - materail
   - trash
   - item
+  - Ingredient
+  - Garbage
   layers:
   - Default
   - TransparentFX
