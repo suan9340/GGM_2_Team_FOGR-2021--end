@@ -20,7 +20,6 @@ public class Weapon : MonoBehaviour
         {
             Item item = collision.GetComponent<Item>();
             circle.Heal(item.GetHeal());
-            //circle.GetIngredient(item.GetIngredient());
             GameManager.Instance.GetIngredient();
             item.Dead();
         }

@@ -2494,9 +2494,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level:
-  - 0
-  - 0
-  - 0
+  - 1
+  - 1
+  - 1
   levelWeaponSpeed:
   - 1
   - 2
@@ -4548,6 +4548,7 @@ MonoBehaviour:
   waitTime: 100
   speed: 50
   maxHp: 100
+  smallingSpeed: 0
   startHp: 30
   hpLevel:
   - 10

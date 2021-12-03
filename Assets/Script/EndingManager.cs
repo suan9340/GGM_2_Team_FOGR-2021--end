@@ -97,7 +97,7 @@ public class EndingManager : MonoBehaviour
     {
         if((int)level[0] < 10)
         {
-            levelValueText[0].text = string.Format("{0} -> {1}", levelWeaponDamage[(int)level[0]], levelWeaponDamage[(int)level[0] + 1]);
+            levelValueText[0].text = string.Format("{0} -> {1}", levelWeaponDamage[(int)level[0] - 1], levelWeaponDamage[(int)level[0]]);
         }
         else
         {
@@ -105,7 +105,7 @@ public class EndingManager : MonoBehaviour
         }
         if ((int)level[1] < 10)
         {
-            levelValueText[1].text = string.Format("{0} -> {1}", levelSpeed[(int)level[1]], levelSpeed[(int)level[1] + 1]);
+            levelValueText[1].text = string.Format("{0} -> {1}", levelSpeed[(int)level[1] - 1], levelSpeed[(int)level[1]]);
         }
         else
         {
@@ -113,25 +113,22 @@ public class EndingManager : MonoBehaviour
         }
         if ((int)level[2] < 10)
         {
-            levelValueText[2].text = string.Format("{0} -> {1}", levelWeaponSpeed[(int)level[2]], levelWeaponSpeed[(int)level[2] + 1]);
+            levelValueText[2].text = string.Format("{0} -> {1}", levelWeaponSpeed[(int)level[2] - 1], levelWeaponSpeed[(int)level[2]]);
         }
         else
         {
             levelValueText[2].text = string.Format("MAX : {0}", levelWeaponSpeed[(int)level[2]]);
         }
-        levelSlider[1].value = level[2] * 0.1f;
-        levelSlider[1].value = level[1] * 0.1f;
         levelSlider[0].value = level[0] * 0.1f;
+        levelSlider[1].value = level[1] * 0.1f;
+        levelSlider[2].value = level[2] * 0.1f;
     }
     #region 실질 업그레이드 실행문
     void UpgradDamage()
     {
         if (level[0] <= 10)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                GameManager.Instance.UpGradeDamage(levelWeaponDamage[(int)level[0]]);
-            }
+            GameManager.Instance.UpGradeDamage(levelWeaponDamage[(int)level[0]]);
             level[0]++;
             levelSlider[0].value = level[0] * 0.1f;
         }
