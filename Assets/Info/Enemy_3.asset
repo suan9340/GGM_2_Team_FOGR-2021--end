@@ -15,4 +15,4 @@ MonoBehaviour:
   name: BeeYoung
   desc: "1\uBC88\uC801\uC744 \uC8FC\uAE30\uC801\uC73C\uB85C \uC0DD\uC0B0\uD558\uC9C0\uB9CC
     \uCCB4\uB825\uC774 \uC57D\uD568"
-  sprite: {fileID: 21300000, guid: 74b10b7f0ecf50a4288601caf0b8a498, type: 3}
+  sprite: {fileID: 21300000, guid: b7341e96377ae0349be6680a98f11f46, type: 3}

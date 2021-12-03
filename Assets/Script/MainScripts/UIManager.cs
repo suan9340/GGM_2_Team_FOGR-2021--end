@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [Header("중지 판넬")] [SerializeField] private GameObject pausePannel;
     [Header("현제 무기 표시할 오브젝트")] [SerializeField] private GameObject[] wappenUI;
     [Header("현제 버프를 표시할 이미지")] [SerializeField] private GameObject buffImage;
+    [Header("쉬는시간 표시용 텍스트")] [SerializeField] private Text breakTimeText;
     #endregion
     private void Start()
     {
@@ -48,10 +49,10 @@ public class UIManager : MonoBehaviour
         upgradePanel.SetActive(true);
         GameManager.Instance.EndingManager.ShowNextEnemy();
     }
-    public void BreakTime(int time)
+    /*public void BreakTime(int time)
     {
 
-    }
+    }*/
     public void BuffOn(float dur, Sprite sprite)
     {
         buffImage.SetActive(true);
@@ -59,8 +60,28 @@ public class UIManager : MonoBehaviour
     }
     public void Pause(bool isOn)
     {
-        pausePannel.SetActive(true);
+        pausePannel.SetActive(isOn);
+        if (isOn)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            StartCoroutine(BreakTime(3));
+        }
+    }
+
+    public IEnumerator BreakTime(int time)
+    {
         Time.timeScale = 0;
+        breakTimeText.gameObject.SetActive(true);
+        for (int i = time; i > 0; i--)
+        {
+            breakTimeText.text = string.Format("{0}", i);
+            yield return new WaitForSecondsRealtime(1f);
+        }
+        breakTimeText.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
     public void Over()
     {

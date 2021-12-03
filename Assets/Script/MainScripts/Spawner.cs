@@ -25,6 +25,7 @@ public class Spawner : MonoBehaviour
     }
     IEnumerator spawn_Item()
     {
+        yield return new WaitForSeconds(0.1f);
         while (true)
         {
             yield return new WaitForSeconds(coolTime[0]);
@@ -46,21 +47,7 @@ public class Spawner : MonoBehaviour
     }
     IEnumerator spawn_Ingredient()
     {
-        /*while (true)
-        {
-            yield return new WaitForSeconds(coolTime[1]);
-            GameObject obj = poolManager.Get(1);
-            if (obj != null)
-            {
-                obj.transform.SetParent(itemHolder.transform);
-                obj.SetActive(true);
-            }
-            else
-            {
-                obj = Instantiate(ingredient);
-                obj.transform.SetParent(itemHolder.transform);
-            }
-        }*/
+        yield return new WaitForSeconds(0.1f);
         while (true)
         {
             yield return new WaitForSeconds(coolTime[1]);
@@ -96,21 +83,7 @@ public class Spawner : MonoBehaviour
     }
     IEnumerator spawn_Garbage()
     {
-        /*while (true)
-        {
-            yield return new WaitForSeconds(coolTime[2]);
-            GameObject obj = poolManager.Get(2);
-            if (obj != null)
-            {
-                obj.transform.SetParent(itemHolder.transform);
-                obj.SetActive(true);
-            }
-            else
-            {
-                obj = Instantiate(garbage);
-                obj.transform.SetParent(itemHolder.transform);
-            }
-        }*/
+        yield return new WaitForSeconds(0.1f);
         while (true)
         {
             yield return new WaitForSeconds(coolTime[2]);
@@ -145,6 +118,7 @@ public class Spawner : MonoBehaviour
     }
     IEnumerator spawn_Enemy()
     {
+        yield return new WaitForSeconds(0.1f);
         while (true)
         {
             yield return new WaitForSeconds(coolTime[3]);

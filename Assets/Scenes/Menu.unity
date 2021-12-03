@@ -158,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9, y: -182}
-  m_SizeDelta: {x: 750, y: 194}
+  m_AnchoredPosition: {x: 0, y: -210}
+  m_SizeDelta: {x: 600, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &13213643
 MonoBehaviour:
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3034646049968315582, guid: 7ba59d714af4836408aaa35a1e94755f, type: 3}
+  m_Sprite: {fileID: -1273325506334792493, guid: 87110d893d846fa459c2bd833c2d55ce, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -577,6 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97f366dfc01b2d408abdb3848e4014d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shakeForce: 0.1
 --- !u!1 &901621397
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,12 +610,12 @@ MonoBehaviour:
   DonClickChang: {fileID: 962323410}
   OutGameChang: {fileID: 2089953807}
   sprite:
-  - {fileID: -6021249271321530903, guid: f2973d1ed8eb363488908315722ef638, type: 3}
-  - {fileID: -2099240410493259282, guid: f2973d1ed8eb363488908315722ef638, type: 3}
-  - {fileID: 3034646049968315582, guid: 7ba59d714af4836408aaa35a1e94755f, type: 3}
-  - {fileID: 6716366882197204390, guid: 7ba59d714af4836408aaa35a1e94755f, type: 3}
-  - {fileID: 1337015271121631594, guid: 15c7c8d4cac140347bf8aab19bcc885d, type: 3}
-  - {fileID: 8086311434013061666, guid: 15c7c8d4cac140347bf8aab19bcc885d, type: 3}
+  - {fileID: 6956015425323572281, guid: 7904ff4d60d25f240a916fd0cd4ffbaf, type: 3}
+  - {fileID: 73625471991627096, guid: 7904ff4d60d25f240a916fd0cd4ffbaf, type: 3}
+  - {fileID: -1273325506334792493, guid: 87110d893d846fa459c2bd833c2d55ce, type: 3}
+  - {fileID: 4878027201893547100, guid: 87110d893d846fa459c2bd833c2d55ce, type: 3}
+  - {fileID: 290727527132585202, guid: 57794cd33d4b2c14485b12494425b16d, type: 3}
+  - {fileID: -3694283300066265039, guid: 57794cd33d4b2c14485b12494425b16d, type: 3}
   UIimages:
   - {fileID: 2037149991}
   - {fileID: 13213644}
@@ -797,8 +798,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.000015, y: -385.29}
-  m_SizeDelta: {x: 750, y: 210}
+  m_AnchoredPosition: {x: 0, y: -420}
+  m_SizeDelta: {x: 600, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &957556724
 MonoBehaviour:
@@ -876,7 +877,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1337015271121631594, guid: 15c7c8d4cac140347bf8aab19bcc885d, type: 3}
+  m_Sprite: {fileID: 290727527132585202, guid: 57794cd33d4b2c14485b12494425b16d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1748,6 +1749,7 @@ GameObject:
   - component: {fileID: 1657278975}
   - component: {fileID: 1657278977}
   - component: {fileID: 1657278976}
+  - component: {fileID: 1657278978}
   m_Layer: 5
   m_Name: Text(Title)
   m_TagString: Untagged
@@ -1807,7 +1809,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'grgr : greedgrow'
+  m_Text: GRGR - GreedGrow
 --- !u!222 &1657278977
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1816,6 +1818,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1657278974}
   m_CullTransparentMesh: 1
+--- !u!114 &1657278978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657278974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 1, a: 1}
+  m_EffectDistance: {x: 5, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1920440592
 GameObject:
   m_ObjectHideFlags: 0
@@ -2005,8 +2022,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.000015, y: 15}
-  m_SizeDelta: {x: 750, y: 204}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 600, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2037149990
 MonoBehaviour:
@@ -2084,7 +2101,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6021249271321530903, guid: f2973d1ed8eb363488908315722ef638, type: 3}
+  m_Sprite: {fileID: 6956015425323572281, guid: 7904ff4d60d25f240a916fd0cd4ffbaf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

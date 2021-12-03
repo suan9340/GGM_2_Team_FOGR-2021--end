@@ -18,7 +18,8 @@ public class EndingManager : MonoBehaviour
     [Header("업그레이드될 수치 표시용 텍스트")] [SerializeField] private Text[] levelValueText;
     [Header("적 이름")] [SerializeField] private Text enemy_Name_Text;
     [Header("적 설명")] [SerializeField] private Text enemy_Desc_Text;
-    [Header("적 사진")] [SerializeField] private Image enemy_Image_Image;
+    [Header("적 사진")] [SerializeField] private Image enemy_Image;
+    [Header("적이 나오는 스테이지")] [SerializeField] private int[] stageEnemyArr;
     #endregion
     /*public void ShowNextStage()
     {
@@ -36,13 +37,23 @@ public class EndingManager : MonoBehaviour
         NextStagePannel.SetActive(false);
         upgradePannel.SetActive(false);
         Time.timeScale = 1;
-        GameManager.Instance.UIManager.BreakTime(10);
+        GameManager.Instance.UIManager.StartCoroutine(GameManager.Instance.UIManager.BreakTime(5));
     }
     public void ShowNextEnemy()
     {
-        enemy_Name_Text.text = enemyInfo[1].name;
-        enemy_Desc_Text.text = enemyInfo[1].desc;
-        enemy_Image_Image.sprite = enemyInfo[1].sprite;
+        enemy_Name_Text.text = "";
+        enemy_Desc_Text.text = "";
+        enemy_Image.color = new Vector4(0,0,0,0);
+        for (int i = 1; i < stageEnemyArr.Length; i++)
+        {
+            if(stageEnemyArr[i] == GameManager.Instance.CurExpLevel)
+            {
+                enemy_Name_Text.text = enemyInfo[i].name;
+                enemy_Desc_Text.text = enemyInfo[i].desc;
+                enemy_Image.sprite = enemyInfo[i].sprite;
+                enemy_Image.color = new Vector4(1, 1, 1, 1);
+            }
+        }
     }
     public void ShowUpgradeValue()
     {

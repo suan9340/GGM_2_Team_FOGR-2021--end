@@ -6,9 +6,10 @@ public class BackGroundShake : MonoBehaviour
 {
     Vector2 mousePos;
     Vector3 originalPos;
+    [SerializeField] private float shakeForce;
     private void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = new Vector3(mousePos.x * 0.1f, mousePos.y * 0.1f, 10);
+        transform.position = new Vector3(mousePos.x * shakeForce, mousePos.y * shakeForce, 10);
     }
 }
