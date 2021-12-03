@@ -34,6 +34,12 @@ public class Player : MonoBehaviour
     {
         ChangeWeaponAngle();
         CheckInput();
+        ChangeAngle();
+    }
+    void ChangeAngle()
+    {
+        float angle = Mathf.Atan2(transform.position.y, transform.position.x) * Mathf.Rad2Deg;
+        transform.eulerAngles = new Vector3(0, 0, angle- 90);
     }
     IEnumerator Attack()
     {
