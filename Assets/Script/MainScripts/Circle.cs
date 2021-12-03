@@ -17,6 +17,7 @@ public class Circle : MonoBehaviour
     [Header("원 줄어들기 시작하는 시간")] [SerializeField] private float waitTime;
     [Header("원이 돌아가는 속도")] [SerializeField] private float speed;
     [Header("원의 최대 hp")] [SerializeField] private float maxHp;
+    [Header("원 줄어드는 속도")] [SerializeField] private float smallingSpeed;
     [Header("기본 hp(시작할 때)")] [SerializeField] private float startHp;
     [Header("hp 단계(카메라 크기 조정 위한것)")] [SerializeField] private float[] hpLevel;
     [Header("hp 단계에 따라서 대응하는 카메라 사이즈")] [SerializeField] private float[] cameraSize;
@@ -128,7 +129,7 @@ public class Circle : MonoBehaviour
         {
             if (isEndWait)
             {
-                curHp -= Time.deltaTime * 1.5f;
+                curHp -= Time.deltaTime * smallingSpeed;
             }
         }
         else
