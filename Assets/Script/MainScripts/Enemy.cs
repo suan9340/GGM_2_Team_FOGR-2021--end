@@ -9,6 +9,7 @@ public class Enemy : Item
     protected float curHp;
     #endregion
     #region 인스펙터
+    [Header("데미지 표시용 텍스트")] [SerializeField] private GameObject damageText;
     [Header("몇번째 적인지 표시용")] [SerializeField] private int enemyIndex;
     [Header("각도 보정치")] [SerializeField] protected Vector3 angle_fix;
     [Header("최대 Hp")] [SerializeField] protected float maxHp;
@@ -42,6 +43,8 @@ public class Enemy : Item
     {
         if (!isAttacked)
         {
+            GameObject obj = Instantiate(damageText, new Vector3(transform.position.x,transform.position.y + 3,transform.position.z), Quaternion.identity);
+            obj.transform.GetChild(0).GetComponent<TextMesh>().text = string.Format("-{0}", damage);
             curHp -= damage;
             if (curHp < maxHp * 0.25f)
             {

@@ -154,6 +154,7 @@ MonoBehaviour:
   particle: {fileID: 1139283897377808518, guid: 4662d1acd08be864d9d8bfdb262b2afa, type: 3}
   poolIndex: 5
   poolManager: {fileID: 0}
+  damageText: {fileID: 6883862333197480375, guid: e87e563c795b7c447b0dd037a2920fc9, type: 3}
   enemyIndex: 2
   angle_fix: {x: 0, y: 0, z: -90}
   maxHp: 50
@@ -162,4 +163,4 @@ MonoBehaviour:
   - {r: 1, g: 0.5, b: 0, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
-  child: {fileID: 8834889440498489407, guid: 730a46e2217ba3149866ba6b1d61b924, type: 3}
+  child: {fileID: 1774715271989673441, guid: 16ae36d6395c87541aa95d57727f701a, type: 3}

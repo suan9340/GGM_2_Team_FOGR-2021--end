@@ -30,18 +30,22 @@ public class Enemy3 : Enemy
         while (true)
         {
             yield return new WaitForSeconds(delay);
-            RaycastHit2D hit;
-            hit = Physics2D.Raycast(firePos.position, Vector2.zero, 10000);
-            lineRenderer.enabled = true;
-            lineRenderer.SetPosition(0, firePos.position);
-            if (hit)
+            Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+            if (pos.x > 0 && pos.x < 1 && pos.y > 0 && pos.y < 1)
             {
-                lineRenderer.SetPosition(1, hit.point);
-                Debug.Log(hit.transform.gameObject.name);
-            }
-            else
-            {
-                Debug.Log("Null!");
+                RaycastHit2D hit;
+                hit = Physics2D.Raycast(firePos.position, Vector2.zero, 10000);
+                lineRenderer.enabled = true;
+                lineRenderer.SetPosition(0, firePos.position);
+                if (hit)
+                {
+                    lineRenderer.SetPosition(1, hit.point);
+                    Debug.Log(hit.transform.gameObject.name);
+                }
+                else
+                {
+                    Debug.Log("Null!");
+                }
             }
             yield return new WaitForSeconds(0.2f);
             lineRenderer.enabled = false;

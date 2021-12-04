@@ -154,6 +154,7 @@ MonoBehaviour:
   particle: {fileID: 1139283897377808518, guid: 4662d1acd08be864d9d8bfdb262b2afa, type: 3}
   poolIndex: 4
   poolManager: {fileID: 0}
+  damageText: {fileID: 6883862333197480375, guid: e87e563c795b7c447b0dd037a2920fc9, type: 3}
   enemyIndex: 1
   angle_fix: {x: 0, y: 0, z: 0}
   maxHp: 10

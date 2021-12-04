@@ -31,7 +31,13 @@ public class Enemy2 : Enemy
         while (true)
         {
             yield return new WaitForSeconds(2);
-            GameObject obj = Instantiate(child, transform.position,Quaternion.identity);
+            Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+            if (pos.x > 0 && pos.x < 1 && pos.y > 0 && pos.y < 1)
+            {
+                GameObject obj = Instantiate(child, transform.position, Quaternion.identity);
+                yield return new WaitForEndOfFrame();
+                obj.GetComponent<Item>().SetPositionByCall(transform.position);
+            }
         }
     }
 }
