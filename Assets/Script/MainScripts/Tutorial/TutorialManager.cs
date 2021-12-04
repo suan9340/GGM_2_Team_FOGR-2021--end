@@ -7,7 +7,21 @@ public class TutorialManager : MonoSingleton<TutorialManager>
     public bool isStory6 = false;
     public bool isStory8 = false;
     public bool isStory9 = false;
-    public bool isStory15 = false;
-    public bool isStory16 = false;
-    public bool isStory20 = false;
+    public bool isStory11 = false;
+    public bool isStory12 = false;
+    public bool isStory13 = false;
+    public bool isTypingSound = false;
+    public bool isSpeedTypingSound = false;
+    [SerializeField] private Animator small;
+
+    [SerializeField] private AudioClip typingsound = null;
+    public void isSamll()
+    {
+        small.Play("1");
+    }
+
+    public void isbig()
+    {
+        small.Play("2");
+    }
 }

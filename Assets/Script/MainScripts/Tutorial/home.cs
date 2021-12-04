@@ -11,6 +11,7 @@ public class home : MonoBehaviour
             if (TutorialManager.Instance.isStory6)
             {
                 Debug.Log("원이 작아져");
+                TutorialManager.Instance.isSamll();
                 Destroy(collision.gameObject);
             }
             else return;
@@ -25,6 +26,7 @@ public class home : MonoBehaviour
         if(collision.CompareTag("trash"))
         {
             Debug.Log("원이 작아져");
+            TutorialManager.Instance.isSamll();
             Destroy(collision.gameObject);
         }
 

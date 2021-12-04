@@ -11,11 +11,11 @@ public class Tuto : MonoBehaviour
     [SerializeField] private Text storyText = null;
     [SerializeField] private Transform storyTextTransform = null;
     [SerializeField] private string[] story;
-    private Transform textTrans;
-    [SerializeField] bool isa = false;
+    [SerializeField] private float speed;
 
     private Vector3 enemyPosition;
-
+    private bool isTyping = true;
+    private bool isTyping_ing = true;
     [SerializeField] private int index = 1;
 
     [Header("변수")]
@@ -31,13 +31,12 @@ public class Tuto : MonoBehaviour
     [SerializeField] private GameObject buff = null;
     [SerializeField] private GameObject outTuto = null;
     [SerializeField] private GameObject arrow = null;
+    [SerializeField] private GameObject weaponpannel = null;
 
     #endregion
 
-    private bool isMove = false;
     private void Start()
     {
-        textTrans = storyTextTransform;
         Tutorial(index);
     }
 
@@ -123,18 +122,6 @@ public class Tuto : MonoBehaviour
                 Nineteen();
                 break;
 
-            case 20:
-                Twenty();
-                break;
-
-            case 21:
-                TwentyOne();
-                break;
-
-            case 22:
-                TwentyTwo();
-                break;
-
             default:
                 Debug.Log("끗");
                 outTuto.SetActive(true);
@@ -142,195 +129,168 @@ public class Tuto : MonoBehaviour
         }
 
     }
-
+    private IEnumerator TypingEffect(Text _typingText, string _message, float _speed)
+    {
+        isTyping_ing = true;
+        isTyping = true;
+        TutorialManager.Instance.isTypingSound = true;
+        for (int i = 0; i < _message.Length; i++)
+        {
+            _typingText.text = _message.Substring(0, i + 1);
+            yield return new WaitForSeconds(speed);
+        }
+        TutorialManager.Instance.isTypingSound = false;
+        TutorialManager.Instance.isSpeedTypingSound = false;
+        speed = 0.1f;
+        isTyping_ing = false;
+        isTyping = false;
+    }
     public void outttTuto()
     {
         SceneManager.LoadScene("Menu");
     }
     public void nextBtn()
     {
-        if (isMove)
+        if(!isTyping)
         {
-            return;
-        }
+             if (index == 12)
+            {
+                if (TutorialManager.Instance.isStory12)
+                {
+                    index++;
+                }
+                else return;
+            }
 
-        if (index == 8)
-        {
-            if (TutorialManager.Instance.isStory9)
+            else if (index == 16)
+            {
+                if (TutorialManager.Instance.isStory13)
+                {
+                    index++;
+                }
+            }
+
+            else
             {
                 index++;
             }
-            else return;
-        }
 
-        else if (index == 6)
-        {
-            if (isa)
-            {
-                index++;
-            }
-            else return;
+            Tutorial(index);
         }
-
-        else if (index == 15)
-        {
-            if (TutorialManager.Instance.isStory16)
-            {
-                index++;
-            }
-            else return;
-        }
-
-        else if (index == 19)
-        {
-            if (TutorialManager.Instance.isStory20)
-            {
-                index++;
-            }
-        }
-
-        else
-        {
-            index++;
-        }
-
-        Tutorial(index);
     }
 
     private void One()
     {
-        storyText.text = story[0];
+        StartCoroutine(TypingEffect(storyText, story[0], speed));
     }
 
     private void Two()
     {
+        StartCoroutine(TypingEffect(storyText, story[1], speed));
         arrow.SetActive(false);
         score.SetActive(true);
-        storyText.text = story[1];
     }
 
     private void Three()
     {
         stage.SetActive(true);
-        storyText.text = story[2];
+        StartCoroutine(TypingEffect(storyText, story[2], speed));
     }
 
     private void Four()
     {
-        storyText.text = story[3];
+        StartCoroutine(TypingEffect(storyText, story[3], speed));
     }
 
     private void Five()
     {
+        StartCoroutine(TypingEffect(storyText, story[4], speed));
         enemyPosition = new Vector3(enemy.transform.position.x, enemy.transform.position.y, 0f);
         enemy.SetActive(true);
         enemy.transform.DOMove(new Vector3(0f, 0f, 0f), 2f);
-        Invoke("IsMove", 2f);
-        storyText.text = story[4];
     }
 
     private void Six()
     {
         TutorialManager.Instance.isStory6 = true;
+        StartCoroutine(TypingEffect(storyText, story[5], speed));
         enemy.transform.position = new Vector3(enemyPosition.x, enemyPosition.y, enemyPosition.z);
-        enemy.transform.DOMove(new Vector3(0f, 0f, 0f), 2f);
-        storyText.text = story[5];
+        enemy.transform.DOMove(new Vector3(0f, 0f, 0f), 3f);
     }
 
     private void Seven()
-    {
+    {// 원의 크기는 재료를 흡수해서 가능
+        StartCoroutine(TypingEffect(storyText, story[6], speed));
         material.SetActive(true);
-        storyText.text = story[6];
     }
 
     private void Eight()
     {
         TutorialManager.Instance.isStory8 = true;
-        storyText.text = story[7];
+        StartCoroutine(TypingEffect(storyText, story[7], speed));
     }
 
     private void Nine()
     {
-        storyText.text = story[8];
+        StartCoroutine(TypingEffect(storyText, story[8], speed));
+        material.transform.DOMove(new Vector3(0f, 0f, 0f), 3f);
     }
 
     private void Ten()
     {
-        storyText.text = story[9];
+        weaponpannel.SetActive(true);
+        StartCoroutine(TypingEffect(storyText, story[9], speed));
     }
 
     private void Eleven()
     {
-        material.SetActive(true);
-        material.transform.DOMove(new Vector3(2.53f, 0.38f, 0f), 2f);
-
-        storyText.text = story[10];
+        StartCoroutine(TypingEffect(storyText, story[10], speed));
     }
 
     private void Twelve()
-    {
-        storyText.text = story[11];
+    {// 쓰레기
+        TutorialManager.Instance.isStory11 = true;
+        StartCoroutine(TypingEffect(storyText, story[11], speed));
+        trash.SetActive(true);
     }
 
     private void Thirteen()
     {
-        storyText.text = story[12];
+        StartCoroutine(TypingEffect(storyText, story[12], speed));
     }
 
     private void Fourteen()
     {
-        storyText.text = story[13];
+        StartCoroutine(TypingEffect(storyText, story[13], speed));
+        trash.SetActive(true);
+        trash.transform.DOMove(new Vector3(0f, 0f, 0f), 3f);
     }
 
     private void Fiften()
-    {//쓰레기
-        TutorialManager.Instance.isStory15 = true;
-        trash.SetActive(true);
-        storyText.text = story[14];
+    {
+        StartCoroutine(TypingEffect(storyText, story[14], speed));
     }
 
     private void Sixteen()
-    {
-        storyText.text = story[15];
+    {// 아이템
+        StartCoroutine(TypingEffect(storyText, story[15], speed));
+        item.SetActive(true);
     }
 
     private void Seventeen()
-    {
-        trash.SetActive(true);
-        trash.transform.DOMove(new Vector3(-2.7f, 0.7f, 0f), 2f);
-
-        storyText.text = story[16];
+    {//버프
+        StartCoroutine(TypingEffect(storyText, story[16], speed));
+        buff.SetActive(true);
     }
 
     private void Eighteen()
     {
-        storyText.text = story[17];
+        StartCoroutine(TypingEffect(storyText, story[17], speed));
     }
 
     private void Nineteen()
-    {//아이템
-        item.SetActive(true);
-        storyText.text = story[18];
-    }
-
-    private void Twenty()
-    {//버프
-        buff.SetActive(true);
-        storyText.text = story[19];
-    }
-
-    private void TwentyOne()
     {
-        storyText.text = story[20];
-    }
-
-    private void TwentyTwo()
-    {
-        storyText.text = story[21];
-    }
-
-    private void IsMove()
-    {
-        isa = true;
+        StartCoroutine(TypingEffect(storyText, story[18], speed));
     }
 }
+

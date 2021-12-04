@@ -2,20 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class material : MonoBehaviour
+public class material : TutoBase
 {
-    private void OnMouseUp()
+    protected override void OnMouseUp()
     {
-        if (TutorialManager.Instance.isStory8)
-        {
-            gameObject.SetActive(false);
-            Debug.Log("재료를 흡수해");
-            TutorialManager.Instance.isStory9 = true;
-        }
-        else return;
+        
     }
-
-   
 }
-
-
