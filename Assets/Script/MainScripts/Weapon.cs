@@ -15,12 +15,13 @@ public class Weapon : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
-            collision.GetComponent<Enemy>().GetDamaged(damage);
+        {
+            collision.GetComponent<Enemy>().GetDamaged((int)(damage * GameManager.Instance.DamageBuffAmount * GameManager.Instance.DamageUpgradeAmount));
+        }
         if (collision.CompareTag("Ingredient"))
         {
             Item item = collision.GetComponent<Item>();
             circle.Heal(item.GetHeal());
-            //circle.GetIngredient(item.GetIngredient());
             GameManager.Instance.GetIngredient();
             item.Dead();
         }

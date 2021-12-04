@@ -106,6 +106,7 @@ public class GameManager : MonoSingleton<GameManager>
     }
     public void GetIngredient()
     {
+        uiManager.UpdateUI();
         if (ingredient >= ingredientAmount[curWeaponLevel])
         {
             ingredient = 0;

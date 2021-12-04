@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3807573016900453935}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_Children:
   - {fileID: 1650765065908641850}
   m_Father: {fileID: 0}
@@ -127,14 +127,15 @@ MonoBehaviour:
   particle: {fileID: 1139283897377808518, guid: 4662d1acd08be864d9d8bfdb262b2afa, type: 3}
   poolIndex: 7
   poolManager: {fileID: 0}
+  damageText: {fileID: 6883862333197480375, guid: e87e563c795b7c447b0dd037a2920fc9, type: 3}
   enemyIndex: 4
-  angle_fix: {x: 0, y: 180, z: -90}
+  angle_fix: {x: 0, y: 0, z: -90}
   maxHp: 50
-  Color:
-  - {r: 0, g: 1, b: 0, a: 1}
+  ColorArr:
   - {r: 1, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.5, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
   firePos: {fileID: 1650765065908641850}
   delay: 4
 --- !u!58 &3807573016900453928
@@ -185,7 +186,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 97bd5a2162f921e4082ea1fce443c70d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -211,7 +212,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 4
     widthCurve:
       serializedVersion: 2
       m_Curve:

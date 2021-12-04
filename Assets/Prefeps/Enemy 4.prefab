@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2621419343293416160}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 55.602364, y: -133.46489, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -154,11 +154,12 @@ MonoBehaviour:
   particle: {fileID: 1139283897377808518, guid: 4662d1acd08be864d9d8bfdb262b2afa, type: 3}
   poolIndex: 6
   poolManager: {fileID: 0}
+  damageText: {fileID: 6883862333197480375, guid: e87e563c795b7c447b0dd037a2920fc9, type: 3}
   enemyIndex: 3
   angle_fix: {x: 0, y: 0, z: 0}
   maxHp: 10
-  Color:
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0, g: 1, b: 0, a: 1}
+  ColorArr:
   - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.5, b: 0, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}

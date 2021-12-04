@@ -18,7 +18,8 @@ public class EndingManager : MonoBehaviour
     [Header("업그레이드될 수치 표시용 텍스트")] [SerializeField] private Text[] levelValueText;
     [Header("적 이름")] [SerializeField] private Text enemy_Name_Text;
     [Header("적 설명")] [SerializeField] private Text enemy_Desc_Text;
-    [Header("적 사진")] [SerializeField] private Image enemy_Image_Image;
+    [Header("적 사진")] [SerializeField] private Image enemy_Image;
+    [Header("적이 나오는 스테이지")] [SerializeField] private int[] stageEnemyArr;
     #endregion
     /*public void ShowNextStage()
     {
@@ -36,13 +37,23 @@ public class EndingManager : MonoBehaviour
         NextStagePannel.SetActive(false);
         upgradePannel.SetActive(false);
         Time.timeScale = 1;
-        GameManager.Instance.UIManager.BreakTime(10);
+        GameManager.Instance.UIManager.StartCoroutine(GameManager.Instance.UIManager.BreakTime(5));
     }
     public void ShowNextEnemy()
     {
-        enemy_Name_Text.text = enemyInfo[1].name;
-        enemy_Desc_Text.text = enemyInfo[1].desc;
-        enemy_Image_Image.sprite = enemyInfo[1].sprite;
+        enemy_Name_Text.text = "";
+        enemy_Desc_Text.text = "";
+        enemy_Image.color = new Vector4(0,0,0,0);
+        for (int i = 1; i < stageEnemyArr.Length; i++)
+        {
+            if(stageEnemyArr[i] == GameManager.Instance.CurExpLevel)
+            {
+                enemy_Name_Text.text = enemyInfo[i].name;
+                enemy_Desc_Text.text = enemyInfo[i].desc;
+                enemy_Image.sprite = enemyInfo[i].sprite;
+                enemy_Image.color = new Vector4(1, 1, 1, 1);
+            }
+        }
     }
     public void ShowUpgradeValue()
     {
@@ -86,7 +97,7 @@ public class EndingManager : MonoBehaviour
     {
         if((int)level[0] < 10)
         {
-            levelValueText[0].text = string.Format("{0} -> {1}", levelWeaponDamage[(int)level[0]], levelWeaponDamage[(int)level[0] + 1]);
+            levelValueText[0].text = string.Format("{0} -> {1}", levelWeaponDamage[(int)level[0] - 1], levelWeaponDamage[(int)level[0]]);
         }
         else
         {
@@ -94,7 +105,7 @@ public class EndingManager : MonoBehaviour
         }
         if ((int)level[1] < 10)
         {
-            levelValueText[1].text = string.Format("{0} -> {1}", levelSpeed[(int)level[1]], levelSpeed[(int)level[1] + 1]);
+            levelValueText[1].text = string.Format("{0} -> {1}", levelSpeed[(int)level[1] - 1], levelSpeed[(int)level[1]]);
         }
         else
         {
@@ -102,25 +113,22 @@ public class EndingManager : MonoBehaviour
         }
         if ((int)level[2] < 10)
         {
-            levelValueText[2].text = string.Format("{0} -> {1}", levelWeaponSpeed[(int)level[2]], levelWeaponSpeed[(int)level[2] + 1]);
+            levelValueText[2].text = string.Format("{0} -> {1}", levelWeaponSpeed[(int)level[2] - 1], levelWeaponSpeed[(int)level[2]]);
         }
         else
         {
             levelValueText[2].text = string.Format("MAX : {0}", levelWeaponSpeed[(int)level[2]]);
         }
-        levelSlider[1].value = level[2] * 0.1f;
-        levelSlider[1].value = level[1] * 0.1f;
         levelSlider[0].value = level[0] * 0.1f;
+        levelSlider[1].value = level[1] * 0.1f;
+        levelSlider[2].value = level[2] * 0.1f;
     }
     #region 실질 업그레이드 실행문
     void UpgradDamage()
     {
         if (level[0] <= 10)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                GameManager.Instance.UpGradeDamage(levelWeaponDamage[(int)level[0]]);
-            }
+            GameManager.Instance.UpGradeDamage(levelWeaponDamage[(int)level[0]]);
             level[0]++;
             levelSlider[0].value = level[0] * 0.1f;
         }
