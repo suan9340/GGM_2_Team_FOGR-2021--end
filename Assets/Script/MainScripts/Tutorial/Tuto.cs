@@ -12,6 +12,7 @@ public class Tuto : MonoBehaviour
     [SerializeField] private Transform storyTextTransform = null;
     [SerializeField] private string[] story;
     [SerializeField] private float speed;
+    [SerializeField] SoundManager soundManager;
 
     private Vector3 enemyPosition;
     private bool isTyping = true;
@@ -157,6 +158,7 @@ public class Tuto : MonoBehaviour
                 if (TutorialManager.Instance.isStory12)
                 {
                     index++;
+                    soundManager.Next();
                 }
                 else return;
             }
@@ -167,6 +169,7 @@ public class Tuto : MonoBehaviour
                 if (TutorialManager.Instance.isStory8)
                 {
                     index++;
+                    soundManager.Next();
                 }
 
                 else return;
@@ -176,12 +179,14 @@ public class Tuto : MonoBehaviour
                 if (TutorialManager.Instance.isStory13)
                 {
                     index++;
+                    soundManager.Next();
                 }
             }
 
             else
             {
                 index++;
+                soundManager.Next();
             }
 
             Tutorial(index);

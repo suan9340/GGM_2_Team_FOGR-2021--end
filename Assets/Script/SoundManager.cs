@@ -5,7 +5,7 @@ public class SoundManager : MonoBehaviour
 {
     #region 인스펙터
     #endregion
-    [Header("출력할 오디오 소스")] [SerializeField] private AudioSource turn, click;
+    [Header("출력할 오디오 소스")] [SerializeField] private AudioSource turn, click, next;
     public void Click()
     {
         click.Play();
@@ -13,5 +13,9 @@ public class SoundManager : MonoBehaviour
     public void Turn()
     {
         turn.Play();
+    }
+    public void Next()
+    {
+        next.Play();
     }
 }
