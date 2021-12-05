@@ -67,7 +67,7 @@ public class Spawner : MonoBehaviour
             if (isSpawn)
             {
                 GameObject obj = poolManager.Get(i + 12);
-                Debug.Log(i + 3);
+                //Debug.Log(i + 3);
                 if (obj != null)
                 {
                     obj.transform.SetParent(itemHolder.transform);

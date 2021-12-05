@@ -7,10 +7,7 @@ public class Player : MonoBehaviour
     #region º¯¼ö
     bool isUsingWappen;
     int weaponIndex = 0;
-    public float angle;
-    public float angle2;
-    public Vector2 temp;
-    public Vector2 FixTemp;
+    float angle;
     float range;
     Vector2 mousePos;
     Vector2 target;
@@ -41,7 +38,7 @@ public class Player : MonoBehaviour
     void ChangeAngle()
     {
         float angle = Mathf.Atan2(transform.position.y, transform.position.x) * Mathf.Rad2Deg;
-        transform.eulerAngles = new Vector3(0, 0, angle- 90);
+        transform.localEulerAngles = new Vector3(0, 0, angle- 90);
     }
     IEnumerator Attack()
     {
@@ -53,34 +50,24 @@ public class Player : MonoBehaviour
     void ChangeWeaponAngle()
     {
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
-        angle2 = Mathf.Atan2(transform.position.y, transform.position.x) * Mathf.Rad2Deg;
-
-        if (angle2 - attackAngle[weaponIndex] < -180)
-        {
-            FixTemp.x = 180;
-        }
-        else
-        {
-            FixTemp.x = 0;
-        }
-        if(angle2 + attackAngle[weaponIndex] > 180)
-        {
-            FixTemp.y = -180;
-        }
-        else
-        {
-            FixTemp.y = 0;
-        }
-        if (angle2 - attackAngle[weaponIndex] + FixTemp.x < angle2 + attackAngle[weaponIndex] + FixTemp.y)
-        {
-            angle = Mathf.Clamp(angle, angle2 - attackAngle[weaponIndex] + FixTemp.x, angle2 + attackAngle[weaponIndex] + FixTemp.y);
-        }
-        else
-        {
-            angle = Mathf.Clamp(angle, angle2 + attackAngle[weaponIndex] + FixTemp.y, angle2 - attackAngle[weaponIndex] + FixTemp.x);
-        }
+        angle = Mathf.Atan2(mousePos.y - wappenHold.position.y, mousePos.x - wappenHold.position.x) * Mathf.Rad2Deg;
         wappenHold.eulerAngles = new Vector3(0, 0, angle - 90);
+        float temp = wappenHold.localEulerAngles.z;
+        if (temp <= 360 && temp >= attackAngle[weaponIndex] + 180 - attackAngle[weaponIndex])
+        {
+            if (temp < 360 - attackAngle[weaponIndex])
+            {
+                temp = 360 - attackAngle[weaponIndex];
+            }
+        }
+        else 
+        {
+            if(temp > attackAngle[weaponIndex])
+            {
+                temp = attackAngle[weaponIndex];
+            }
+        }
+        wappenHold.localEulerAngles = new Vector3(0, 0, temp);
     }
     void CheckInput()
     {
