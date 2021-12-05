@@ -13,6 +13,7 @@ public class TutorialManager : MonoSingleton<TutorialManager>
     public bool isTypingSound = false;
     public bool isSpeedTypingSound = false;
     [SerializeField] private Animator small;
+    [SerializeField] private Animator change;
 
     [SerializeField] private AudioClip typingsound = null;
     public void isSamll()
@@ -23,5 +24,10 @@ public class TutorialManager : MonoSingleton<TutorialManager>
     public void isbig()
     {
         small.Play("2");
+    }
+
+    public void changeweapon()
+    {
+        change.Play("change");
     }
 }

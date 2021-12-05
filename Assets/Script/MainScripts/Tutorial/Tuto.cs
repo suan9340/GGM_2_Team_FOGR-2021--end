@@ -32,6 +32,9 @@ public class Tuto : MonoBehaviour
     [SerializeField] private GameObject outTuto = null;
     [SerializeField] private GameObject arrow = null;
     [SerializeField] private GameObject weaponpannel = null;
+    [SerializeField] private GameObject weapon1 = null;
+    [SerializeField] private GameObject weapon2 = null;
+    [SerializeField] private GameObject weapon3 = null;
 
     #endregion
 
@@ -117,10 +120,7 @@ public class Tuto : MonoBehaviour
             case 18:
                 Eighteen();
                 break;
-
-            case 19:
-                Nineteen();
-                break;
+          
 
             default:
                 Debug.Log("끗");
@@ -207,7 +207,7 @@ public class Tuto : MonoBehaviour
         StartCoroutine(TypingEffect(storyText, story[4], speed));
         enemyPosition = new Vector3(enemy.transform.position.x, enemy.transform.position.y, 0f);
         enemy.SetActive(true);
-        enemy.transform.DOMove(new Vector3(0f, 0f, 0f), 2f);
+        enemy.transform.DOMove(new Vector3(0f, 0f, 0f), 1.5f);
     }
 
     private void Six()
@@ -215,7 +215,7 @@ public class Tuto : MonoBehaviour
         TutorialManager.Instance.isStory6 = true;
         StartCoroutine(TypingEffect(storyText, story[5], speed));
         enemy.transform.position = new Vector3(enemyPosition.x, enemyPosition.y, enemyPosition.z);
-        enemy.transform.DOMove(new Vector3(0f, 0f, 0f), 3f);
+        enemy.transform.DOMove(new Vector3(0f, 0f, 0f), 2f);
     }
 
     private void Seven()
@@ -233,17 +233,20 @@ public class Tuto : MonoBehaviour
     private void Nine()
     {
         StartCoroutine(TypingEffect(storyText, story[8], speed));
-        material.transform.DOMove(new Vector3(0f, 0f, 0f), 3f);
+        material.transform.DOMove(new Vector3(0f, 0f, 0f), 2f);
     }
 
     private void Ten()
-    {
+    {//무기레벨 또한 일정 레벨에 도달하면
         weaponpannel.SetActive(true);
+        weapon1.SetActive(true);
         StartCoroutine(TypingEffect(storyText, story[9], speed));
     }
 
     private void Eleven()
     {
+        weapon1.SetActive(false);
+        TutorialManager.Instance.changeweapon();
         StartCoroutine(TypingEffect(storyText, story[10], speed));
     }
 
@@ -263,7 +266,7 @@ public class Tuto : MonoBehaviour
     {
         StartCoroutine(TypingEffect(storyText, story[13], speed));
         trash.SetActive(true);
-        trash.transform.DOMove(new Vector3(0f, 0f, 0f), 3f);
+        trash.transform.DOMove(new Vector3(0f, 0f, 0f), 2f);
     }
 
     private void Fiften()
@@ -286,11 +289,6 @@ public class Tuto : MonoBehaviour
     private void Eighteen()
     {
         StartCoroutine(TypingEffect(storyText, story[17], speed));
-    }
-
-    private void Nineteen()
-    {
-        StartCoroutine(TypingEffect(storyText, story[18], speed));
     }
 }
 
