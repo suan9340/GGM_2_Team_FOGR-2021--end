@@ -5,6 +5,7 @@ using UnityEngine;
 public class TutorialManager : MonoSingleton<TutorialManager>
 {
     public bool isStory6 = false;
+    public bool isStory7 = false;
     public bool isStory8 = false;
     public bool isStory9 = false;
     public bool isStory11 = false;

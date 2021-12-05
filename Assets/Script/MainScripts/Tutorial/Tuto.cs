@@ -23,7 +23,6 @@ public class Tuto : MonoBehaviour
 
     [SerializeField] private GameObject score = null;
     [SerializeField] private GameObject stage = null;
-    [SerializeField] private GameObject home = null;
     [SerializeField] private GameObject enemy = null;
     [SerializeField] private GameObject material = null;
     [SerializeField] private GameObject trash = null;
@@ -33,8 +32,8 @@ public class Tuto : MonoBehaviour
     [SerializeField] private GameObject arrow = null;
     [SerializeField] private GameObject weaponpannel = null;
     [SerializeField] private GameObject weapon1 = null;
-    [SerializeField] private GameObject weapon2 = null;
-    [SerializeField] private GameObject weapon3 = null;
+    [SerializeField] private Text materalText = null;
+    [SerializeField] private GameObject materialPannel = null;
 
     #endregion
 
@@ -120,7 +119,7 @@ public class Tuto : MonoBehaviour
             case 18:
                 Eighteen();
                 break;
-          
+
 
             default:
                 Debug.Log("끗");
@@ -151,9 +150,9 @@ public class Tuto : MonoBehaviour
     }
     public void nextBtn()
     {
-        if(!isTyping)
+        if (!isTyping)
         {
-             if (index == 12)
+            if (index == 12)
             {
                 if (TutorialManager.Instance.isStory12)
                 {
@@ -162,6 +161,16 @@ public class Tuto : MonoBehaviour
                 else return;
             }
 
+
+            else if (index == 7)
+            {
+                if (TutorialManager.Instance.isStory8)
+                {
+                    index++;
+                }
+
+                else return;
+            }
             else if (index == 16)
             {
                 if (TutorialManager.Instance.isStory13)
@@ -220,18 +229,22 @@ public class Tuto : MonoBehaviour
 
     private void Seven()
     {// 원의 크기는 재료를 흡수해서 가능
+        TutorialManager.Instance.isStory7 = true;
         StartCoroutine(TypingEffect(storyText, story[6], speed));
         material.SetActive(true);
     }
 
     private void Eight()
     {
-        TutorialManager.Instance.isStory8 = true;
         StartCoroutine(TypingEffect(storyText, story[7], speed));
     }
 
     private void Nine()
-    {
+    {// 강화용 증가
+        material.SetActive(true);
+        materialPannel.SetActive(true);
+        materalText.enabled = true;
+        materalText.text = string.Format("재료 1 / 5");
         StartCoroutine(TypingEffect(storyText, story[8], speed));
         material.transform.DOMove(new Vector3(0f, 0f, 0f), 2f);
     }
@@ -259,6 +272,7 @@ public class Tuto : MonoBehaviour
 
     private void Thirteen()
     {
+        materalText.text = string.Format("재료 2 / 5");
         StartCoroutine(TypingEffect(storyText, story[12], speed));
     }
 
