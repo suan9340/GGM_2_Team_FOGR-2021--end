@@ -11,6 +11,8 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject OutGameChang;   // 겜 종료 창
     [SerializeField] private GameObject storyPanel;
     [SerializeField] private Sprite[] sprite;
+    [SerializeField] private AudioSource[] audioSources;
+    [SerializeField] private AudioSource bgm;
 
     [SerializeField] private Image[] UIimages;
     private bool isOutGame = false;
@@ -56,11 +58,13 @@ public class Menu : MonoBehaviour
     }
     public void OnClickStory()
     {
+        bgm.volume = 0.25f;
         UIimages[3].sprite = sprite[7];
         storyPanel.SetActive(true);
     }
     public void EndStory()
     {
+        bgm.volume = 1;
         UIimages[3].sprite = sprite[6];
     }
 
@@ -77,6 +81,10 @@ public class Menu : MonoBehaviour
     {
         Debug.Log("게임 종료 성공!!");
         Application.Quit();
+    }
+    public void ClickAudio(int i)
+    {
+        audioSources[i].Play();
     }
 
 }

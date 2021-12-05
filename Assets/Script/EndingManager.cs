@@ -39,7 +39,8 @@ public class EndingManager : MonoBehaviour
         NextStagePannel.SetActive(false);
         upgradePannel.SetActive(false);
         Time.timeScale = 1;
-        GameManager.Instance.UIManager.StartCoroutine(GameManager.Instance.UIManager.BreakTime(5));
+        GameManager.Instance.IsCanESC = true;
+        GameManager.Instance.UIManager.StartCoroutine(GameManager.Instance.UIManager.BreakTime(3));
     }
     public void ShowNextEnemy()
     {

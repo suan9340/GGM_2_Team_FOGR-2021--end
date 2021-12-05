@@ -17,6 +17,10 @@ public class GameManager : MonoSingleton<GameManager>
     public CameraManager CameraManager { get { return cameraManager; } set { cameraManager = value; } }
     public PoolManager PoolManager { get { return poolManager; } set { poolManager = value; } }
     public EndingManager EndingManager { get { return endingManager; } set { endingManager = value; } }
+    public bool IsCanESC { get { return isCanESC; } set { isCanESC = value; } }
+    public int CurWeaponLevel { get { return curWeaponLevel; } set { curWeaponLevel = value; } }
+    public int WeaponLevelLength { get { return levelPerDamage.Length; }}
+    public float LevelPerDamage { get { return levelPerDamage[curWeaponLevel]; } set { levelPerDamage[curWeaponLevel] = value; } }
     public float DamageUpgradeAmount { get { return damageUpgradeAmount; } set { damageUpgradeAmount = value; } }
     public float DamageBuffAmount { get { return damageBuffAmount; } set { damageBuffAmount = value; } }
     public float SpeedUpgradeAmount { get { return speedUpgradeAmount; } set { speedUpgradeAmount = value; } }
@@ -25,6 +29,7 @@ public class GameManager : MonoSingleton<GameManager>
     public float WaeponSpeedBuffAmount { get { return weaponSpeedBuffAmount; } set { weaponSpeedBuffAmount = value; } }
     #endregion
     #region 변수
+    bool isCanESC = true;
     private int curExpLevel;
     private int curWeaponLevel;
     #endregion
@@ -32,6 +37,7 @@ public class GameManager : MonoSingleton<GameManager>
     [Header("재료")] [SerializeField] private int ingredient;
     [Header("현제 경험치")] [SerializeField] private int exp;
     [Header("무기 레벨업 필요한 재료량")] [SerializeField] private int[] ingredientAmount;
+    [Header("무기 레벨에 따른 공격력")] [SerializeField] private float[] levelPerDamage;
     [Header("단계별 초당 경험치 배열")] [SerializeField] private int[] sps;
     [Header("현제 스테이지 단계")] [SerializeField] private int[] expLevel;
     [Header("스테이지당 대응하는 적 정보(2차원 배열)")] [SerializeField] private LevelEnemy[] LevelPerEnemy;
@@ -58,7 +64,7 @@ public class GameManager : MonoSingleton<GameManager>
     }
     void CheckInput()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && isCanESC)
         {
             uiManager.Pause(true);
         }
@@ -73,6 +79,13 @@ public class GameManager : MonoSingleton<GameManager>
             ingredientAmount[i] = temp;
             temp += 3;
         }
+        float temp2 = 1;
+        for (int i = 0; i < 100; i++)
+        {
+            levelPerDamage[i] = temp2;
+            temp2 += 0.2f;
+        }
+        uiManager.UpdateUI();
     }
     public void UpGradeSpeed(float value)
     {

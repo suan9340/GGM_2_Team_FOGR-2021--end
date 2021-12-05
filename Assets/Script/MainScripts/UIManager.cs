@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     #region 인스펙터
     [Header("재료 표시용 텍스트")] [SerializeField] private Text ingredientText;
+    [Header("현재 무기 레벨 텍스트")] [SerializeField] private Text levelText;
     [Header("점수 표시용 텍스트")] [SerializeField] private Text scoreText;
     [Header("Level 애 대응할 텍스트")] [SerializeField] private Text stageText;
     [Header("게임오버 판넬")] [SerializeField] private GameObject overPannel;
@@ -34,6 +35,7 @@ public class UIManager : MonoBehaviour
         slider.value = GameManager.Instance.GetSliderValue();
         stageText.text = string.Format("Stage : {0}", GameManager.Instance.CurExpLevel);
         ingredientText.text = string.Format("재료 : {0} / {1}",GameManager.Instance.Ingredient,GameManager.Instance.IngredientAmount);
+        levelText.text = string.Format("레벨 : {0} / {1}", GameManager.Instance.CurWeaponLevel, GameManager.Instance.WeaponLevelLength);
     }
     public void ChangeUiWappen(int index)
     {
@@ -46,6 +48,7 @@ public class UIManager : MonoBehaviour
     public void ShowUpgradePannel()
     {
         Time.timeScale = 0;
+        GameManager.Instance.IsCanESC = false;
         upgradePanel.SetActive(true);
         GameManager.Instance.EndingManager.ShowNextEnemy();
     }
@@ -73,6 +76,7 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator BreakTime(int time)
     {
+        GameManager.Instance.IsCanESC = false;
         Time.timeScale = 0;
         breakTimeText.gameObject.SetActive(true);
         for (int i = time; i > 0; i--)
@@ -81,6 +85,7 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(1f);
         }
         breakTimeText.gameObject.SetActive(false);
+        GameManager.Instance.IsCanESC = true;
         Time.timeScale = 1;
     }
     public void Over()

@@ -7,9 +7,10 @@ public class Story : MonoBehaviour
     [SerializeField] Sprite[] sprites;
     [SerializeField] Image image;
     [SerializeField] Menu menu;
+    [SerializeField] AudioSource audio;
     int page = 0;
     public void Next()
-    {
+    { 
         page++;
         if(page >= sprites.Length)
         {
@@ -18,6 +19,7 @@ public class Story : MonoBehaviour
             menu.EndStory();
             gameObject.SetActive(false);
         }
+        audio.Play();
         image.sprite = sprites[page];
     }
 }

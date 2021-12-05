@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().GetDamaged((int)(damage * GameManager.Instance.DamageBuffAmount * GameManager.Instance.DamageUpgradeAmount));
+            collision.GetComponent<Enemy>().GetDamaged((int)(GameManager.Instance.LevelPerDamage * GameManager.Instance.DamageBuffAmount * GameManager.Instance.DamageUpgradeAmount));
         }
         if (collision.CompareTag("Ingredient"))
         {
