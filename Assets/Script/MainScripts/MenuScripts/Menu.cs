@@ -9,6 +9,7 @@ public class Menu : MonoBehaviour
     SpriteRenderer spriteRenderer = null;
     [SerializeField] private GameObject DonClickChang;  // 클릭 방지용 창
     [SerializeField] private GameObject OutGameChang;   // 겜 종료 창
+    [SerializeField] private GameObject storyPanel;
     [SerializeField] private Sprite[] sprite;
 
     [SerializeField] private Image[] UIimages;
@@ -52,6 +53,15 @@ public class Menu : MonoBehaviour
             DonClickChang.SetActive(false);
 
         }
+    }
+    public void OnClickStory()
+    {
+        UIimages[3].sprite = sprite[7];
+        storyPanel.SetActive(true);
+    }
+    public void EndStory()
+    {
+        UIimages[3].sprite = sprite[6];
     }
 
     // 게임 종료 창 끄는 거 눌렀을 때 함수

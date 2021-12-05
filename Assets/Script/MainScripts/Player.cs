@@ -7,8 +7,10 @@ public class Player : MonoBehaviour
     #region º¯¼ö
     bool isUsingWappen;
     int weaponIndex = 0;
-    float angle;
-    float angle2;
+    public float angle;
+    public float angle2;
+    public Vector2 temp;
+    public Vector2 FixTemp;
     float range;
     Vector2 mousePos;
     Vector2 target;
@@ -51,11 +53,34 @@ public class Player : MonoBehaviour
     void ChangeWeaponAngle()
     {
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        angle2 = Mathf.Atan2(transform.position.y, transform.position.x) * Mathf.Rad2Deg;
         angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
+        angle2 = Mathf.Atan2(transform.position.y, transform.position.x) * Mathf.Rad2Deg;
 
-        angle = Mathf.Clamp(angle, -attackAngle[weaponIndex] + angle2, attackAngle[weaponIndex] + angle2);
-        wappenHold.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        if (angle2 - attackAngle[weaponIndex] < -180)
+        {
+            FixTemp.x = 180;
+        }
+        else
+        {
+            FixTemp.x = 0;
+        }
+        if(angle2 + attackAngle[weaponIndex] > 180)
+        {
+            FixTemp.y = -180;
+        }
+        else
+        {
+            FixTemp.y = 0;
+        }
+        if (angle2 - attackAngle[weaponIndex] + FixTemp.x < angle2 + attackAngle[weaponIndex] + FixTemp.y)
+        {
+            angle = Mathf.Clamp(angle, angle2 - attackAngle[weaponIndex] + FixTemp.x, angle2 + attackAngle[weaponIndex] + FixTemp.y);
+        }
+        else
+        {
+            angle = Mathf.Clamp(angle, angle2 + attackAngle[weaponIndex] + FixTemp.y, angle2 - attackAngle[weaponIndex] + FixTemp.x);
+        }
+        wappenHold.eulerAngles = new Vector3(0, 0, angle - 90);
     }
     void CheckInput()
     {

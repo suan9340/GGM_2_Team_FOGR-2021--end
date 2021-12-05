@@ -9,7 +9,7 @@ public class EndingManager : MonoBehaviour
     //[Header("이상한거")] [SerializeField] private GameObject holdPannel;
     [Header("레벨")] [SerializeField] private float[] level;
     [Header("레벨에 대응하는 차징 속도")] [SerializeField] private float[] levelWeaponSpeed;
-    [Header("레벨에 대응하는 무기 데미지")] [SerializeField] private int[] levelWeaponDamage;
+    [Header("레벨에 대응하는 무기 데미지")] [SerializeField] private float[] levelWeaponDamage;
     [Header("레벨에 대응하는 속도")] [SerializeField] private float[] levelSpeed;
     [Header("업그레이드 판넬")] [SerializeField] private GameObject upgradePannel;
     [Header("다음 스테이지 판넬")] [SerializeField] private GameObject NextStagePannel;
@@ -20,6 +20,7 @@ public class EndingManager : MonoBehaviour
     [Header("적 설명")] [SerializeField] private Text enemy_Desc_Text;
     [Header("적 사진")] [SerializeField] private Image enemy_Image;
     [Header("적이 나오는 스테이지")] [SerializeField] private int[] stageEnemyArr;
+    [Header("StageClear 에니메이션")] [SerializeField] private GameObject stageClear;
     #endregion
     /*public void ShowNextStage()
     {
@@ -34,6 +35,7 @@ public class EndingManager : MonoBehaviour
     }
     public void GoGame()
     {
+        stageClear.SetActive(false);
         NextStagePannel.SetActive(false);
         upgradePannel.SetActive(false);
         Time.timeScale = 1;
@@ -41,6 +43,8 @@ public class EndingManager : MonoBehaviour
     }
     public void ShowNextEnemy()
     {
+        stageClear.SetActive(true);
+        bool istrue = false;
         enemy_Name_Text.text = "";
         enemy_Desc_Text.text = "";
         enemy_Image.color = new Vector4(0,0,0,0);
@@ -48,11 +52,16 @@ public class EndingManager : MonoBehaviour
         {
             if(stageEnemyArr[i] == GameManager.Instance.CurExpLevel)
             {
+                istrue = true;
                 enemy_Name_Text.text = enemyInfo[i].name;
                 enemy_Desc_Text.text = enemyInfo[i].desc;
                 enemy_Image.sprite = enemyInfo[i].sprite;
                 enemy_Image.color = new Vector4(1, 1, 1, 1);
             }
+        }
+        if(!istrue)
+        {
+            ShowUpgrade();
         }
     }
     public void ShowUpgradeValue()

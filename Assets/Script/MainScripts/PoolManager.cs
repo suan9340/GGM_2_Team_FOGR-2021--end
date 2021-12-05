@@ -23,17 +23,7 @@ public class PoolManager : MonoBehaviour
         for (int i = 0; i < holder.childCount; i++)
         {
             Item item = holder.GetChild(0).GetComponent<Item>();
-            if (item == null)
-            {
-                Enemy enemy = holder.GetChild(0).GetComponent<Enemy>();
-                //print("A");
-                enemy.Dead();
-            }
-            else
-            {
-                //print(item.gameObject.name);
-                item.Dead();
-            }
+            item.Dead();
         }
     }
 }
