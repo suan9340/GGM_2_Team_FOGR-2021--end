@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class EndingManager : MonoBehaviour
 {
+    int temp = 0;
     #region 인스펙터    
     //[Header("무기 배열 ?")] [SerializeField] private Weapon[] weapon;
     //[Header("이상한거")] [SerializeField] private GameObject holdPannel;
@@ -19,16 +20,14 @@ public class EndingManager : MonoBehaviour
     [Header("적 이름")] [SerializeField] private Text enemy_Name_Text;
     [Header("적 설명")] [SerializeField] private Text enemy_Desc_Text;
     [Header("적 사진")] [SerializeField] private Image enemy_Image;
+    [Header("업그레이드 가능수 표시용 텍스트")] [SerializeField] private Text upGradeCountText;
     [Header("적이 나오는 스테이지")] [SerializeField] private int[] stageEnemyArr;
     [Header("StageClear 에니메이션")] [SerializeField] private GameObject stageClear;
     #endregion
-    /*public void ShowNextStage()
-    {
-        NextStagePannel.SetActive(true);
-        holdPannel.SetActive(true);
-    }*/
     public void ShowUpgrade()
     {
+        temp = 3;
+        upGradeCountText.text = string.Format("{0} / {1}",temp , 3);
         NextStagePannel.SetActive(false);
         upgradePannel.SetActive(true);
         SetNextValue();
@@ -65,7 +64,7 @@ public class EndingManager : MonoBehaviour
             ShowUpgrade();
         }
     }
-    public void ShowUpgradeValue()
+    /*public void ShowUpgradeValue()
     {
         for (int i = 0; i < levelValueText.Length; i++)
         {
@@ -82,9 +81,11 @@ public class EndingManager : MonoBehaviour
                     break;
             }
         }
-    }
+    }*/
     public void Upgrade(int get)
     {
+        temp--;
+        upGradeCountText.text = string.Format("{0} / {1}",temp , 3);
         switch (get)
         {
             case 0:
@@ -100,12 +101,16 @@ public class EndingManager : MonoBehaviour
                 Debug.LogError("Null!");
                 break;
         }
-        GameManager.Instance.PoolManager.ClearTable();
-        GoGame();
+        SetNextValue();
+        if (temp == 0)
+        {
+            GameManager.Instance.PoolManager.ClearTable();
+            GoGame();
+        }
     }
     void SetNextValue() 
     {
-        if((int)level[0] < 10)
+        if((int)level[0] < 20)
         {
             levelValueText[0].text = string.Format("{0} -> {1}", levelWeaponDamage[(int)level[0] - 1], levelWeaponDamage[(int)level[0]]);
         }
@@ -113,7 +118,7 @@ public class EndingManager : MonoBehaviour
         {
             levelValueText[0].text = string.Format("MAX : {0}",levelWeaponDamage[(int)level[0]]);
         }
-        if ((int)level[1] < 10)
+        if ((int)level[1] < 20)
         {
             levelValueText[1].text = string.Format("{0} -> {1}", levelSpeed[(int)level[1] - 1], levelSpeed[(int)level[1]]);
         }
@@ -121,7 +126,7 @@ public class EndingManager : MonoBehaviour
         {
             levelValueText[1].text = string.Format("MAX : {0}", levelSpeed[(int)level[1]]);
         }
-        if ((int)level[2] < 10)
+        if ((int)level[2] < 20)
         {
             levelValueText[2].text = string.Format("{0} -> {1}", levelWeaponSpeed[(int)level[2] - 1], levelWeaponSpeed[(int)level[2]]);
         }
@@ -129,36 +134,33 @@ public class EndingManager : MonoBehaviour
         {
             levelValueText[2].text = string.Format("MAX : {0}", levelWeaponSpeed[(int)level[2]]);
         }
-        levelSlider[0].value = level[0] * 0.1f;
-        levelSlider[1].value = level[1] * 0.1f;
-        levelSlider[2].value = level[2] * 0.1f;
+        levelSlider[0].value = level[0];
+        levelSlider[1].value = level[1];
+        levelSlider[2].value = level[2];
     }
     #region 실질 업그레이드 실행문
     void UpgradDamage()
     {
-        if (level[0] <= 10)
+        if (level[0] <= 20)
         {
             GameManager.Instance.UpGradeDamage(levelWeaponDamage[(int)level[0]]);
             level[0]++;
-            levelSlider[0].value = level[0] * 0.1f;
         }
     }
     void UpgradSpeed()
     {
-        if (level[1] <= 10)
+        if (level[1] <= 20)
         {
             GameManager.Instance.UpGradeSpeed(levelSpeed[(int)level[1]]);
             level[1]++;
-            levelSlider[1].value = level[1] * 0.1f;
         }
     }
     void UpgradAttackSpeed()
     {
-        if (level[2] <= 10)
+        if (level[2] <= 20)
         {
             GameManager.Instance.UpGradeWeaponSpeed(levelWeaponSpeed[(int)level[2]]);
             level[2]++;
-            levelSlider[2].value = level[2] * 0.1f;
         }
     }
     #endregion
