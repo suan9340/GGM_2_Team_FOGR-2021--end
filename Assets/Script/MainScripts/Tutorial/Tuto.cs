@@ -35,6 +35,8 @@ public class Tuto : MonoBehaviour
     [SerializeField] private GameObject weapon1 = null;
     [SerializeField] private Text materalText = null;
     [SerializeField] private GameObject materialPannel = null;
+    [SerializeField] private GameObject click1 = null;
+    [SerializeField] private GameObject click2 = null;
 
     #endregion
 
@@ -134,11 +136,13 @@ public class Tuto : MonoBehaviour
         isTyping_ing = true;
         isTyping = true;
         TutorialManager.Instance.isTypingSound = true;
+        soundManager.keyboardPlay();
         for (int i = 0; i < _message.Length; i++)
         {
             _typingText.text = _message.Substring(0, i + 1);
             yield return new WaitForSeconds(speed);
         }
+        soundManager.keyboardStop();    
         TutorialManager.Instance.isTypingSound = false;
         TutorialManager.Instance.isSpeedTypingSound = false;
         speed = 0.1f;
@@ -193,6 +197,18 @@ public class Tuto : MonoBehaviour
         }
     }
 
+    private IEnumerator click()
+    {
+        for(int i=0;i<3;i++)
+        {
+            click1.SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+            click1.SetActive(false);
+            click2.SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+            click2.SetActive(false);
+        }
+    }
     private void One()
     {
         StartCoroutine(TypingEffect(storyText, story[0], speed));
@@ -234,9 +250,13 @@ public class Tuto : MonoBehaviour
 
     private void Seven()
     {// 원의 크기는 재료를 흡수해서 가능
+        //클릭
         TutorialManager.Instance.isStory7 = true;
         StartCoroutine(TypingEffect(storyText, story[6], speed));
         material.SetActive(true);
+        click1.transform.position = new Vector3(-1.87f, 1.28f, 1.572099f);
+        click2.transform.position = new Vector3(-1.87f, 1.28f, 1.572099f);
+        StartCoroutine(click());
     }
 
     private void Eight()
@@ -251,7 +271,7 @@ public class Tuto : MonoBehaviour
         materalText.enabled = true;
         materalText.text = string.Format("재료 1 / 5");
         StartCoroutine(TypingEffect(storyText, story[8], speed));
-        material.transform.DOMove(new Vector3(0f, 0f, 0f), 2f);
+        material.transform.DOMove(new Vector3(0f, 0f, 0f), 3f);//속도좀줄ㅇ리자
     }
 
     private void Ten()
@@ -270,9 +290,13 @@ public class Tuto : MonoBehaviour
 
     private void Twelve()
     {// 쓰레기
+        //클릭
         TutorialManager.Instance.isStory11 = true;
         StartCoroutine(TypingEffect(storyText, story[11], speed));
         trash.SetActive(true);
+        click1.transform.position = new Vector3(-12.47f, 1.86f, 1.572099f);
+        click2.transform.position = new Vector3(-12.47f, 1.86f, 1.572099f);
+        StartCoroutine(click());
     }
 
     private void Thirteen()
@@ -285,7 +309,7 @@ public class Tuto : MonoBehaviour
     {
         StartCoroutine(TypingEffect(storyText, story[13], speed));
         trash.SetActive(true);
-        trash.transform.DOMove(new Vector3(0f, 0f, 0f), 2f);
+        trash.transform.DOMove(new Vector3(0f, 0f, 0f), 3f);
     }
 
     private void Fiften()
@@ -295,8 +319,12 @@ public class Tuto : MonoBehaviour
 
     private void Sixteen()
     {// 아이템
+        //클릭
         StartCoroutine(TypingEffect(storyText, story[15], speed));
         item.SetActive(true);
+        click1.transform.position = new Vector3(-2.7f, -3.11f, 1.572099f);
+        click2.transform.position = new Vector3(-2.7f, -3.11f, 1.572099f);
+        StartCoroutine(click());
     }
 
     private void Seventeen()
