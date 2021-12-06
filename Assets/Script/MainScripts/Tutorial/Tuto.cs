@@ -199,7 +199,7 @@ public class Tuto : MonoBehaviour
 
     private IEnumerator click()
     {
-        for(int i=0;i<3;i++)
+        for(int i=0;i<8;i++)
         {
             click1.SetActive(true);
             yield return new WaitForSeconds(0.3f);
@@ -254,8 +254,8 @@ public class Tuto : MonoBehaviour
         TutorialManager.Instance.isStory7 = true;
         StartCoroutine(TypingEffect(storyText, story[6], speed));
         material.SetActive(true);
-        click1.transform.position = new Vector3(-1.87f, 1.28f, 1.572099f);
-        click2.transform.position = new Vector3(-1.87f, 1.28f, 1.572099f);
+        click1.transform.position = new Vector3(4.97f, 1.71f, 0f);
+        click2.transform.position = new Vector3(4.97f, 1.71f, 0f);
         StartCoroutine(click());
     }
 
@@ -294,8 +294,8 @@ public class Tuto : MonoBehaviour
         TutorialManager.Instance.isStory11 = true;
         StartCoroutine(TypingEffect(storyText, story[11], speed));
         trash.SetActive(true);
-        click1.transform.position = new Vector3(-12.47f, 1.86f, 1.572099f);
-        click2.transform.position = new Vector3(-12.47f, 1.86f, 1.572099f);
+        click1.transform.position = new Vector3(-5.66f, 1.9f, 0f);
+        click2.transform.position = new Vector3(-5.66f, 1.9f, 0f);
         StartCoroutine(click());
     }
 
@@ -322,8 +322,8 @@ public class Tuto : MonoBehaviour
         //Å¬¸¯
         StartCoroutine(TypingEffect(storyText, story[15], speed));
         item.SetActive(true);
-        click1.transform.position = new Vector3(-2.7f, -3.11f, 1.572099f);
-        click2.transform.position = new Vector3(-2.7f, -3.11f, 1.572099f);
+        click1.transform.position = new Vector3(4.18f, -2.88f, 0f);
+        click2.transform.position = new Vector3(4.18f, -2.88f, 0f);
         StartCoroutine(click());
     }
 
