@@ -27,6 +27,7 @@ public class Circle : MonoBehaviour
     [Header("버프 표현할 스프라이트 배열")] [SerializeField] private Sprite[] buffSprites;
     [Header("버프 활성화 시간")] [SerializeField] private float[] buffTimes;
     [Header("크기당 얻는 초당점수 배열")] [SerializeField] private int[] expPerSecond;
+    [SerializeField] AudioSource audio;
     #endregion
     void Start()
     {
@@ -148,10 +149,6 @@ public class Circle : MonoBehaviour
             GameManager.Instance.UIManager.Over();
         }
     }
-    /*public void ChangeSpeed(float value) // 원 속도를 업그레이드 해줬을 때 호출되는 함수
-    {
-        curSpeed = value;
-    }*/
     public void Heal(float temp) // 원이 커질 때 호출되는 함수
     {
         curHp += temp;
@@ -167,22 +164,10 @@ public class Circle : MonoBehaviour
     }
     public void GetBuff() // 아이템을 공격 시 얻는 버프를 실행하는 함수
     {
+        audio.Play();
         int a = Random.Range(0, 3);
-        switch(a)
-        {
-            case 0:
-                GameManager.Instance.UIManager.BuffOn(buffTimes[a], buffSprites[a]);
-                break;
-            case 1:
-                GameManager.Instance.UIManager.BuffOn(buffTimes[a], buffSprites[a]);
-                break;
-            case 2:
-                GameManager.Instance.UIManager.BuffOn(buffTimes[a], buffSprites[a]);
-                break;
-            default:
-                Debug.Log("범위 이상");
-                break;
-        }
+        GameManager.Instance.AddBuff(a);
+        GameManager.Instance.UIManager.BuffOn(buffTimes[a], buffSprites[a]);
     }
     public void ChangeSize()
     {

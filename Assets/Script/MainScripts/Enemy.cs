@@ -14,6 +14,7 @@ public class Enemy : Item
     [Header("각도 보정치")] [SerializeField] protected Vector3 angle_fix;
     [Header("최대 Hp")] [SerializeField] protected float maxHp;
     [Header("색깔")] [SerializeField] private Color[] ColorArr;
+    [SerializeField] AudioSource audio;
     #endregion
     private void Start()
     {
@@ -24,7 +25,6 @@ public class Enemy : Item
     private void OnEnable() // 켜질때 세팅 해주는 것
     {
         base.damage = GameManager.Instance.GetLevel(enemyIndex,1);
-        //base.speed = GameManager.Instance.GetLevel(enemyIndex,2);
         curHp = GameManager.Instance.GetLevel(enemyIndex,0);
         maxHp = GameManager.Instance.GetLevel(enemyIndex,0);
         if(renderer != null)
@@ -35,7 +35,6 @@ public class Enemy : Item
     }
     void Update()
     {
-        //MoveToZero();
         float angle = Mathf.Atan2(transform.position.y, transform.position.x) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(0,0,angle) + angle_fix;
     }
@@ -43,6 +42,7 @@ public class Enemy : Item
     {
         if (!isAttacked)
         {
+            audio.Play();
             GameObject obj = Instantiate(damageText, new Vector3(transform.position.x,transform.position.y + 3,transform.position.z), Quaternion.identity);
             obj.transform.GetChild(0).GetComponent<TextMesh>().text = string.Format("-{0}", damage);
             curHp -= damage;

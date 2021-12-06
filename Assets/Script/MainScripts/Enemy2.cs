@@ -6,6 +6,7 @@ public class Enemy2 : Enemy
 {
     Coroutine runningCoroutine = null;
     [Header("스폰시킬 자식적")] [SerializeField] private GameObject child;
+    [SerializeField] AudioSource audio;
     private void OnEnable() // 켜질때 세팅 해주는 것
     {
         base.damage = GameManager.Instance.GetLevel(1, 1);
@@ -34,6 +35,7 @@ public class Enemy2 : Enemy
             Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
             if (pos.x > 0 && pos.x < 1 && pos.y > 0 && pos.y < 1)
             {
+                audio.Play();
                 GameObject obj = Instantiate(child, transform.position, Quaternion.identity);
                 yield return new WaitForEndOfFrame();
                 obj.GetComponent<Item>().SetPositionByCall(transform.position);

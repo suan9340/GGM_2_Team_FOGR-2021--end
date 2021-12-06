@@ -104,6 +104,7 @@ MonoBehaviour:
   particle: {fileID: 1139283897377808518, guid: 4662d1acd08be864d9d8bfdb262b2afa, type: 3}
   poolIndex: 2
   poolManager: {fileID: 0}
+  audio: {fileID: 0}
 --- !u!50 &3258738151478278376
 Rigidbody2D:
   serializedVersion: 4

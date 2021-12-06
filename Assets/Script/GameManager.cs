@@ -160,6 +160,14 @@ public class GameManager : MonoSingleton<GameManager>
                 break;
         }
     }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(2);
+    }
+    public void Ending()
+    {
+
+    }
 }
 [System.Serializable]
 public class LevelEnemy
