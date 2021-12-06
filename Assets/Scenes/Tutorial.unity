@@ -1804,7 +1804,7 @@ MonoBehaviour:
   - "\uC801\uC758 \uACF5\uACA9\uC73C\uB85C\uBD80\uD130 \uC9C0\uD0AC \uC218 \uC788\uB294
     \uC801\uC808\uD55C \uD06C\uAE30\uB97C \uC720\uC9C0\uD558\uBA70 \uC6D0\uC758 \uD06C\uAE30\uB97C
     \uD0A4\uC6CC\uBCF4\uC138\uC694! "
-  speed: 0.06
+  speed: 0.04
   soundManager: {fileID: 672784695}
   index: 1
   score: {fileID: 681484878}
@@ -2698,11 +2698,8 @@ MonoBehaviour:
   isStory11: 0
   isStory12: 0
   isStory13: 0
-  isTypingSound: 0
-  isSpeedTypingSound: 0
   small: {fileID: 1694281522}
   change: {fileID: 1519865022}
-  typingsound: {fileID: 8300000, guid: ae186e8ccebddd84986415d5c6f16c7c, type: 3}
 --- !u!1 &1362129989
 GameObject:
   m_ObjectHideFlags: 0

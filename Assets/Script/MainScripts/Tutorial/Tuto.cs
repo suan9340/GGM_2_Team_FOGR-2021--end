@@ -135,7 +135,6 @@ public class Tuto : MonoBehaviour
     {
         isTyping_ing = true;
         isTyping = true;
-        TutorialManager.Instance.isTypingSound = true;
         soundManager.keyboardPlay();
         for (int i = 0; i < _message.Length; i++)
         {
@@ -143,8 +142,6 @@ public class Tuto : MonoBehaviour
             yield return new WaitForSeconds(speed);
         }
         soundManager.keyboardStop();    
-        TutorialManager.Instance.isTypingSound = false;
-        TutorialManager.Instance.isSpeedTypingSound = false;
         speed = 0.1f;
         isTyping_ing = false;
         isTyping = false;

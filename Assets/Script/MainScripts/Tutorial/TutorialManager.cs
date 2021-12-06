@@ -11,12 +11,9 @@ public class TutorialManager : MonoSingleton<TutorialManager>
     public bool isStory11 = false;
     public bool isStory12 = false;
     public bool isStory13 = false;
-    public bool isTypingSound = false;
-    public bool isSpeedTypingSound = false;
     [SerializeField] private Animator small;
     [SerializeField] private Animator change;
 
-    [SerializeField] private AudioClip typingsound = null;
     public void isSamll()
     {
         small.Play("1");
