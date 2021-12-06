@@ -59,7 +59,7 @@ public class Menu : MonoBehaviour
     }
     public void OnClickStory()
     {
-        bgm.volume = 0.25f;
+        bgm.volume = 0.15f;
         UIimages[3].sprite = sprite[7];
         storyPanel.SetActive(true);
     }
@@ -70,7 +70,6 @@ public class Menu : MonoBehaviour
     }
     public void OnClickSetting()
     {
-        bgm.volume = 0.25f;
         UIimages[4].sprite = sprite[8];
         settingPanel.SetActive(true);
     }

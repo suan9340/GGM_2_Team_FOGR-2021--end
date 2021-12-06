@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4056140365455999994}
   - component: {fileID: 4056140365455999993}
   - component: {fileID: 4056140365455999941}
+  - component: {fileID: 7821517198364120207}
   m_Layer: 9
   m_Name: Garbage_1_S
   m_TagString: Garbage
@@ -54,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3b2b9e15dcc0d15498b3b4e60209a11a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,7 +103,7 @@ MonoBehaviour:
   heal: 5
   damage: 10
   particle: {fileID: 1139283897377808518, guid: 4662d1acd08be864d9d8bfdb262b2afa, type: 3}
-  poolIndex: 2
+  poolIndex: 7
   poolManager: {fileID: 0}
 --- !u!50 &4056140365455999994
 Rigidbody2D:
@@ -154,3 +155,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+--- !u!114 &7821517198364120207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4056140365455999998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad23d5ab9cc074a458967ca905052fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 1, b: 1, a: 0.8}
+  outlineSize: 16
