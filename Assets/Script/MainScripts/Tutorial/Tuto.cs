@@ -29,7 +29,6 @@ public class Tuto : MonoBehaviour
     [SerializeField] private GameObject trash = null;
     [SerializeField] private GameObject item = null;
     [SerializeField] private GameObject buff = null;
-    [SerializeField] private GameObject outTuto = null;
     [SerializeField] private GameObject arrow = null;
     [SerializeField] private GameObject weaponpannel = null;
     [SerializeField] private GameObject weapon1 = null;
@@ -37,6 +36,10 @@ public class Tuto : MonoBehaviour
     [SerializeField] private GameObject materialPannel = null;
     [SerializeField] private GameObject click1 = null;
     [SerializeField] private GameObject click2 = null;
+    [SerializeField] private GameObject mouse = null;
+    [SerializeField] private Image outGame = null;
+    [SerializeField] private Sprite[] outImage = null;
+
 
     #endregion
 
@@ -126,9 +129,16 @@ public class Tuto : MonoBehaviour
 
             default:
                 Debug.Log("²ý");
-                outTuto.SetActive(true);
+                outGame.enabled = true;
                 break;
         }
+
+    }
+
+    public void OnclickOut()
+    {
+        outGame.sprite = outImage[1];
+        SceneManager.LoadScene("Menu");
 
     }
     private IEnumerator TypingEffect(Text _typingText, string _message, float _speed)
@@ -142,13 +152,11 @@ public class Tuto : MonoBehaviour
             yield return new WaitForSeconds(speed);
         }
         soundManager.keyboardStop();    
-        speed = 0.1f;
         isTyping_ing = false;
         isTyping = false;
     }
     public void outttTuto()
     {
-        SceneManager.LoadScene("Menu");
     }
     public void nextBtn()
     {
@@ -196,7 +204,7 @@ public class Tuto : MonoBehaviour
 
     private IEnumerator click()
     {
-        for(int i=0;i<8;i++)
+        for(int i=0;i<6;i++)
         {
             click1.SetActive(true);
             yield return new WaitForSeconds(0.3f);
@@ -234,7 +242,7 @@ public class Tuto : MonoBehaviour
         StartCoroutine(TypingEffect(storyText, story[4], speed));
         enemyPosition = new Vector3(enemy.transform.position.x, enemy.transform.position.y, 0f);
         enemy.SetActive(true);
-        enemy.transform.DOMove(new Vector3(0f, 0f, 0f), 1.5f);
+        enemy.transform.DOMove(new Vector3(0f, 0f, 0f), 1f);
     }
 
     private void Six()
@@ -251,6 +259,7 @@ public class Tuto : MonoBehaviour
         TutorialManager.Instance.isStory7 = true;
         StartCoroutine(TypingEffect(storyText, story[6], speed));
         material.SetActive(true);
+        mouse.SetActive(true);
         click1.transform.position = new Vector3(4.97f, 1.71f, 0f);
         click2.transform.position = new Vector3(4.97f, 1.71f, 0f);
         StartCoroutine(click());
@@ -291,6 +300,7 @@ public class Tuto : MonoBehaviour
         TutorialManager.Instance.isStory11 = true;
         StartCoroutine(TypingEffect(storyText, story[11], speed));
         trash.SetActive(true);
+        mouse.SetActive(true);
         click1.transform.position = new Vector3(-5.66f, 1.9f, 0f);
         click2.transform.position = new Vector3(-5.66f, 1.9f, 0f);
         StartCoroutine(click());
@@ -319,6 +329,7 @@ public class Tuto : MonoBehaviour
         //Å¬¸¯
         StartCoroutine(TypingEffect(storyText, story[15], speed));
         item.SetActive(true);
+        mouse.SetActive(true);
         click1.transform.position = new Vector3(4.18f, -2.88f, 0f);
         click2.transform.position = new Vector3(4.18f, -2.88f, 0f);
         StartCoroutine(click());
