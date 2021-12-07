@@ -97,15 +97,15 @@ public class Player : MonoBehaviour
             GameManager.Instance.UIManager.ChangeUiWappen(weaponIndex);
             wappenText.text = string.Format("무기 : {0}", wappenName[weaponIndex]);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && !isUsingWappen && GameManager.Instance.CurWeaponLevel > 35)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && !isUsingWappen && GameManager.Instance.CurWeaponLevel > 0)
         {
-            weaponIndex = 1;
+            weaponIndex = 2;
             GameManager.Instance.UIManager.ChangeUiWappen(weaponIndex);
             wappenText.text = string.Format("무기 : {0}", wappenName[weaponIndex]);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && !isUsingWappen && GameManager.Instance.CurWeaponLevel > 70)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && !isUsingWappen && GameManager.Instance.CurWeaponLevel > 0)
         {
-            weaponIndex = 2;
+            weaponIndex = 1;
             GameManager.Instance.UIManager.ChangeUiWappen(weaponIndex);
             wappenText.text = string.Format("무기 : {0}", wappenName[weaponIndex]);
         }

@@ -142,7 +142,6 @@ public class Tuto : MonoBehaviour
             yield return new WaitForSeconds(speed);
         }
         soundManager.keyboardStop();    
-        speed = 0.1f;
         isTyping_ing = false;
         isTyping = false;
     }
