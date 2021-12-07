@@ -5,7 +5,7 @@ using UnityEngine;
 public class material : TutoBase
 {
     [SerializeField] private GameObject mouse = null;
-    protected override void OnMouseUp()
+    public void Attacked()
     {
         if (TutorialManager.Instance.isStory7)
         {
@@ -15,6 +15,5 @@ public class material : TutoBase
             mouse.SetActive(false);
         }
         else return;
-       
     }
 }

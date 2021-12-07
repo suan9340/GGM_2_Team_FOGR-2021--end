@@ -168,6 +168,12 @@ public class Circle : MonoBehaviour
         int a = Random.Range(0, 3);
         GameManager.Instance.AddBuff(a);
         GameManager.Instance.UIManager.BuffOn(buffTimes[a], buffSprites[a]);
+        StartCoroutine(MinusBuff(a));
+    }
+    public IEnumerator MinusBuff(int a)
+    {
+        yield return new WaitForSeconds(buffTimes[a]);
+        GameManager.Instance.MinusBuff(a);
     }
     public void ChangeSize()
     {

@@ -17,6 +17,7 @@ public class Tuto : MonoBehaviour
     private Vector3 enemyPosition;
     private bool isTyping = true;
     private bool isTyping_ing = true;
+    public bool canNext = true;
     [SerializeField] private int index = 1;
 
     [Header("º¯¼ö")]
@@ -51,7 +52,6 @@ public class Tuto : MonoBehaviour
 
     private void Tutorial(int num)
     {
-
         switch (num)
         {
             case 1:
@@ -160,6 +160,7 @@ public class Tuto : MonoBehaviour
     }
     public void nextBtn()
     {
+        if (!canNext) { return; }
         if (!isTyping)
         {
             if (index == 12)
@@ -242,14 +243,22 @@ public class Tuto : MonoBehaviour
         StartCoroutine(TypingEffect(storyText, story[4], speed));
         enemyPosition = new Vector3(enemy.transform.position.x, enemy.transform.position.y, 0f);
         enemy.SetActive(true);
+        canNext = false;
+        StartCoroutine(SetCanNext_True(1));
         enemy.transform.DOMove(new Vector3(0f, 0f, 0f), 1f);
     }
-
+    IEnumerator SetCanNext_True(float time)
+    {
+        yield return new WaitForSeconds(time);
+        canNext = true;
+    }
     private void Six()
     {
         TutorialManager.Instance.isStory6 = true;
         StartCoroutine(TypingEffect(storyText, story[5], speed));
         enemy.transform.position = new Vector3(enemyPosition.x, enemyPosition.y, enemyPosition.z);
+        canNext = false;
+        StartCoroutine(SetCanNext_True(2));
         enemy.transform.DOMove(new Vector3(0f, 0f, 0f), 2f);
     }
 

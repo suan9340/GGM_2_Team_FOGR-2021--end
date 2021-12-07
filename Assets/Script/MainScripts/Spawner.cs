@@ -102,7 +102,7 @@ public class Spawner : MonoBehaviour
             }
             if (isSpawn)
             {
-                GameObject obj = poolManager.Get(i + 12);
+                GameObject obj = poolManager.Get(i + 7);
                 if (obj != null)
                 {
                     obj.transform.SetParent(itemHolder.transform);

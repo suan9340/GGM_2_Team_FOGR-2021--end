@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class trash : TutoBase
+public class trash : MonoBehaviour
 {
     [SerializeField] private GameObject mouse = null;
-    protected override void OnMouseUp()
+    public void Attacked()
     {
         if (TutorialManager.Instance.isStory11)
         {
