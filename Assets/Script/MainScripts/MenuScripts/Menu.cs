@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -16,11 +17,15 @@ public class Menu : MonoBehaviour
     [SerializeField] private AudioSource bgm;
 
     [SerializeField] private Image[] UIimages;
+    [SerializeField] AudioMixer audioMixer;
     private bool isOutGame = false;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioMixer.SetFloat("BGM", PlayerPrefs.GetFloat("BGM"));
+        audioMixer.SetFloat("SFX", PlayerPrefs.GetFloat("SFX"));
+        audioMixer.SetFloat("Master", PlayerPrefs.GetFloat("Master"));
     }
 
 

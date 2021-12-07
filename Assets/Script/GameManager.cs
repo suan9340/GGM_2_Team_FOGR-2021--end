@@ -114,6 +114,10 @@ public class GameManager : MonoSingleton<GameManager>
         {
             curExpLevel++;
             uiManager.ShowUpgradePannel();
+            if (curExpLevel == 19)
+            {
+                uiManager.Ending();
+            }
         }
         uiManager.UpdateUI();
     }
@@ -124,6 +128,7 @@ public class GameManager : MonoSingleton<GameManager>
         {
             ingredient = 0;
             curWeaponLevel++;
+            player.CheckWeapon();
         }
     }
     public float GetLevel(int type, int mod)

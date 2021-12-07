@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Enemy_2
   m_EditorClassIdentifier: 
   name: Shouck
-  desc: "\uCCB4\uB825\uC774 \uC57D\uD558\uC9C0\uB9CC \uBE60\uB974\uACE0 \uAC15\uB825\uD568"
+  desc: "\uCCB4\uB825\uC774 \uB0AE\uC9C0\uB9CC \uBE60\uB974\uACE0 \uAC15\uB825\uD558\uB2E4"
   sprite: {fileID: -8689211591297796482, guid: b718d81b8872cd841a7a4a3b3d4ee5a5, type: 3}

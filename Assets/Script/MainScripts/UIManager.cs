@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     [Header("현제 무기 표시할 오브젝트")] [SerializeField] private GameObject[] wappenUI;
     [Header("현제 버프를 표시할 이미지")] [SerializeField] private GameObject buffImage;
     [Header("쉬는시간 표시용 텍스트")] [SerializeField] private Text breakTimeText;
+    [Header("엔딩 판넬")] [SerializeField] private GameObject endingPannel;
     #endregion
     private void Start()
     {
@@ -91,5 +92,10 @@ public class UIManager : MonoBehaviour
     public void Over()
     {
         overPannel.SetActive(true);
+    }
+    public void Ending()
+    {
+        Time.timeScale = 0;
+        endingPannel.SetActive(true);
     }
 }

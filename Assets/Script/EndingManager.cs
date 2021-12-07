@@ -84,7 +84,6 @@ public class EndingManager : MonoBehaviour
     }*/
     public void Upgrade(int get)
     {
-        temp--;
         upGradeCountText.text = string.Format("{0} / {1}",temp , 3);
         switch (get)
         {
@@ -141,24 +140,27 @@ public class EndingManager : MonoBehaviour
     #region 실질 업그레이드 실행문
     void UpgradDamage()
     {
-        if (level[0] <= 20)
+        if (level[0] < 20)
         {
+            temp--;
             GameManager.Instance.UpGradeDamage(levelWeaponDamage[(int)level[0]]);
             level[0]++;
         }
     }
     void UpgradSpeed()
     {
-        if (level[1] <= 20)
+        if (level[1] < 20)
         {
+            temp--;
             GameManager.Instance.UpGradeSpeed(levelSpeed[(int)level[1]]);
             level[1]++;
         }
     }
     void UpgradAttackSpeed()
     {
-        if (level[2] <= 20)
+        if (level[2] < 20)
         {
+            temp--;
             GameManager.Instance.UpGradeWeaponSpeed(levelWeaponSpeed[(int)level[2]]);
             level[2]++;
         }

@@ -9,6 +9,19 @@ public class SettingManager : MonoBehaviour
     [SerializeField] Slider MasterSoundSlider;
     [SerializeField] Slider bgmSlider;
     [SerializeField] Slider soundSlider;
+    private void Start()
+    {
+        
+    }
+    private void OnEnable()
+    {
+        /*PlayerPrefs.SetFloat("BGM", bgmSlider.value);
+        PlayerPrefs.SetFloat("Master", MasterSoundSlider.value);
+        PlayerPrefs.SetFloat("SFX", soundSlider.value);*/
+        MasterSoundSlider.value = PlayerPrefs.GetFloat("Master");
+        bgmSlider.value = PlayerPrefs.GetFloat("BGM");
+        soundSlider.value = PlayerPrefs.GetFloat("SFX");
+    }
     public void ChangeBGMVolume(float volume)
     {
         if (volume <= -30f)
@@ -18,6 +31,7 @@ public class SettingManager : MonoBehaviour
         else
         {
             audioMixer.SetFloat("BGM", volume);
+            PlayerPrefs.SetFloat("BGM", volume);
         }
     }
     public void ChangeMasterVolume(float volume)
@@ -31,6 +45,7 @@ public class SettingManager : MonoBehaviour
         {
             audioMixer.SetFloat("Master", volume);
         }
+        PlayerPrefs.SetFloat("Master", volume);
     }
     public void ChangeSFXVolume(float volume)
     {
@@ -42,6 +57,7 @@ public class SettingManager : MonoBehaviour
         {
             audioMixer.SetFloat("SFX", volume);
         }
+        PlayerPrefs.SetFloat("SFX", volume);
     }
     public void Exit()
     {
