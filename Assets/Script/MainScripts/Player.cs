@@ -91,21 +91,18 @@ public class Player : MonoBehaviour
             StartCoroutine(Attack());
             range = 0;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1) && !isUsingWappen)
-        {
-            weaponIndex = 0;
-            GameManager.Instance.UIManager.ChangeUiWappen(weaponIndex);
-            wappenText.text = string.Format("公扁 : {0}", wappenName[weaponIndex]);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && !isUsingWappen && GameManager.Instance.CurWeaponLevel > 0)
-        {
-            weaponIndex = 2;
-            GameManager.Instance.UIManager.ChangeUiWappen(weaponIndex);
-            wappenText.text = string.Format("公扁 : {0}", wappenName[weaponIndex]);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && !isUsingWappen && GameManager.Instance.CurWeaponLevel > 0)
+    }
+    public void CheckWeapon()
+    {
+        if (GameManager.Instance.CurWeaponLevel >= 75)
         {
             weaponIndex = 1;
+            GameManager.Instance.UIManager.ChangeUiWappen(weaponIndex);
+            wappenText.text = string.Format("公扁 : {0}", wappenName[weaponIndex]);
+        }
+        else if (GameManager.Instance.CurWeaponLevel >= 35)
+        {
+            weaponIndex = 2;
             GameManager.Instance.UIManager.ChangeUiWappen(weaponIndex);
             wappenText.text = string.Format("公扁 : {0}", wappenName[weaponIndex]);
         }

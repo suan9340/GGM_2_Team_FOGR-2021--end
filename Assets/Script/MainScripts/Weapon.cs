@@ -28,7 +28,8 @@ public class Weapon : MonoBehaviour
         if (collision.CompareTag("Garbage"))
         {
             Item item = collision.GetComponent<Item>();
-            circle.Heal(item.GetHeal());
+            //circle.Heal(item.GetHeal());
+            circle.GetIngredient(item.GetIngredient());
             GameManager.Instance.GetIngredient();
             item.Dead();
         }

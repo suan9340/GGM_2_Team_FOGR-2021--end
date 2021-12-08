@@ -2421,6 +2421,7 @@ MonoBehaviour:
   - {fileID: 957556725}
   - {fileID: 13213644}
   - {fileID: 1774110057}
+  audioMixer: {fileID: 24100000, guid: 615bca2c541544042a3a5b918afdca09, type: 2}
 --- !u!4 &901621399
 Transform:
   m_ObjectHideFlags: 0

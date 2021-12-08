@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredient: 75
-  heal: 50
+  heal: 33
   damage: 0
   particle: {fileID: 1139283897377808518, guid: 4662d1acd08be864d9d8bfdb262b2afa, type: 3}
   poolIndex: 23

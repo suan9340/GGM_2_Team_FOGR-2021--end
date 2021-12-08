@@ -29,6 +29,7 @@ public class Circle : MonoBehaviour
     [Header("크기당 얻는 초당점수 배열")] [SerializeField] private int[] expPerSecond;
     [SerializeField] AudioSource audio;
     #endregion
+    [SerializeField] float damageTimes , healTimes;
     void Start()
     {
         GameSetUP();
@@ -66,17 +67,17 @@ public class Circle : MonoBehaviour
     }
     void GetDamage(float _damage)
     {
-        curHp -= _damage;
+        curHp -= _damage * damageTimes;
         GameManager.Instance.CameraManager.ShakeCamera();
     }
-    public IEnumerator LerfSize() // 러프 사이즈를 위해 1초전 hp를 기억하는 함수
+    /*public IEnumerator LerfSize() // 러프 사이즈를 위해 1초전 hp를 기억하는 함수
     {
         while (true)
         {
             preHp = curHp;
             yield return new WaitForSeconds(1f);
         }
-    }
+    }*/
     private IEnumerator CheckLevel() // 원의 증감소에 따라 카메라 크기 비율 맞춰주는 코루틴 함수
     {
         while (true)
@@ -115,7 +116,6 @@ public class Circle : MonoBehaviour
         sizeHp = curHp;
         StartCoroutine(Wait());
         StartCoroutine(CheckLevel());
-        StartCoroutine(LerfSize());
         StartCoroutine(GetScroe());
     }
     private void CheckInput()
@@ -151,7 +151,7 @@ public class Circle : MonoBehaviour
     }
     public void Heal(float temp) // 원이 커질 때 호출되는 함수
     {
-        curHp += temp;
+        curHp += temp * healTimes;
         if (curHp > maxHp)
         {
             curHp = maxHp;
