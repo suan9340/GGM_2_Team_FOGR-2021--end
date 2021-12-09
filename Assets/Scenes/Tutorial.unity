@@ -2085,8 +2085,8 @@ MonoBehaviour:
   mouse: {fileID: 1362129989}
   outGame: {fileID: 1308793908}
   outImage:
-  - {fileID: 290727527132585202, guid: 57794cd33d4b2c14485b12494425b16d, type: 3}
-  - {fileID: -3694283300066265039, guid: 57794cd33d4b2c14485b12494425b16d, type: 3}
+  - {fileID: 2720456991161907095, guid: cf145422dee665d4c81f2a2060a19c77, type: 3}
+  - {fileID: -3759250531772125230, guid: cf145422dee665d4c81f2a2060a19c77, type: 3}
 --- !u!4 &1094591538
 Transform:
   m_ObjectHideFlags: 0
@@ -2751,7 +2751,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 290727527132585202, guid: 57794cd33d4b2c14485b12494425b16d, type: 3}
+  m_Sprite: {fileID: 2720456991161907095, guid: cf145422dee665d4c81f2a2060a19c77, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
