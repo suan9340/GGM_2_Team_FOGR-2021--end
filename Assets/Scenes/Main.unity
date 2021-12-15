@@ -4893,6 +4893,7 @@ MonoBehaviour:
   - {fileID: 1427189349}
   buffImage: {fileID: 88261093}
   breakTimeText: {fileID: 33219444}
+  endingPannel: {fileID: 0}
 --- !u!1 &738130975
 GameObject:
   m_ObjectHideFlags: 0
@@ -5309,6 +5310,8 @@ MonoBehaviour:
   - 10
   expPerSecond: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
   audio: {fileID: 794932218}
+  damageTimes: 0
+  healTimes: 0
 --- !u!58 &794932216
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class Enemy : Item
     bool isAttacked;
     private SpriteRenderer renderer;
     protected float curHp;
+    public float shild = 1; 
     #endregion
     #region 인스펙터
     [Header("데미지 표시용 텍스트")] [SerializeField] private GameObject damageText;
@@ -38,14 +39,18 @@ public class Enemy : Item
         float angle = Mathf.Atan2(transform.position.y, transform.position.x) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(0,0,angle) + angle_fix;
     }
+    public void SetShild(float value)
+    {
+        shild = value;
+    }
     public void GetDamaged(int damage) // 데미지 입었을 때 색 바꿔주는 함수
     {
         if (!isAttacked)
         {
             audio.Play();
             GameObject obj = Instantiate(damageText, new Vector3(transform.position.x,transform.position.y + 3,transform.position.z), Quaternion.identity);
-            obj.transform.GetChild(0).GetComponent<TextMesh>().text = string.Format("-{0}", damage);
-            curHp -= damage;
+            obj.transform.GetChild(0).GetComponent<TextMesh>().text = string.Format("-{0}", damage * shild);
+            curHp -= damage * shild;
             if (curHp < maxHp * 0.25f)
             {
                 renderer.color = ColorArr[3];
